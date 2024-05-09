@@ -8,13 +8,13 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import org.kartu.Kartu;
-import org.kartu.hewan.Herbivora;
-import org.kartu.hewan.Hewan;
-import org.kartu.hewan.Karnivora;
-import org.kartu.hewan.Omnivora;
+import org.kartu.harvestable.hewan.Herbivora;
+import org.kartu.harvestable.hewan.Hewan;
+import org.kartu.harvestable.hewan.Karnivora;
+import org.kartu.harvestable.hewan.Omnivora;
 import org.kartu.item.*;
 import org.kartu.product.Product;
-import org.kartu.tumbuhan.Tumbuhan;
+import org.kartu.harvestable.tumbuhan.Tumbuhan;
 
 public class Config {
     private HashMap<String, Item> listItem;
@@ -57,7 +57,7 @@ public class Config {
                     int weightToHarvest = Integer.parseInt(split[2]);
 
                     if(split[1].equals("Karnivora")){
-                        this.listKarnivora.put(name, new Karnivora());
+                        this.listKarnivora.put(name, new Karnivora(name, "Karnivora", imgUrl, weightToHarvest, ""));
                     }
                     else if(split[1].equals("Herbivora")){
                         this.listHerbivora.put(name, new Herbivora());
