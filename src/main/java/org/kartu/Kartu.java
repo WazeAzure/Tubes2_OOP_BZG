@@ -5,6 +5,12 @@ public class Kartu {
     private String kategori;
     private String imageURL;
 
+
+    public Kartu(String nama, String kategori, String imageURL) {
+        this.nama = nama;
+        this.kategori = kategori;
+        this.imageURL = imageURL;
+    }
     /**
      * Class to get val
      */
