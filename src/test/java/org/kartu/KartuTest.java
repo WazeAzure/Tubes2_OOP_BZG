@@ -8,7 +8,9 @@ class KartuTest {
 
     @Test
     void getVal() {
-        Kartu kartu = new Kartu();
-        assertEquals(kartu.getVal(), 2, "card value must be 3");
+        Kartu kartu = new Kartu("TestName", "TestKategori", "TestImage");
+        assertEquals(kartu.getNama(), "TestName", "nama harus TestName");
+        assertEquals(kartu.getKategori(), "TestKategori", "kategori harus TestKategori");
+        assertEquals(kartu.getImageURL(), "TestImage", "nama harus TestImage");
     }
 }
