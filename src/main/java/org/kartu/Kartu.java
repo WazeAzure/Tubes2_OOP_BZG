@@ -1,9 +1,12 @@
 package org.kartu;
 
 public class Kartu {
-    public int val = 3;
+    public int val = 2;
 
-    int getVal(){
+    /**
+     * Class to get val
+     */
+    public int getVal(){
         return this.val;
     }
 }

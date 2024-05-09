@@ -14,5 +14,7 @@ class AppTest {
 
     @Test
     void main() {
+        App app = new App();
+        assertEquals( app.val, 11, "val should be 10");
     }
 }
