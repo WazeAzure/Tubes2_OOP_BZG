@@ -1,12 +1,24 @@
 package org.kartu;
 
 public class Kartu {
-    public int val = 2;
+    private String nama;
+    private String kategori;
+    private String imageURL;
 
     /**
      * Class to get val
      */
-    public int getVal(){
-        return this.val;
+    // Methods
+
+    public String getNama() {
+        return nama;
+    }
+
+    public String getKategori() {
+        return kategori;
+    }
+
+    public String getImageURL() {
+        return imageURL;
     }
 }
