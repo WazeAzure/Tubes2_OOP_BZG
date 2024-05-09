@@ -1,9 +1,9 @@
 package org.kartu;
 
 public class Kartu {
-    private String nama;
-    private String kategori;
-    private String imageURL;
+    protected String nama;
+    protected String kategori;
+    protected String imageURL;
 
 
     public Kartu(String nama, String kategori, String imageURL) {
