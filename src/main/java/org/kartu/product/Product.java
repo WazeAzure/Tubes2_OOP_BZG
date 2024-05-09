@@ -1,4 +1,12 @@
 package org.kartu.product;
 
-public class Product {
+import org.kartu.Kartu;
+
+public class Product extends Kartu {
+    private Integer harga;
+
+    public Product (String nama, String kategori, String imageURL, Integer harga) {
+        super(nama, kategori, imageURL);
+        this.harga = harga;
+    }
 }
