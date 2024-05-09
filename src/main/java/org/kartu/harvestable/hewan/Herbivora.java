@@ -1,8 +1,8 @@
 package org.kartu.harvestable.hewan;
 
 public class Herbivora extends Hewan {
-    public Herbivora(String nama, String kategori, String imageURL, Integer berat, Integer beratEffect) {
-        super(nama, kategori, imageURL, berat, beratEffect);
+    public Herbivora(String nama, String kategori, String imageURL, Integer beratPanen) {
+        super(nama, kategori, imageURL, beratPanen);
     }
 
     @Override
