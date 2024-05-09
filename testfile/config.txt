@@ -1,0 +1,24 @@
+Hewan Karnivora 20 Hiu Darat
+Hewan Herbivora 10 Sapi
+Hewan Herbivora 12 Domba
+Hewan Herbivora 14 Kuda
+Hewan Omnivora 5 Ayam
+Hewan Omnivora 25 Beruang
+Produk Tanaman 10 500 Labu
+Produk Tanaman 3 150 Jagung
+Produk Tanaman 5 350 Stroberi
+Produk Hewan 4 100 Susu
+Produk Hewan 2 50 Telur
+Produk Hewan 12 500 Sirip Hiu
+Produk Hewan 8 150 Daging Kuda
+Produk Hewan 6 120 Daging Domba
+Produk Hewan 12 500 Daging Beruang
+Tanaman 5 Biji Labu
+Tanaman 3 Biji Jagung
+Tanaman 4 Biji Stroberi
+Item Accelerate
+Item Delay
+Item Instant Harvest
+Item Destroy
+Item Protect
+Item Trap

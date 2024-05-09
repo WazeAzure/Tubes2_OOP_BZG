@@ -1,4 +1,4 @@
 package org.kartu.hewan;
 
-public class Karnivora {
+public class Karnivora extends Hewan{
 }
