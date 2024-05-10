@@ -57,7 +57,6 @@ public class Config {
                     int weightToHarvest = Integer.parseInt(split[2]);
 
                     if(split[1].equals("Karnivora")){
-
                         Config.listKarnivora.put(name, new Karnivora(name, "Karnivora", "..", weightToHarvest));
                     }
                     else if(split[1].equals("Herbivora")){
