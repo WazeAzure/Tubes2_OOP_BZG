@@ -8,33 +8,33 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import org.kartu.Kartu;
-import org.kartu.hewan.Herbivora;
-import org.kartu.hewan.Hewan;
-import org.kartu.hewan.Karnivora;
-import org.kartu.hewan.Omnivora;
+import org.kartu.harvestable.hewan.Herbivora;
+import org.kartu.harvestable.hewan.Hewan;
+import org.kartu.harvestable.hewan.Karnivora;
+import org.kartu.harvestable.hewan.Omnivora;
 import org.kartu.item.*;
 import org.kartu.product.Product;
-import org.kartu.tumbuhan.Tumbuhan;
+import org.kartu.harvestable.tumbuhan.Tumbuhan;
 
 public class Config {
-    private HashMap<String, Item> listItem;
-    private HashMap<String, Tumbuhan> listTumbuhan;
-    private HashMap<String, Product> listProductAnimal;
-    private HashMap<String, Product> listProductPlant;
-    private HashMap<String, Karnivora> listKarnivora;
-    private HashMap<String, Herbivora> listHerbivora;
-    private HashMap<String, Omnivora> listOmnivora;
+    private static HashMap<String, Item> listItem;
+    private static HashMap<String, Tumbuhan> listTumbuhan;
+    private static HashMap<String, Product> listProductAnimal;
+    private static HashMap<String, Product> listProductPlant;
+    private static HashMap<String, Karnivora> listKarnivora;
+    private static HashMap<String, Herbivora> listHerbivora;
+    private static HashMap<String, Omnivora> listOmnivora;
 
     private String testfileDirectory = "testfile";
 
     public Config() {
-        this.listItem = new HashMap<>();
-        this.listTumbuhan = new HashMap<>();
-        this.listProductAnimal = new HashMap<>();
-        this.listProductPlant = new HashMap<>();
-        this.listKarnivora = new HashMap<>();
-        this.listHerbivora = new HashMap<>();
-        this.listOmnivora = new HashMap<>();
+        Config.listItem = new HashMap<>();
+        Config.listTumbuhan = new HashMap<>();
+        Config.listProductAnimal = new HashMap<>();
+        Config.listProductPlant = new HashMap<>();
+        Config.listKarnivora = new HashMap<>();
+        Config.listHerbivora = new HashMap<>();
+        Config.listOmnivora = new HashMap<>();
     }
 
     public void loadConfig(){
@@ -57,13 +57,14 @@ public class Config {
                     int weightToHarvest = Integer.parseInt(split[2]);
 
                     if(split[1].equals("Karnivora")){
-                        this.listKarnivora.put(name, new Karnivora());
+
+                        Config.listKarnivora.put(name, new Karnivora(name, "Karnivora", "..", weightToHarvest));
                     }
                     else if(split[1].equals("Herbivora")){
-                        this.listHerbivora.put(name, new Herbivora());
+                        Config.listHerbivora.put(name, new Herbivora(name, "Herbivora", "..", weightToHarvest));
                     }
                     else if(split[1].equals("Omnivora")){
-                        this.listOmnivora.put(name, new Omnivora());
+                        Config.listOmnivora.put(name, new Omnivora(name, "Omnivora", "..", weightToHarvest));
                     }
                 }
                 else if(split[0].equals("Produk")){
@@ -76,10 +77,10 @@ public class Config {
                     int price = Integer.parseInt(split[3]);
 
                     if(split[1].equals("Hewan")){
-                        this.listProductAnimal.put(name, new Product());
+                        Config.listProductAnimal.put(name, new Product(name, "ProdukHewan", "..", price, weightAdded));
                     }
                     else if(split[1].equals("Tanaman")){
-                        this.listProductPlant.put(name, new Product());
+                        Config.listProductPlant.put(name, new Product(name, "ProdukTanaman", "..", price, weightAdded));
                     }
                 }
                 else if(split[0].equals("Tanaman")){
@@ -90,11 +91,11 @@ public class Config {
 
                     int dayToHarvest = Integer.parseInt(split[1]);
 
-                    this.listTumbuhan.put(name, new Tumbuhan());
+                    Config.listTumbuhan.put(name, new Tumbuhan(name, "Tumbuhan", "..", dayToHarvest));
                 }
                 else if(split[0].equals("Item")){
                     String name = split[1];
-                    this.listItem.put(name, new Item());
+                    Config.listItem.put(name, new Item(name, "Item", ".."));
                 }
             }
         } catch (FileNotFoundException e) {
@@ -104,40 +105,40 @@ public class Config {
         }
     }
 
-    public Product buildProduct(String name) {
+    public static Product buildProduct(String name) {
         Product p;
-        if(this.listProductAnimal.containsKey(name)){
-            p = this.listProductAnimal.get(name);
+        if(Config.listProductAnimal.containsKey(name)){
+            p = Config.listProductAnimal.get(name);
         }
-        else if(this.listProductPlant.containsKey(name)){
-            p = this.listProductPlant.get(name);
+        else {
+            p = Config.listProductPlant.get(name);
         }
-        return new Product();
+        return new Product(p.getNama(), p.getKategori(), p.getImageURL(), p.getHarga(), p.getBerat());
     }
 
-    public Omnivora buildOmnivora(String name){
-        Omnivora p = this.listOmnivora.get(name);
-        return new Omnivora();
+    public static Omnivora buildOmnivora(String name){
+        Omnivora p = Config.listOmnivora.get(name);
+        return new Omnivora(p.getNama(), p.getKategori(), p.getImageURL(), p.getValuePanen());
     }
 
-    public Karnivora buildKarnivora(String name){
-        Karnivora p = this.listKarnivora.get(name);
-        return new Karnivora();
+    public static Karnivora buildKarnivora(String name){
+        Karnivora p = Config.listKarnivora.get(name);
+        return new Karnivora(p.getNama(), p.getKategori(), p.getImageURL(), p.getValuePanen());
     }
 
-    public Herbivora buildHerbivora(String name){
-        Herbivora p = this.listHerbivora.get(name);
-        return new Herbivora();
+    public static Herbivora buildHerbivora(String name){
+        Herbivora p = Config.listHerbivora.get(name);
+        return new Herbivora(p.getNama(), p.getKategori(), p.getImageURL(), p.getValuePanen());
     }
 
-    public Tumbuhan buildTumbuhan(String name){
-        Tumbuhan p = this.listTumbuhan.get(name);
-        return new Tumbuhan();
+    public static Tumbuhan buildTumbuhan(String name){
+        Tumbuhan p = Config.listTumbuhan.get(name);
+        return new Tumbuhan(p.getNama(), p.getKategori(), p.getImageURL(), p.getValuePanen());
     }
 
-    public Item buildItem(String name){
-        Item p = this.listItem.get(name);
-        return new Item();
+    public static Item buildItem(String name){
+        Item p = Config.listItem.get(name);
+        return new Item(p.getNama(), p.getKategori(), p.getImageURL());
     }
 
     public static void main(String[] args){

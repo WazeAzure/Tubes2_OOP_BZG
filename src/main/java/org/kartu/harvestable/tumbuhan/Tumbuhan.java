@@ -9,7 +9,7 @@ public class Tumbuhan extends Harvestable {
     String realNama;
     String realImageURL;
 
-    public Tumbuhan(String nama, String kategori, String imageURL, Integer value, Integer valuePanen) {
+    public Tumbuhan(String nama, String kategori, String imageURL, Integer valuePanen) {
         super(nama, kategori, imageURL, valuePanen);
         this.realNama = nama;
         this.realImageURL = imageURL;
