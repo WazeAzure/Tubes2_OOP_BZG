@@ -1,6 +1,8 @@
 package org.kartu.harvestable;
+import org.config.Config;
 import org.kartu.Kartu;
 import org.kartu.item.Item;
+import org.kartu.product.Product;
 
 import java.util.HashMap;
 
@@ -9,26 +11,29 @@ public abstract class Harvestable extends Kartu {
     protected Integer valueEfek;
     protected Integer valuePanen;
     protected Integer valueToHarvest;
-    protected String product;
+    protected Product product;
     HashMap<String, Integer> itemAktif = new HashMap<>();
 
-    public Harvestable(String nama, String kategori, String imageURL, Integer valuePanen, String product) {
+    public Harvestable(String nama, String kategori, String imageURL, Integer valuePanen) {
         super(nama, kategori, imageURL);
         this.valuePanen = valuePanen;
         this.value = 0;
         this.valueEfek = 0;
-        this.product = product;
+        switch (nama) {
+            case "":
+                this.product = Config.buildProduct("");
+        }
     }
 
-    public int getBerat() {
+    public int getValue() {
         return value;
     }
 
-    public int getBeratEfek() {
+    public int getValueEfek() {
         return valueEfek;
     }
 
-    public int getBeratPanen() {
+    public int getValuePanen() {
         return valuePanen;
     }
 
@@ -44,16 +49,20 @@ public abstract class Harvestable extends Kartu {
         }
     }
 
-    public void setBerat(Integer value) {
+    public void setValue(Integer value) {
         this.value = value;
     }
 
-    public void setBeratEfek(Integer valueEfek) {
+    public void setValueEfek(Integer valueEfek) {
         this.valueEfek = valueEfek;
+    }
+
+    public Boolean isSiapPanen() {
+        return valueEfek >= valuePanen;
     }
 
     public abstract void applyEfek(String efek);
 
-    public abstract void panen();
+    public abstract Product panen() throws Exception;
 
 }
