@@ -5,6 +5,7 @@ import org.kartu.harvestable.tumbuhan.Tumbuhan;
 import org.kartu.product.Product;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,13 +15,17 @@ public class Ladang {
     public static final char[] chars = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','o','p','q','r','s','t','u','v','w','x','y','z'};
     private int curWidth;
     private int curHeight;
-    private Map<String, Harvestable> kumpulanPetak;
+    private Map<String, Harvestable> kumpulanPetak = new HashMap<>();
 
     Ladang(int Width, int Height){
-        for(int i = 0; i < Width; i++){
+        curWidth = 1;
+        curHeight = 1;
+        kumpulanPetak.put("A1", null);
+        for(int i = 0; i < Width-1; i++){
             addCol();
         }
-        for(int j = 0; j < Height; j++){
+
+        for(int j = 0; j < Height-1; j++){
             addRow();
         }
     }
@@ -29,22 +34,26 @@ public class Ladang {
     }
     public void addRow(){
         for(int i=0; i<this.curWidth; i++){
-            curHeight++;
-            kumpulanPetak.put(Character.toString(chars[i])+Integer.toString(curHeight), null);
+            String key = Character.toString(chars[i]).toUpperCase()+ (curHeight+1);
+            kumpulanPetak.put(key, null);
         }
+        curHeight++;
     }
 
     public void addCol(){
         for(int i=0; i<this.curHeight; i++) {
-            kumpulanPetak.put(chars[curWidth] + Integer.toString(i), null);
-            curWidth++;
+            String key = Character.toString(chars[curWidth]).toUpperCase() + (i+1);
+            kumpulanPetak.put(key, null);
         }
+        curWidth++;
     }
     public List<Harvestable> removeRow(){
         List<Harvestable> l = new ArrayList<>();
         Harvestable h;
         for(int i=0; i<this.curWidth; i++){
-            h = (kumpulanPetak.get(Character.toString(chars[i])+Integer.toString(curHeight)));
+            String key = Character.toString(chars[i]).toUpperCase() + curHeight;
+            h = kumpulanPetak.get(key);
+            kumpulanPetak.remove(key);
             if(h != null){
                 l.add(h);
             }

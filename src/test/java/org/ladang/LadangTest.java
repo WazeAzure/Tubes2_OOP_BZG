@@ -3,6 +3,9 @@ package org.ladang;
 import org.junit.jupiter.api.Test;
 import org.kartu.harvestable.Harvestable;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,29 +15,36 @@ class LadangTest {
     @Test
     void ladangConstructor() {
         Ladang l = new Ladang(4, 5);
-        System.out.println(l.getLadang().entrySet());
+        List<String> list = new ArrayList<String>(l.getLadang().keySet());
+        Collections.sort(list);
+        System.out.println(list);
 
     }
     @Test
     void addRow() {
         Ladang l = new Ladang(4, 5);
         l.addRow();
-        System.out.println(l.getLadang().entrySet());
+        List<String> list = new ArrayList<String>(l.getLadang().keySet());
+        Collections.sort(list);
+        System.out.println(list);
     }
 
     @Test
     void addCol() {
         Ladang l = new Ladang(4, 5);
         l.addCol();
-        System.out.println(l.getLadang().entrySet());
+        List<String> list = new ArrayList<String>(l.getLadang().keySet());
+        Collections.sort(list);
+        System.out.println(list);
     }
 
     @Test
     void removeRow() {
         Ladang l = new Ladang(4, 5);
         List<Harvestable> l2 = l.removeRow();
-        System.out.println(l.getLadang().entrySet());
-        System.out.println();
+        List<String> list = new ArrayList<String>(l.getLadang().keySet());
+        Collections.sort(list);
+        System.out.println(list);
         System.out.println(l2);
     }
 
