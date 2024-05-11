@@ -1,18 +1,23 @@
 package org.toko;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.config.Config;
 import org.kartu.Kartu;
 import org.kartu.product.Product;
 
-import java.util.*;
-
 public class Toko {
     private Map<String,Kartu> daftar;
     private Map<String, Integer> stok;
-    private Config config;
     public Toko(Config config) {
         daftar = new HashMap<>();
-        this.config = config;
-        for(var p: Config.b){
+        for(var p: Config.getListProductAnimal().entrySet()){
+            daftar.put(p.getKey(), p.getValue());
+            stok.put(p.getKey(), 0);
+        }
+        for(var p: Config.getListProductPlant().entrySet()){
             daftar.put(p.getKey(), p.getValue());
             stok.put(p.getKey(), 0);
         }
@@ -30,12 +35,12 @@ public class Toko {
     }
     public Kartu buy(String produk, int jumlah, int uang) throws Exception{
         if(uang >= totalHarga(produk, jumlah)){
-            return new config.buildProduct(produk);
+            return Config.buildProduct(produk);
         }
         throw new Exception("Duit lu gak cukup");
     }
     public int sell(String produk){
         stok.put(produk, stok.get(produk)+1);
-        return (Product)daftar.get(produk).getHarga();
+        return ((Product)daftar.get(produk)).getHarga();
     }
 }
