@@ -139,6 +139,30 @@ public class Config {
         return new Item(p.getNama(), p.getKategori(), p.getImageURL());
     }
 
+    public static HashMap<String, Item> getListItem(){
+        return Config.listItem;
+    }
+
+    public static HashMap<String, Herbivora> getHerbivora(){
+        return Config.listHerbivora;
+    }
+
+    public static HashMap<String, Omnivora> getOmnivora(){
+        return Config.listOmnivora;
+    }
+    public static HashMap<String, Karnivora> getKarnivora(){
+        return Config.listKarnivora;
+    }
+    public static HashMap<String, Tumbuhan> getListTumbuhan(){
+        return Config.listTumbuhan;
+    }
+    public static HashMap<String, Product> getListProductAnimal(){
+        return Config.listProductAnimal;
+    }
+    public static HashMap<String, Product> getListProductPlant(){
+        return Config.listProductPlant;
+    }
+
     public static void main(String[] args){
         Config conf = new Config();
         conf.loadConfig();
