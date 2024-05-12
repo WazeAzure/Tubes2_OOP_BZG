@@ -17,7 +17,7 @@ public class Ladang {
     private int curHeight;
     private Map<String, Harvestable> kumpulanPetak = new HashMap<>();
 
-    Ladang(int Width, int Height){
+    public Ladang(int Width, int Height){
         curWidth = 1;
         curHeight = 1;
         kumpulanPetak.put("A1", null);
