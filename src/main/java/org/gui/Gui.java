@@ -52,26 +52,27 @@ public class Gui extends Default{
         return panel;
     }
 
-    private static JPanel items_in_shop() {
-        JPanel panel = new JPanel(new BorderLayout());
-
-        JPanel contentPanel = new JPanel();
-        contentPanel.setLayout(new FlowLayout()); 
+    private static JScrollPane items_in_shop() {
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
+    
         for (int i = 0; i < 10; i++) {
-            ItemCard card = new ItemCard("Wibu", "src\\main\\java\\org\\gui\\assets\\image.png", 5000, 2);
+            ItemCard card = new ItemCard("Wibu" + i, "src\\main\\java\\org\\gui\\assets\\image.png", 5000, 2);
             JPanel cardpanel = card.createCard();
-            contentPanel.add(cardpanel);
+            panel.add(cardpanel);
         }
-        contentPanel.revalidate();
-        contentPanel.repaint();
-
-        JScrollPane scroll = new JScrollPane(contentPanel);
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-
-        panel.add(scroll, BorderLayout.CENTER);
-        return panel;
+    
+        panel.revalidate();
+        panel.repaint();
+    
+        JScrollPane scrollPane = new JScrollPane(panel);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+    
+        scrollPane.setPreferredSize(new Dimension(1060, 250));  
+    
+        return scrollPane;
     }
+    
 
     private JPanel buyPanel() {
         JPanel panel = new JPanel();
@@ -83,7 +84,7 @@ public class Gui extends Default{
 
         panel.add(label);
         
-        JPanel items = items_in_shop();
+        JScrollPane items = items_in_shop();
         panel.add(items);
 
         return panel;

@@ -26,7 +26,7 @@ public class ItemCard {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBackground(Color.WHITE);
-        panel.setBorder(new LineBorder(Color.BLACK, 1, true)); // Rounded border
+        panel.setBorder(new LineBorder(Color.BLACK, 1, true)); 
         panel.setPreferredSize(new Dimension(150, 230));
 
         JLabel nameLabel = new JLabel(this.name);
@@ -89,7 +89,9 @@ public class ItemCard {
         buyButton.setBackground(Color.GREEN);
         buyButton.setForeground(Color.WHITE);
         buyButton.setFont(new Font("Arial", Font.BOLD, 14));
-        buyButton.setBorder(new EmptyBorder(10, 20, 10, 20));         
+        buyButton.setBorder(new EmptyBorder(10, 20, 10, 20)); 
+        
+        buyButton.addActionListener(e -> buy(panel));
         
         panel.add(nameLabel);
         panel.add(imagePan);
@@ -101,18 +103,7 @@ public class ItemCard {
         return panel;
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 600);
-        frame.setLayout(new FlowLayout());
-
-        for (int i = 0; i < 5; i++) {
-            ItemCard card = new ItemCard("Item " + (i + 1), "src\\main\\java\\org\\gui\\assets\\image.png", 5000, 2);
-            JPanel cardPanel = card.createCard();
-            frame.add(cardPanel);
-        }
-
-        frame.setVisible(true);
+    public void buy(Component parentComponent) {
+        JOptionPane.showMessageDialog(parentComponent, "You clicked on: " + name);
     }
 }
