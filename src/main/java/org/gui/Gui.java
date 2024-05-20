@@ -1,9 +1,14 @@
 package org.gui;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.plaf.BorderUIResource;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import java.util.*;
 
 public class Gui extends Default{
     JFrame frame = new JFrame();
@@ -47,6 +52,27 @@ public class Gui extends Default{
         return panel;
     }
 
+    private static JPanel items_in_shop() {
+        JPanel panel = new JPanel(new BorderLayout());
+
+        JPanel contentPanel = new JPanel();
+        contentPanel.setLayout(new FlowLayout()); 
+        for (int i = 0; i < 10; i++) {
+            ItemCard card = new ItemCard("Wibu", "src\\main\\java\\org\\gui\\assets\\image.png", 5000, 2);
+            JPanel cardpanel = card.createCard();
+            contentPanel.add(cardpanel);
+        }
+        contentPanel.revalidate();
+        contentPanel.repaint();
+
+        JScrollPane scroll = new JScrollPane(contentPanel);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+        panel.add(scroll, BorderLayout.CENTER);
+        return panel;
+    }
+
     private JPanel buyPanel() {
         JPanel panel = new JPanel();
         panel.setBounds(0, 50, 1060, 280);
@@ -56,6 +82,10 @@ public class Gui extends Default{
         label.setText("Want to Buy?");
 
         panel.add(label);
+        
+        JPanel items = items_in_shop();
+        panel.add(items);
+
         return panel;
     }
 
