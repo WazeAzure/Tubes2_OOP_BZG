@@ -9,13 +9,13 @@ import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class ItemCard {
+public class DeckCard {
     private String name;
     private String img;
     private int price;
     private int stock;
 
-    public ItemCard(String name, String img, int price, int stock){
+    public DeckCard(String name, String img, int price, int stock){
         this.name = name;
         this.img = img;
         this.price = price;
@@ -84,7 +84,7 @@ public class ItemCard {
         stockLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         stockLabel.setBorder(new EmptyBorder(0, 0, 0, 0));
 
-        JButton buyButton = new JButton("Buy Now!");
+        JButton buyButton = new JButton("Sell");
         buyButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         buyButton.setBackground(Color.GREEN);
         buyButton.setForeground(Color.WHITE);
