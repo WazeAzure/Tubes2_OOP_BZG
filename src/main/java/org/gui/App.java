@@ -11,6 +11,7 @@ public class App extends Default{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout()); 
         frame.setResizable(false);
+        frame.setBackground(Color.decode("#F1E4C3"));
 
         JPanel main = main_panel();
 
@@ -36,6 +37,7 @@ public class App extends Default{
 
     private JPanel main_panel() {
         JPanel panel = new JPanel(); 
+        panel.setBackground(Color.decode(getColor1()));
         panel.setLayout(null);
         panel.setPreferredSize(new Dimension(1060, 660));
         Shop shop = new Shop();
