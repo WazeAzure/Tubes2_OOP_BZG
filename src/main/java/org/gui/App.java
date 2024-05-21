@@ -33,6 +33,11 @@ public class App extends Default{
         frame.add(empty2, BorderLayout.EAST);
         frame.add(empty4, BorderLayout.WEST);
 
+        String sound_track = "src\\main\\java\\org\\gui\\assets\\bs2.mp3";
+        Music se = new Music();
+        se.setFile(sound_track);
+        se.play();
+
         frame.setVisible(true);
 
         frame.pack();
@@ -45,10 +50,10 @@ public class App extends Default{
         panel.setPreferredSize(new Dimension(1060, 660));
         // Farm farm = new Farm();
         // panel.add(farm.page_farm());
-        // Shop shop = new Shop();
-        // panel.add(shop.page_shop());
-        Save save = new Save();
-        panel.add(save.page_save());
+        Shop shop = new Shop();
+        panel.add(shop.page_shop());
+        // Save save = new Save();
+        // panel.add(save.page_save());
         // Load load = new Load();
         // panel.add(load.page_load());
         // Plugin plugin = new Plugin();

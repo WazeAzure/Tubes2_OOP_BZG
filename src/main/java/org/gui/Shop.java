@@ -16,6 +16,7 @@ public class Shop extends Default{
         panel.setBackground(Color.decode(getColor1()));
 
         JLabel label = new JLabel("Welcome to Shop!");
+        label.setFont(new Font("Serif", Font.BOLD, 30));
         label.setHorizontalAlignment(JLabel.CENTER);
         panel.add(label);
         
@@ -91,6 +92,7 @@ public class Shop extends Default{
         panel.setBackground(Color.decode(getColor1()));
 
         JLabel label = new JLabel();
+        label.setFont(new Font("Serif", Font.BOLD, 20));
         label.setText("Want to Buy?");
         panel.add(label);
         
@@ -106,6 +108,7 @@ public class Shop extends Default{
         panel.setBackground(Color.decode(getColor1()));
 
         JLabel label = new JLabel();
+        label.setFont(new Font("Serif", Font.BOLD, 20));
         label.setText("Want to Sell?");
         panel.add(label);
 
@@ -121,12 +124,12 @@ public class Shop extends Default{
 
         JButton button = new JButton();
         try {
-            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/shovel.png"));
-            Image resizedImage = img.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/field.png"));
+            Image resizedImage = img.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
             ImageIcon icon = new ImageIcon(resizedImage);
 
             button.setIcon(icon);
-            button.setPreferredSize(new Dimension(25, 25)); 
+            button.setPreferredSize(new Dimension(40, 40)); 
         } catch (Exception e) {
             e.printStackTrace();
         }

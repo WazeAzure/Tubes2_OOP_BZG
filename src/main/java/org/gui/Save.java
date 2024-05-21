@@ -1,13 +1,9 @@
 package org.gui;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-
-import javax.crypto.spec.PBEKeySpec;
 import javax.imageio.ImageIO;
 
 public class Save extends Default {
