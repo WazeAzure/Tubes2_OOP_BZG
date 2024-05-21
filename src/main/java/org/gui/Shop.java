@@ -137,7 +137,7 @@ public class Shop extends Default{
         return panel;
     }
 
-    JPanel page_shop() {
+    public JPanel page_shop() {
         JPanel panel = new JPanel(); 
         panel.setLayout(null);
         panel.setBounds(0, 0, 1060, 660);

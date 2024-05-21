@@ -7,7 +7,7 @@ public class App extends Default{
     JFrame frame = new JFrame();
 
     private void initialize() {
-        frame.setTitle("Shop GUI");
+        frame.setTitle("HARVEST SUN");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout()); 
         frame.setResizable(false);
@@ -40,8 +40,10 @@ public class App extends Default{
         panel.setBackground(Color.decode(getColor1()));
         panel.setLayout(null);
         panel.setPreferredSize(new Dimension(1060, 660));
-        Shop shop = new Shop();
-        panel.add(shop.page_shop());
+        Farm farm = new Farm();
+        panel.add(farm.page_farm());
+        // Shop shop = new Shop();
+        // panel.add(shop.page_shop());
         return panel;
     }
     
