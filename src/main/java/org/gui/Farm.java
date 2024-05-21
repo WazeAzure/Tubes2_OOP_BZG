@@ -12,7 +12,7 @@ public class Farm extends Default{
 
     private JPanel player1(){
         JPanel panel = new JPanel();
-        panel.setBounds(0, 70, 150, 200);
+        panel.setBounds(0, 20, 100, 80);
         panel.setBackground(Color.GREEN);
         return panel;
     }
@@ -37,7 +37,7 @@ public class Farm extends Default{
     
     private JPanel headerPanel(){
         JPanel panel = new JPanel();
-        panel.setBounds(0, 0, 800, 100);
+        panel.setBounds(180, 0, 620, 100);
         panel.setBackground(Color.WHITE);
         panel.add(player1());
         panel.add(title());
@@ -68,7 +68,7 @@ public class Farm extends Default{
 
     private JPanel nextTurn(){
         JPanel panel = new JPanel();
-        panel.setBounds(900, 20, 160, 250);
+        panel.setBounds(920, 20, 120, 60);
         panel.setBackground(Color.pink);
         return panel;
     }
@@ -83,6 +83,7 @@ public class Farm extends Default{
         panel.add(menu());
         panel.add(field());
         panel.add(deck());
+        panel.add(nextTurn());
 
         return panel;
     }
