@@ -24,8 +24,8 @@ public class App extends Default{
         JPanel empty4 = new JPanel();
         empty4.setPreferredSize(new Dimension(20, 660));
 
-        frame.add(empty1, BorderLayout.NORTH);
-        frame.add(empty3, BorderLayout.SOUTH);
+//        frame.add(empty1, BorderLayout.NORTH);
+//        frame.add(empty3, BorderLayout.SOUTH);
         frame.add(main, BorderLayout.CENTER);
         frame.add(empty2, BorderLayout.EAST);
         frame.add(empty4, BorderLayout.WEST);
@@ -39,9 +39,11 @@ public class App extends Default{
         JPanel panel = new JPanel(); 
         panel.setBackground(Color.decode(getColor1()));
         panel.setLayout(null);
-        panel.setPreferredSize(new Dimension(1060, 660));
+        panel.setPreferredSize(new Dimension(1060, 700));
         Shop shop = new Shop();
-        panel.add(shop.page_shop());
+        Farm farm = new Farm();
+//        panel.add(shop.page_shop());
+        panel.add(farm);
         return panel;
     }
     
