@@ -26,7 +26,7 @@ public class CardPanel extends JPanel implements Transferable, Serializable {
         JLabel labelNama = new JLabel(this.nama);
         labelNama.setBounds(0,80,30,30);
         this.add(labelNama, gbc);
-        this.setBackground(Color.WHITE);
+        this.setBackground(Color.RED);
     }
 
     @Override

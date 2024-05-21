@@ -17,7 +17,6 @@ public class CardDropTargetListener extends DropTargetAdapter {
     }
     public void drop(DropTargetDropEvent event) {
         try {
-
             event.acceptDrop(DnDConstants.ACTION_MOVE);
             var tr = event.getTransferable();
             if (event.isDataFlavorSupported(CardPanel.card)) {
@@ -28,13 +27,18 @@ public class CardDropTargetListener extends DropTargetAdapter {
                 this.panel.setPanelCard(card1);
                 ds.createDefaultDragGestureRecognizer(card1, DnDConstants.ACTION_MOVE, this.dgl);
                 event.dropComplete(true);
+                this.dgl.setIsDragging(false);
                 return;
             }
 
             event.rejectDrop();
+            this.dgl.setIsDragging(false);
         } catch (Exception e) {
             e.printStackTrace();
             event.rejectDrop();
+            event.dropComplete(true);
+            this.dgl.setIsDragging(false);
         }
+        this.dgl.setIsDragging(false);
     }
 }

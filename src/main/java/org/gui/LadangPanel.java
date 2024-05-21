@@ -2,8 +2,11 @@ package org.gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.dnd.*;
 
 public class LadangPanel extends JPanel {
+    private Farm farm;
+
     private boolean isExpanded;
     private boolean isShrinked;
     // Normal (4x5) memiliki kode = 0
@@ -25,8 +28,9 @@ public class LadangPanel extends JPanel {
     private final int widthLadang = 520;
     private final int heightLadang = 550;
 
-    public LadangPanel() {
+    public LadangPanel(Farm farm) {
         // Inisialisasi awal pasti dalam keadaan normal
+        this.farm = farm;
         this.setLayout(null);
         this.setBounds(0,0,widthLadang,heightLadang);
         this.setBackground(Color.PINK);
@@ -37,6 +41,13 @@ public class LadangPanel extends JPanel {
                 int x = (j+1)*widthPadding + (j*widthPetakNormal);
                 int y = (i+1)*heightPadding + (i*heightPetakNormal);
                 PetakLadangPlaceholder petakLadang = new PetakLadangPlaceholder(x,y,widthPetakNormal,heightPetakNormal,i,j);
+                new CardDropTargetListener(petakLadang,farm);
+                if(i==0 && j==0){
+                    CardPanel cardPanel = new CardPanel();
+                    petakLadang.setPanelCard(cardPanel);
+                    var ds = new DragSource();
+                    ds.createDefaultDragGestureRecognizer(cardPanel, DnDConstants.ACTION_MOVE, farm);
+                }
                 this.add(petakLadang);
             }
         }

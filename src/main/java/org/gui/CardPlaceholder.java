@@ -26,6 +26,7 @@ public class CardPlaceholder extends JPanel {
 
     public void setPanelEmpty(){
         this.remove(this.panelCard);
+        this.panelCard=null;
         this.revalidate();
         this.repaint();
     }
