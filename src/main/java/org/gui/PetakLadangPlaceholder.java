@@ -11,4 +11,9 @@ public class PetakLadangPlaceholder extends CardPlaceholder {
         this.idx_i = i;
         this.idx_j = j;
     }
+
+    public void displayIJ(){
+        System.out.println(idx_i);
+        System.out.println(idx_j);
+    }
 }

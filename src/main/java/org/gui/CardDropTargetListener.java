@@ -19,26 +19,21 @@ public class CardDropTargetListener extends DropTargetAdapter {
         try {
             event.acceptDrop(DnDConstants.ACTION_MOVE);
             var tr = event.getTransferable();
-            if (event.isDataFlavorSupported(CardPanel.card)) {
+            if (event.isDataFlavorSupported(CardPanel.card) && this.panel.getPanelCard() == null) {
                 CardPanel card1 = (CardPanel) tr.getTransferData(CardPanel.card);
                 CardPlaceholder sourcePanel = this.dgl.getSourceDragPanel();
                 sourcePanel.setPanelEmpty();
                 var ds = new DragSource();
                 this.panel.setPanelCard(card1);
                 ds.createDefaultDragGestureRecognizer(card1, DnDConstants.ACTION_MOVE, this.dgl);
+                PetakLadangPlaceholder petakLadangPlaceholder = (PetakLadangPlaceholder) this.panel;
                 event.dropComplete(true);
-                this.dgl.setIsDragging(false);
                 return;
             }
 
             event.rejectDrop();
-            this.dgl.setIsDragging(false);
         } catch (Exception e) {
-            e.printStackTrace();
-            event.rejectDrop();
-            event.dropComplete(true);
-            this.dgl.setIsDragging(false);
+            event.dropComplete(false);
         }
-        this.dgl.setIsDragging(false);
     }
 }

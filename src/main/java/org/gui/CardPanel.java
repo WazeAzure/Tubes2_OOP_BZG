@@ -6,26 +6,43 @@ import java.awt.datatransfer.*;
 import java.io.*;
 
 public class CardPanel extends JPanel implements Transferable, Serializable {
-    private String nama;
-    private String gambar;
+    int x;
+    int y;
+    int width;
+    int height;
+
+    private String nama = "NAMA";
+    private String gambar = "GAMBAR";
     protected static final DataFlavor card = new DataFlavor(CardPanel.class, "Card");
     protected static final DataFlavor[] supportedFlavors = {card};
 
-    public CardPanel() {
+    public CardPanel(int x, int y, int width, int height) {
         this.setLayout(null);
         this.nama = nama;
         this.gambar = gambar;
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        JLabel labelGambar = new JLabel(this.gambar);
-        labelGambar.setBounds(0,0,30,30);
-        this.add(labelGambar, gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        JLabel labelNama = new JLabel(this.nama);
-        labelNama.setBounds(0,80,30,30);
-        this.add(labelNama, gbc);
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+
+        this.setBounds(x, y, width, height);
+        int widthImage = Math.floorDiv(this.getWidth()*7,9);
+        int heightImage = widthImage;
+        int heightNama = Math.floorDiv(this.getHeight()*5,24);
+        int widthPadding = Math.floorDiv(this.getWidth()-widthImage,2);
+        int heightPadding = Math.floorDiv(this.getHeight()-heightImage-heightNama,3);
+
+        JPanel panelGambar = new JPanel();
+        panelGambar.setLayout(null);
+        panelGambar.setBackground(Color.CYAN);
+        panelGambar.setBounds(widthPadding,heightPadding,widthImage,heightImage);
+        this.add(panelGambar);
+
+        JPanel panelNama = new JPanel();
+        panelNama.setLayout(null);
+        panelNama.setBackground(Color.CYAN);
+        panelNama.setBounds(widthPadding,2*heightPadding+heightImage,widthImage,heightNama);
+        this.add(panelNama);
         this.setBackground(Color.RED);
     }
 
@@ -42,7 +59,7 @@ public class CardPanel extends JPanel implements Transferable, Serializable {
     @Override
     public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
         if (flavor.equals(card)) {
-            return this;
+            return new CardPanel(this.x,this.y,this.width,this.height);
         } else {
             throw new UnsupportedFlavorException(flavor);
         }
