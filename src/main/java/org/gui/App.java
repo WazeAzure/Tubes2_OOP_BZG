@@ -47,12 +47,12 @@ public class App extends Default{
         // panel.add(farm.page_farm());
         // Shop shop = new Shop();
         // panel.add(shop.page_shop());
-        // Save save = new Save();
-        // panel.add(save.page_save());
+        Save save = new Save();
+        panel.add(save.page_save());
         // Load load = new Load();
         // panel.add(load.page_load());
-        Plugin plugin = new Plugin();
-        panel.add(plugin.page_plugin());
+        // Plugin plugin = new Plugin();
+        // panel.add(plugin.page_plugin());
         return panel;
     }
     

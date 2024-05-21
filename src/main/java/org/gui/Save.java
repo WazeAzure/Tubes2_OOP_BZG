@@ -35,6 +35,7 @@ public class Save extends Default {
 
     private JPanel saveComponent() {
         JPanel panel = new JPanel();
+        panel.setBackground(Color.decode(getColor3()));
         panel.setLayout(null);
         panel.setBounds(0, 0, 500, 250);
     
@@ -61,6 +62,7 @@ public class Save extends Default {
         entry.add(folder);
         entry.add(Box.createHorizontalStrut(10));
         entry.add(dropdown);
+        entry.setBackground(Color.decode(getColor3()));
     
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonPanel.setBounds(80, 165, 340, 35); 
@@ -68,6 +70,7 @@ public class Save extends Default {
         JButton saveButton = new JButton("Save");
         buttonPanel.add(cancelButton);
         buttonPanel.add(saveButton);
+        buttonPanel.setBackground(Color.decode(getColor3()));
 
         cancelButton.addActionListener(e -> cancelB(panel));
         saveButton.addActionListener(e -> {
@@ -97,6 +100,7 @@ public class Save extends Default {
     
     private JPanel save() {
         JPanel panel = new JPanel();
+        panel.setBackground(Color.decode(getColor3()));
         panel.setLayout(null);
         panel.setBounds(280, 205, 500, 250);
         panel.setBackground(Color.BLUE);
@@ -106,6 +110,7 @@ public class Save extends Default {
 
     public JPanel page_save() {
         JPanel panel = new JPanel();
+        panel.setBackground(Color.decode(getColor3()));
         panel.setLayout(null);
         panel.setBounds(0, 0, 1060, 660);
     

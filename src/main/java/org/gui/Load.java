@@ -1,13 +1,9 @@
 package org.gui;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-
-import javax.crypto.spec.PBEKeySpec;
 import javax.imageio.ImageIO;
 
 public class Load extends Default {
@@ -37,6 +33,7 @@ public class Load extends Default {
         JPanel panel = new JPanel();
         panel.setLayout(null);
         panel.setBounds(0, 0, 500, 250);
+        panel.setBackground(Color.decode(getColor3()));
     
         JLabel title = new JLabel("Load");
         title.setHorizontalAlignment(SwingConstants.CENTER);
@@ -61,6 +58,7 @@ public class Load extends Default {
         entry.add(folder);
         entry.add(Box.createHorizontalStrut(10));
         entry.add(dropdown);
+        entry.setBackground(Color.decode(getColor3()));
     
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonPanel.setBounds(80, 165, 340, 35); 
@@ -77,6 +75,7 @@ public class Load extends Default {
         
         buttonPanel.add(cancelButton);
         buttonPanel.add(loadButton);
+        buttonPanel.setBackground(Color.decode(getColor3()));
     
         panel.add(title);
         panel.add(entry);

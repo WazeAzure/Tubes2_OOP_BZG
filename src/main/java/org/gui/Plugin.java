@@ -36,6 +36,7 @@ public class Plugin extends Default {
 
     private JPanel pluginComponent() {
         JPanel panel = new JPanel();
+        panel.setBackground(Color.decode(getColor3()));
         panel.setLayout(null);
         panel.setBounds(0, 0, 500, 250);
     
@@ -61,6 +62,7 @@ public class Plugin extends Default {
     
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5)); 
         buttonPanel.setBounds(20, 165, 460, 35);
+        buttonPanel.setBackground(Color.decode(getColor3()));
     
         JButton backButton = new JButton("Back");
         JButton uploadButton = new JButton("Load");
@@ -104,13 +106,13 @@ public class Plugin extends Default {
         JPanel panel = new JPanel();
         panel.setLayout(null);
         panel.setBounds(280, 205, 500, 250);
-        panel.setBackground(Color.BLUE);
         panel.add(pluginComponent());
         return panel;
     }
 
     public JPanel page_plugin() {
         JPanel panel = new JPanel();
+        panel.setBackground(Color.decode(getColor1()));
         panel.setLayout(null);
         panel.setBounds(0, 0, 1060, 660);
     
