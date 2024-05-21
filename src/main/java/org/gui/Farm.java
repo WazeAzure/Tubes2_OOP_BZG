@@ -1,12 +1,7 @@
 package org.gui;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicScrollBarUI;
-
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 
 public class Farm extends Default{
 

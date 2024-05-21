@@ -43,10 +43,12 @@ public class App extends Default{
         panel.setBackground(Color.decode(getColor1()));
         panel.setLayout(null);
         panel.setPreferredSize(new Dimension(1060, 660));
-        Farm farm = new Farm();
+        // Farm farm = new Farm();
         // panel.add(farm.page_farm());
-        Shop shop = new Shop();
-        panel.add(shop.page_shop());
+        // Shop shop = new Shop();
+        // panel.add(shop.page_shop());
+        Save save = new Save();
+        panel.add(save.page_save());
         return panel;
     }
     
