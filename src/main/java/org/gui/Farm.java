@@ -3,72 +3,77 @@ package org.gui;
 import javax.swing.*;
 import java.awt.*;
 
-public class Farm extends Default{
+public class Farm {
+    private App app;
 
-    private JPanel player1(){
+    public Farm(App app) {
+        this.app = app;
+    }
+
+    private JPanel player1() {
         JPanel panel = new JPanel();
         panel.setBounds(0, 20, 100, 80);
         panel.setBackground(Color.GREEN);
         return panel;
     }
 
-    private JPanel player2(){
+    private JPanel player2() {
         JPanel panel = new JPanel();
         panel.setBounds(530, 70, 150, 200);
         panel.setBackground(Color.GREEN);
         return panel;
-
     }
 
-    private JPanel title(){
+    private JPanel title() {
         JPanel panel = new JPanel();
         JLabel label = new JLabel();
         label.setText("LADANGKU");
         panel.setBounds(150, 0, 690, 105);
         panel.setBackground(Color.BLUE);
+        panel.add(label);  
         return panel;
-
     }
-    
-    private JPanel headerPanel(){
+
+    private JPanel headerPanel() {
         JPanel panel = new JPanel();
         panel.setBounds(180, 0, 620, 100);
         panel.setBackground(Color.WHITE);
+        panel.setLayout(null); 
         panel.add(player1());
         panel.add(title());
         panel.add(player2());
         return panel;
     }
 
-    private JPanel field(){
+    private JPanel field() {
         JPanel panel = new JPanel();
         panel.setBounds(180, 100, 620, 560);
         panel.setBackground(Color.BLACK);
         return panel;
     }
-    
-    private JPanel menu(){
+
+    private JPanel menu() {
         JPanel panel = new JPanel();
         panel.setBounds(0, 100, 180, 560);
         panel.setBackground(Color.YELLOW);
         return panel;
     }
 
-    private JPanel deck(){
+    private JPanel deck() {
         JPanel panel = new JPanel();
         panel.setBounds(800, 100, 260, 560);
-        panel.setBackground(Color.gray);
+        panel.setBackground(Color.GRAY);
         return panel;
     }
 
-    private JPanel nextTurn(){
+    private JPanel nextTurn() {
         JPanel panel = new JPanel();
         panel.setBounds(920, 20, 120, 60);
-        panel.setBackground(Color.pink);
+        panel.setBackground(Color.PINK);
         return panel;
     }
 
-    public JPanel page_farm(){
+    public JPanel page_farm() {
         JPanel panel = new JPanel();
         panel.setLayout(null);
         panel.setBounds(0, 0, 1060, 660);
