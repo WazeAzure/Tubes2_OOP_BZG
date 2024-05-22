@@ -24,8 +24,8 @@ public class App extends Default{
         JPanel empty4 = new JPanel();
         empty4.setPreferredSize(new Dimension(20, 660));
 
-//        frame.add(empty1, BorderLayout.NORTH);
-//        frame.add(empty3, BorderLayout.SOUTH);
+        frame.add(empty1, BorderLayout.NORTH);
+        frame.add(empty3, BorderLayout.SOUTH);
         frame.add(main, BorderLayout.CENTER);
         frame.add(empty2, BorderLayout.EAST);
         frame.add(empty4, BorderLayout.WEST);

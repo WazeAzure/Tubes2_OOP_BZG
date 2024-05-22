@@ -24,7 +24,13 @@ public class CardPanel extends JPanel implements Transferable, Serializable {
         this.y = y;
         this.width = width;
         this.height = height;
+        render();
+    }
 
+    public void render() {
+        this.width=this.getWidth();
+        this.height=this.getHeight();
+        this.removeAll();
         this.setBounds(x, y, width, height);
         int widthImage = Math.floorDiv(this.getWidth()*7,9);
         int heightImage = widthImage;

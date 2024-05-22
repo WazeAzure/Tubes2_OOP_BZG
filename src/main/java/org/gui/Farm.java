@@ -11,8 +11,12 @@ public class Farm extends JPanel implements DragGestureListener {
         this.setLayout(null);
         this.setBounds(0,0,1060,700);
         this.setBackground(Color.GREEN);
+
         LadangPanel ladangPanel = new LadangPanel(this);
         this.add(ladangPanel);
+
+        DeckAktif deckAktif = new DeckAktif(this);
+        this.add(deckAktif);
     }
 
     public void dragGestureRecognized(DragGestureEvent event) {

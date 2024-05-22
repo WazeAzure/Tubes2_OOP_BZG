@@ -22,7 +22,8 @@ public class CardPlaceholder extends JPanel {
 
     public void setPanelCard(CardPanel panel){
         this.panelCard = panel;
-//        this.panelCard.setBounds(0,0,this.width,this.height);
+        this.panelCard.setBounds(0,0,this.width,this.height);
+        this.panelCard.render();
         this.add(this.panelCard);
         this.revalidate();
         this.repaint();
