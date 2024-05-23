@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameEngine {
-    private int turn;
+    private Integer turn;
     private List<Pemain> pemain;
     private Config config;
     private Toko toko;
-    private int gameState;
+    private Integer gameState;
 
     public GameEngine() {
         // Inisialisasi turn;
@@ -37,6 +37,34 @@ public class GameEngine {
         gameState = 0;
     }
 
+    Pemain getCurrentPemain() {
+        return pemain.get((turn-1) % 2);
+    }
+
+    List<Pemain> getListPemain() {
+        return pemain;
+    }
+
+    Integer getTurn() {
+        return turn;
+    }
+
+    Integer getGameState() {
+        return gameState;
+    }
+
+    void setGameState(Integer gameState) {
+        this.gameState = gameState;
+    }
+
+    Toko getToko() {
+        return toko;
+    }
+
+    Config getConfig() {
+        return config;
+    }
+
     public void dndLadangLadang(){
 
     }
@@ -53,23 +81,37 @@ public class GameEngine {
 
     }
 
-    public void panen(){
-
+    public void panen(String coor) throws Exception{
+        try {
+            getCurrentPemain().getLadang().panen(coor);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public void nextTurn() {
         if (turn != 21) {
-
+            turn += 1;
+            for (Pemain p : pemain) {
+                p.getLadang().growAllPlant();
+            }
+            gameState = 0;
         } else {
 
         }
     }
 
-    public void beli() {
-
+    public void beli(String produk, int jumlah, int uang) throws Exception {
+        try{
+//            toko.buy(produk, jumlah, uang);
+//            Pemain currentPemain = getCurrentPemain();
+//            currentPemain.setUang(currentPemain.getUang()-);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
-    public void jual() {
+    public void jual(String produk, int indexActiveDeck) throws Exception {
 
     }
 
