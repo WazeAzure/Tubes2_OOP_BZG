@@ -5,9 +5,11 @@ import org.kartu.Kartu;
 
 import java.util.*;
 
-public class ShuffleDeck extends Deck {
+public class ShuffleDeck{
+    private List<Kartu> listKartu;
 
     public ShuffleDeck(){
+        listKartu = new ArrayList<>();
         Random random = new Random();
         Map<String, ? extends Kartu > map;
         List<String> list;

@@ -2,12 +2,18 @@ package org.deck;
 
 import org.kartu.Kartu;
 
-public class ActiveDeck extends Deck{
-    public ActiveDeck(){}
-    public void addCard(Kartu card){
-        listKartu.add(card);
+import java.util.ArrayList;
+import java.util.List;
+
+public class ActiveDeck{
+    private Kartu[] listKartu = new Kartu[6];
+    public ActiveDeck(){
+
     }
-    public void removeCard(Kartu card){
-        listKartu.remove(card);
+    public void addCard(Kartu card, int index){
+        listKartu[index] = card;
+    }
+    public void removeCard(Kartu card, int index){
+        listKartu[index] = null;
     }
 }
