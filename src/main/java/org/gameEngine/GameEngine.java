@@ -30,7 +30,7 @@ public class GameEngine {
         config.loadConfig();
 
         // Inisialisasi Toko
-        toko = new Toko(config);
+        toko = new Toko();
 
         // Inisialisasi gameState
         // 0 = Shuffle Kartu, 1 = Serangan Beruang, 2 = Aksi Bebas
