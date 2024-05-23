@@ -1,5 +1,7 @@
 package org.gui;
 
+import org.config.FileHandling;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -54,6 +56,7 @@ public class Plugin {
         chooseFileButton.setBounds(350, 100, 100, 30);
         chooseFileButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
             int returnVal = fileChooser.showOpenDialog(panel);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 selectedFile = fileChooser.getSelectedFile();
@@ -91,6 +94,13 @@ public class Plugin {
         if (file != null && file.exists()) {
             JOptionPane.showMessageDialog(panel, "Open file: " + file.getName());
             // TODO: Add algoritma plugin
+            FileHandling fh = new FileHandling();
+            try {
+                fh.loadPlugin(String.valueOf(file.getAbsoluteFile()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         } else {
             JOptionPane.showMessageDialog(panel, "File does not exist.");
         }

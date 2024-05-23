@@ -1,0 +1,25 @@
+<PLAYER1>
+    <JUMLAH_GULDEN>500</JUMLAH_GULDEN>
+    <JUMLAH_DECK>39</JUMLAH_DECK>
+    <JUMLAH_DECK_AKTIF>1</JUMLAH_DECK_AKTIF>
+    <DECK>
+        <KARTU>
+            <LOKASI>A01</LOKASI>
+            <NAMA>BERUANG</NAMA>
+        </KARTU>
+    </DECK>
+    <JUMLAH_KARTU_LADANG>1</JUMLAH_KARTU_LADANG>
+    <LADANG>
+        <KARTU>
+            <LOKASI>A01</LOKASI>
+            <NAMA>DOMBA</NAMA>
+            <UMUR_BERAT>5</UMUR_BERAT>
+            <JUMLAH_ITEM_AKTIF>3</JUMLAH_ITEM_AKTIF>
+            <ITEM_AKTIF>
+                <ITEM>ACCELERATE</ITEM>
+                <ITEM>DELAY</ITEM>
+                <ITEM>PROTECT</ITEM>
+            </ITEM_AKTIF>
+        </KARTU>
+    </LADANG>
+</PLAYER1>

@@ -43,4 +43,8 @@ public class Toko {
         stok.put(produk, stok.get(produk)+1);
         return ((Product)daftar.get(produk)).getHarga();
     }
+
+    public void setItemStock(String produk, int jumlah){
+        stok.put(produk, jumlah);
+    }
 }

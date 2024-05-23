@@ -53,8 +53,10 @@ public class App extends Default {
 
         String sound_track = "src\\main\\java\\org\\gui\\assets\\bs2.mp3";
         Music se = new Music();
-        se.setFile(sound_track);
-        se.play();
+
+        // TODO: JANGAN LUPA UNCOMMENT LAGU. Ini tadi aku uncomment gara2 error :"
+//        se.setFile(sound_track);
+//        se.play();
 
         frame.pack();
         frame.setVisible(true);

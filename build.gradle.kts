@@ -20,6 +20,6 @@ tasks.test {
 }
 
 application {
-    mainClass = "org.example.App"
-
+    mainClass = "org.gui.App"
+//    mainClass = "org.example.App"
 }

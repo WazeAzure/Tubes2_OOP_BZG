@@ -8,6 +8,7 @@ import org.toko.Toko;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class GameEngine {
     private Integer turn;
@@ -15,6 +16,7 @@ public class GameEngine {
     private Config config;
     private Toko toko;
     private Integer gameState;
+    private Map<String, Class> pluginMap;
 
     public GameEngine() {
         // Inisialisasi turn;
@@ -37,19 +39,19 @@ public class GameEngine {
         gameState = 0;
     }
 
-    Pemain getCurrentPemain() {
+    public Pemain getCurrentPemain() {
         return pemain.get((turn-1) % 2);
     }
 
-    List<Pemain> getListPemain() {
+    public List<Pemain> getListPemain() {
         return pemain;
     }
 
-    Integer getTurn() {
+    public Integer getTurn() {
         return turn;
     }
 
-    Integer getGameState() {
+    public Integer getGameState() {
         return gameState;
     }
 
@@ -121,5 +123,21 @@ public class GameEngine {
 
     public void addKartuToDeck(Kartu kartu) {
 
+    }
+
+    public void addPlugin() {
+
+    }
+
+    public void setTurn(int turn){
+        this.turn = turn;
+    }
+
+    public void setItemInToko(String name, int qty) {
+        this.toko.setItemStock(name, qty);
+    }
+
+    public void setPemainGulden(int pemain, int gulden){
+        this.pemain.get(pemain).setUang(gulden);
     }
 }
