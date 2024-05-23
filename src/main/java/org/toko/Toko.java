@@ -11,7 +11,7 @@ import org.kartu.product.Product;
 public class Toko {
     private Map<String,Kartu> daftar;
     private Map<String, Integer> stok;
-    public Toko(Config config) {
+    public Toko() {
         daftar = new HashMap<>();
         for(var p: Config.getListProductAnimal().entrySet()){
             daftar.put(p.getKey(), p.getValue());
@@ -24,9 +24,9 @@ public class Toko {
         // isi dari config
 
     }
-    public List<String> getInfo(int i){
-        return new ArrayList<>();
-    }
+//    public List<String> getInfo(int i){
+//        return new ArrayList<>();
+//    }
     public List<Kartu> getListCard(){
         return new ArrayList<>(daftar.values());
     }
