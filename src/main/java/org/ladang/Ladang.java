@@ -94,7 +94,7 @@ public class Ladang {
 
 
     // ngecek apakah placement kartu valid
-    public Boolean validateCardPlacement(Kartu card, String coor){
+    public Boolean validateItemCardPlacement(Kartu card, String coor){
         if(card.getKategori().equals("Item")){
             return getObject(coor) != null;
         }else{
@@ -102,16 +102,18 @@ public class Ladang {
         }
     }
 
-    public void placeCard(Harvestable h, String coor){
-        if(validateCardPlacement(h,coor)){
-            kumpulanPetak.put(coor,h);
+    public void placeCard(Kartu h, String coor){
+        if(validateItemCardPlacement(h,coor)){
+            kumpulanPetak.put(coor,(Harvestable) h);
         }
     }
 
 
     // panen digunakan untuk memanggil method panen pada Harvestable
     public Product panen(String coor) throws Exception{
-        return getObject(coor).panen();
+        Product product = getObject(coor).panen();
+        kumpulanPetak.put(coor, null);
+        return product;
     }
 
     // growAllPlant untuk menambah umur dari semua tanaman pada ladang
@@ -134,6 +136,16 @@ public class Ladang {
             message.add(item.getKey() + ": " + item.getValue());
         }
         return message;
+    }
+    public void moveObject(String source, String dest) throws Exception{
+        Harvestable obj = getObject(source);
+        Harvestable obj2 = getObject(dest);
+        if(obj == null || obj2 != null){
+            throw new Exception("Ga bisa kocak");
+        }else{
+            kumpulanPetak.put(source, null);
+            kumpulanPetak.put(dest, obj);
+        }
     }
 
 
