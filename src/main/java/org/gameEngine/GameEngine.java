@@ -137,14 +137,14 @@ public class GameEngine {
     }
 
     public void jual(String produk, int indexActiveDeck) throws Exception {
-        
+        getCurrentPemain().setUang(getCurrentPemain().getUang() + toko.sell(produk));
     }
 
-    public void shuffleDeck() {
-
+    public List<Kartu> shuffleDeck(int jumlah) {
+        return getCurrentPemain().getShuffleDeck().getShuffleKartu(jumlah);
     }
 
-    public void addKartuToDeck(Kartu kartu) {
-
+    public void addKartuToDeck(List<Kartu> listKartu) {
+        getCurrentPemain().getActiveDeck().addCard(listKartu);
     }
 }
