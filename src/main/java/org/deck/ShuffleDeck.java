@@ -5,9 +5,11 @@ import org.kartu.Kartu;
 
 import java.util.*;
 
-public class ShuffleDeck extends Deck {
+public class ShuffleDeck{
+    private List<Kartu> listKartu;
 
     public ShuffleDeck(){
+        listKartu = new ArrayList<>();
         Random random = new Random();
         Map<String, ? extends Kartu > map;
         List<String> list;
@@ -75,15 +77,19 @@ public class ShuffleDeck extends Deck {
             }
         }
     }
-    public List<Kartu> getShuffleKartu(){
+    public List<Kartu> getShuffleKartu(int jumlah){
         Random random = new Random();
         int randomInt;
         List<Kartu> list = new ArrayList<>();
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < jumlah; i++){
             randomInt = random.nextInt(listKartu.size());
             list.add(listKartu.get(randomInt));
-            listKartu.remove(listKartu.get(randomInt));
         }
         return list;
+    }
+    public void removeFromDeck(List<Kartu> lk){
+        for(Kartu k : lk){
+            listKartu.remove(k);
+        }
     }
 }

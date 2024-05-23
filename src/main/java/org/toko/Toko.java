@@ -33,9 +33,13 @@ public class Toko {
     public int totalHarga(String produk, int jumlah){
         return ((Product)daftar.get(produk)).getHarga() * jumlah;
     }
-    public Kartu buy(String produk, int jumlah, int uang) throws Exception{
+    public List<Kartu> buy(String produk, int jumlah, int uang) throws Exception{
+        List<Kartu> kartu = new ArrayList<>();
         if(uang >= totalHarga(produk, jumlah)){
-            return Config.buildProduct(produk);
+           for(int i = 0; i < jumlah; i++){
+               kartu.add(Config.buildProduct(produk));
+           }
+           return kartu;
         }
         throw new Exception("Duit lu gak cukup");
     }
