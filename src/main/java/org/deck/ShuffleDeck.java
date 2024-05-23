@@ -75,11 +75,11 @@ public class ShuffleDeck extends Deck {
             }
         }
     }
-    public List<Kartu> getShuffleKartu(){
+    public List<Kartu> getShuffleKartu(int jumlah){
         Random random = new Random();
         int randomInt;
         List<Kartu> list = new ArrayList<>();
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < jumlah; i++){
             randomInt = random.nextInt(listKartu.size());
             list.add(listKartu.get(randomInt));
             listKartu.remove(listKartu.get(randomInt));
