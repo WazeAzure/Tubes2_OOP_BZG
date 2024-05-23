@@ -1,11 +1,13 @@
 package org.gameEngine;
 
 import org.config.Config;
+import org.config.FileHandling;
 import org.kartu.Kartu;
 import org.ladang.Ladang;
 import org.pemain.Pemain;
 import org.toko.Toko;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,7 @@ public class GameEngine {
     private Config config;
     private Toko toko;
     private Integer gameState;
+    private FileHandling fileHandling;
 
     public GameEngine() {
         // Inisialisasi turn;
@@ -35,10 +38,17 @@ public class GameEngine {
         // Inisialisasi gameState
         // 0 = Shuffle Kartu, 1 = Serangan Beruang, 2 = Aksi Bebas
         gameState = 0;
+
+        Object self;
+        fileHandling = new FileHandling(this);
     }
 
     Pemain getCurrentPemain() {
         return pemain.get((turn-1) % 2);
+    }
+
+    Pemain getCurrentLawan() {
+        return pemain.get(turn % 2);
     }
 
     List<Pemain> getListPemain() {
@@ -65,28 +75,42 @@ public class GameEngine {
         return config;
     }
 
-    public void dndLadangLadang(){
+    public void dndLadangLadang(int colSource, int rowSource, int colDest, int rowDest) throws Exception {
+        getCurrentPemain().getLadang().moveObject(Ladang.parseToKey(colSource, rowSource), Ladang.parseToKey(colDest, rowDest));
+    }
+
+    public void dndDeckDeck(int indexSource, int indexDest) throws Exception {
+        Kartu sourceCard = getCurrentPemain().getActiveDeck().getListKartu()[indexSource];
+        Kartu DestCard = getCurrentPemain().getActiveDeck().getListKartu()[indexDest];
+        if (sourceCard == null) {
+            return;
+        } else {
+            getCurrentPemain().getActiveDeck().getListKartu()[indexSource] = DestCard;
+            getCurrentPemain().getActiveDeck().getListKartu()[indexDest] = sourceCard;
+        }
 
     }
 
-    public void dndDeckDeck() {
-
+    public void dndDeckLadang(int indexSource, int rowDest, int colDest) throws Exception{
+        Kartu sourceCard = getCurrentPemain().getActiveDeck().getListKartu()[indexSource];
+        if (sourceCard == null) {
+            throw new Exception("Pemindahan Tidak valid!");
+        } else {
+            getCurrentPemain().getLadang().placeCard(sourceCard, Ladang.parseToKey(colDest, rowDest));
+        }
     }
 
-    public void dndDeckLadang() {
-
-    }
-
-    public void dndDeckLadangMusuh() {
-
+    public void dndDeckLadangMusuh(int indexSource, int rowDest, int colDest) throws Exception {
+        Kartu sourceCard = getCurrentPemain().getActiveDeck().getListKartu()[indexSource];
+        if (sourceCard == null || sourceCard.getNama().equals("Protect") || !sourceCard.getKategori().equals("Item")) {
+            throw new Exception("Pemindahan Tidak valid!");
+        } else {
+            getCurrentPemain().getLadang().placeCard(sourceCard, Ladang.parseToKey(colDest, rowDest));
+        }
     }
 
     public void panen(String coor) throws Exception{
-        try {
-            getCurrentPemain().getLadang().panen(coor);
-        } catch (Exception e) {
-            throw e;
-        }
+        getCurrentPemain().getLadang().panen(coor);
     }
 
     public void nextTurn() {
@@ -102,17 +126,18 @@ public class GameEngine {
     }
 
     public void beli(String produk, int jumlah, int uang) throws Exception {
-        try{
-//            toko.buy(produk, jumlah, uang);
-//            Pemain currentPemain = getCurrentPemain();
-//            currentPemain.setUang(currentPemain.getUang()-);
-        } catch (Exception e) {
-            throw e;
+        if (getCurrentPemain().getActiveDeck().remainingSlot() >= jumlah) {
+            List<Kartu> listKartu = toko.buy(produk, jumlah, uang);
+            Pemain currentPemain = getCurrentPemain();
+            currentPemain.setUang(currentPemain.getUang() - toko.totalHarga(produk, jumlah));
+            getCurrentPemain().getActiveDeck().addCard(listKartu);
+        } else {
+            throw new Exception("Slot tidak cukup!");
         }
     }
 
     public void jual(String produk, int indexActiveDeck) throws Exception {
-
+        
     }
 
     public void shuffleDeck() {

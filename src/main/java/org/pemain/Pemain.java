@@ -1,13 +1,15 @@
 package org.pemain;
 
+import org.deck.ActiveDeck;
+import org.deck.ShuffleDeck;
 import org.ladang.Ladang;
 
 public class Pemain {
     private Integer playerNumber;
     Integer uang;
     private Ladang ladang;
-//    private Deck deck;
-//    private ActiveDeck activeDeck;
+    private ShuffleDeck deck;
+    private ActiveDeck activeDeck;
 
     public Pemain(Integer playerNumber) {
         ladang = new Ladang(5, 4);
@@ -31,6 +33,14 @@ public class Pemain {
 
     public Ladang getLadang() {
         return ladang;
+    }
+
+    public ShuffleDeck getShuffleDeck() {
+        return deck;
+    }
+
+    public ActiveDeck getActiveDeck() {
+        return activeDeck;
     }
 
     public void setUang(Integer uang) {
