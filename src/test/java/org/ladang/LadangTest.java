@@ -111,6 +111,8 @@ class LadangTest {
     @Test
     void destroyRegion(){
         Ladang l = new Ladang(4, 5);
-        l.destroyRegion();
+        for(String s: l.destroyRegion()){
+            System.out.println(s);
+        }
     }
 }

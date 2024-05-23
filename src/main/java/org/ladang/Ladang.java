@@ -176,7 +176,7 @@ public class Ladang {
         }
         return rand;
     }
-    public void destroyRegion(){
+    public List<String> destroyRegion(){
         Random random =  new Random();
         int size = regionSize();
         List<String> listDestroy = new ArrayList<>();
@@ -290,11 +290,7 @@ public class Ladang {
             listDestroy.add(Character.toString('A' + col-1)  + row);
 
         }
-        for(String s: listDestroy){
-            System.out.println(size);
-            System.out.println(s);
-            removeObject(s);
-        }
+        return listDestroy;
 //        int possibility = random.nextInt(4);
 //        switch (possibility) {
 //            case 0: // 1 x 1
