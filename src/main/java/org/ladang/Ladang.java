@@ -29,12 +29,6 @@ public class Ladang {
     public Map<String, Harvestable> getLadang(){
         return kumpulanPetak;
     }
-    public String parseToKey(int col, int row){
-        StringBuilder sb = new StringBuilder();
-        sb.append(chars[col]);
-        sb.append(row+1);
-        return sb.toString().toUpperCase();
-    }
     // ke samping ABC ke bawah 1,2,3
     public void addRow(){
         for(int i=0; i<this.curWidth; i++){
@@ -80,6 +74,12 @@ public class Ladang {
         }
         curWidth--;
         return l;
+    }
+    public static String parseToKey(int col, int row){
+        StringBuilder sb = new StringBuilder();
+        sb.append(chars[col]);
+        sb.append(row+1);
+        return sb.toString().toUpperCase();
     }
 
     public void makeBigger(){
