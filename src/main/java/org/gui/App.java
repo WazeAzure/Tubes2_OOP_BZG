@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class App extends Default {
-    protected int page = 4;
+    protected int page = 3;
     JFrame frame;
     JPanel mainPanel;
     Farm farm1;
@@ -24,11 +24,21 @@ public class App extends Default {
     }
 
     private void initialize() {
-        frame = new JFrame();
+        JFrame frame = new JFrame();
+
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
+        int screenWidth = screenSize.width;
+        int screenHeight = screenSize.height;
+
         frame.setTitle("HARVEST SUN");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setResizable(false);
+        frame.pack(); 
+        frame.setLocationRelativeTo(null); 
+        frame.setVisible(true);
+        frame.setLocation((screenWidth - getWidth())/2, (screenHeight - getHeight())/2 - 20);
 
         mainPanel = main_panel();
         frame.add(mainPanel, BorderLayout.CENTER);
@@ -51,10 +61,10 @@ public class App extends Default {
         frame.add(empty2, BorderLayout.EAST);
         frame.add(empty4, BorderLayout.WEST);
 
-        String sound_track = "src\\main\\java\\org\\gui\\assets\\bs2.mp3";
+        String sound_track = "src\\main\\java\\org\\gui\\assets\\bs1.wav";
         Music se = new Music();
         se.setFile(sound_track);
-        se.play();
+        se.loop();
 
         frame.pack();
         frame.setVisible(true);

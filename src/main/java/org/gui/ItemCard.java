@@ -117,6 +117,26 @@ public class ItemCard extends Default{
     }
 
     public void buy(Component parentComponent) {
-        JOptionPane.showMessageDialog(parentComponent, "Klik: " + name);
+        Object[] options = {"Sure", "Cancel"};
+        int choice = JOptionPane.showOptionDialog(
+                null, 
+                "Are you sure to buy?", 
+                this.name, 
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.QUESTION_MESSAGE, 
+                null, 
+                options, 
+                options[0]
+        );
+
+        if (choice == JOptionPane.YES_OPTION) {
+            System.out.println("Sure button clicked");
+            String sound_track = "src\\main\\java\\org\\gui\\assets\\buy.wav";
+            Music se = new Music();
+            se.setFile(sound_track);
+            se.play();
+        } else if (choice == JOptionPane.NO_OPTION) {
+            System.out.println("Cancel button clicked");
+        }
     }
 }

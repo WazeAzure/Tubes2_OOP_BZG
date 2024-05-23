@@ -31,6 +31,15 @@ public class Music {
         }
     }
 
+    public void loop() {
+        if (clip != null) {
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            System.out.println("music loop start");
+        } else {
+            System.out.println("Clip is not initialized");
+        }
+    }
+    
     public void stop() throws IOException {
         if (sound != null) {
             sound.close();
