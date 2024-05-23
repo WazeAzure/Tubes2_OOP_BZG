@@ -82,6 +82,22 @@ public class Ladang {
         return sb.toString().toUpperCase();
     }
 
+    // mulai dari 1 bukan 0
+    public static List<Integer> parseFromKey(String key){
+        List<Integer> l = new ArrayList<>();
+        StringBuilder sb = new StringBuilder(key);
+        int col = sb.charAt(0) - 'A' + 1;
+        StringBuilder numeric = new StringBuilder();
+        for(int i=1; i<key.length(); i++){
+            numeric.append(sb.charAt(i));
+        }
+        int row = Integer.parseInt(numeric.toString());
+        l.add(col);
+        l.add(row);
+
+        return l;
+    }
+
     public void makeBigger(){
         addRow();
         addCol();
@@ -186,29 +202,21 @@ public class Ladang {
         int size = regionSize();
         List<String> listDestroy = new ArrayList<>();
         List<String> list = new ArrayList<>(kumpulanPetak.keySet());
-
+        List<Integer> colrow = new ArrayList<>();
         int randomInt = random.nextInt(list.size());
         String start = list.get(randomInt);
-        StringBuilder sb = new StringBuilder(start);
-        int col = sb.charAt(0) - 'A' + 1;
-        StringBuilder numeric = new StringBuilder();
-        for(int i=1; i<start.length(); i++){
-            numeric.append(sb.charAt(i));
-        }
-        int row = Integer.parseInt(numeric.toString());
+        colrow = parseFromKey(start);
+        int col = colrow.get(0);
+        int row = colrow.get(1);
         if(size == 1){
             listDestroy.add(Character.toString('A' + col-1)  + row);
         }else if(size == 2){
            while(col + 1 > curWidth){
                randomInt = random.nextInt(list.size());
                start = list.get(randomInt);
-               sb = new StringBuilder(start);
-               col = sb.charAt(0) - 'A' + 1;
-               numeric = new StringBuilder();
-               for(int i=1; i<start.length(); i++){
-                   numeric.append(sb.charAt(i));
-               }
-               row = Integer.parseInt(numeric.toString());
+               colrow = parseFromKey(start);
+               col = colrow.get(0);
+               row = colrow.get(1);
            }
            listDestroy.add(Character.toString('A' + col-1)  + row);
            col++;
@@ -217,13 +225,9 @@ public class Ladang {
             while(col + 2 > curWidth){
                 randomInt = random.nextInt(list.size());
                 start = list.get(randomInt);
-                sb = new StringBuilder(start);
-                col = sb.charAt(0) - 'A' + 1;
-                numeric = new StringBuilder();
-                for(int i=1; i<start.length(); i++){
-                    numeric.append(sb.charAt(i));
-                }
-                row = Integer.parseInt(numeric.toString());
+                colrow = parseFromKey(start);
+                col = colrow.get(0);
+                row = colrow.get(1);
             }
             listDestroy.add(Character.toString('A' + col-1)  + row);
             col++;
@@ -234,13 +238,9 @@ public class Ladang {
             while(col + 1 > curWidth || row + 1 > curHeight){
                 randomInt = random.nextInt(list.size());
                 start = list.get(randomInt);
-                sb = new StringBuilder(start);
-                col = sb.charAt(0) - 'A' + 1;
-                numeric = new StringBuilder();
-                for(int i=1; i<start.length(); i++){
-                    numeric.append(sb.charAt(i));
-                }
-                row = Integer.parseInt(numeric.toString());
+                colrow = parseFromKey(start);
+                col = colrow.get(0);
+                row = colrow.get(1);
             }
             listDestroy.add(Character.toString('A' + col-1)  + row);
             col++;
@@ -253,13 +253,9 @@ public class Ladang {
             while(col + 4 > curHeight){
                 randomInt = random.nextInt(list.size());
                 start = list.get(randomInt);
-                sb = new StringBuilder(start);
-                col = sb.charAt(0) - 'A' + 1;
-                numeric = new StringBuilder();
-                for(int i=1; i<start.length(); i++){
-                    numeric.append(sb.charAt(i));
-                }
-                row = Integer.parseInt(numeric.toString());
+                colrow = parseFromKey(start);
+                col = colrow.get(0);
+                row = colrow.get(1);
             }
             listDestroy.add(Character.toString('A' + col-1)  + row);
             row++;
@@ -274,13 +270,9 @@ public class Ladang {
             while(col + 2 > curWidth || row + 1 > curHeight) {
                 randomInt = random.nextInt(list.size());
                 start = list.get(randomInt);
-                sb = new StringBuilder(start);
-                col = sb.charAt(0) - 'A' + 1;
-                numeric = new StringBuilder();
-                for (int i = 1; i < start.length(); i++) {
-                    numeric.append(sb.charAt(i));
-                }
-                row = Integer.parseInt(numeric.toString());
+                colrow = parseFromKey(start);
+                col = colrow.get(0);
+                row = colrow.get(1);
             }
             listDestroy.add(Character.toString('A' + col-1)  + row);
             col++;
