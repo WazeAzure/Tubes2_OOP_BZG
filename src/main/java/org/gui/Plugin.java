@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class Plugin {
+public class Plugin extends Default{
     private App app;
     private File selectedFile;
 
@@ -37,22 +37,37 @@ public class Plugin {
 
     private JPanel pluginComponent() {
         JPanel panel = new JPanel();
-        panel.setOpaque(false); // Make the panel transparent
+        panel.setOpaque(false);
         panel.setLayout(null);
         panel.setBounds(0, 0, 500, 250);
 
         JLabel title = new JLabel("Plugin");
         title.setHorizontalAlignment(SwingConstants.CENTER);
         title.setFont(new Font("Serif", Font.BOLD, 24));
-        title.setBounds(0, 20, 500, 50);
+        title.setBounds(0, 35, 500, 50);
         panel.add(title);
 
         JTextField fileNameField = new JTextField("No file selected");
+        fileNameField.setFont(new Font("Arial", Font.BOLD, 14));
+        fileNameField.setBackground(Color.decode(getColor3()));
+        fileNameField.setForeground(Color.BLACK);
+
         fileNameField.setEditable(false);
         fileNameField.setBounds(50, 100, 280, 30);
         panel.add(fileNameField);
 
-        JButton chooseFileButton = new JButton("Choose File");
+        JButton chooseFileButton = new JButton();
+        chooseFileButton.setBackground(Color.decode(app.getColor1()));
+        try {
+            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/choose.png"));
+            Image resizedImage = img.getScaledInstance(120, 40, Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon(resizedImage);
+
+            chooseFileButton.setIcon(icon);
+            chooseFileButton.setPreferredSize(new Dimension(120, 40)); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         chooseFileButton.setBounds(350, 100, 100, 30);
         chooseFileButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
@@ -65,7 +80,7 @@ public class Plugin {
         panel.add(chooseFileButton);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
-        buttonPanel.setOpaque(false); // Make the panel transparent
+        buttonPanel.setOpaque(false);
         buttonPanel.setBounds(20, 150, 460, 40);
 
         JButton backButton = new JButton();
@@ -82,7 +97,19 @@ public class Plugin {
         }
         buttonPanel.add(backButton);
 
-        JButton uploadButton = new JButton("Load");
+        JButton uploadButton = new JButton();
+        uploadButton.setBackground(Color.decode(app.getColor1()));
+        try {
+            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/upload.png"));
+            Image resizedImage = img.getScaledInstance(120, 40, Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon(resizedImage);
+
+            uploadButton.setIcon(icon);
+            uploadButton.setPreferredSize(new Dimension(120, 40)); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        buttonPanel.add(uploadButton);
         buttonPanel.add(uploadButton);
 
         backButton.addActionListener(e -> backB());
@@ -115,7 +142,7 @@ public class Plugin {
 
     private JPanel plugin() {
         JPanel panel = new JPanel();
-        panel.setOpaque(false); // Make the panel transparent
+        panel.setOpaque(false);
         panel.setLayout(null);
         panel.setBounds(280, 205, 500, 250);
         panel.add(pluginComponent());
@@ -124,7 +151,7 @@ public class Plugin {
 
     public JPanel page_plugin() {
         JPanel panel = new JPanel();
-        panel.setBackground(new Color(0, 0, 0, 0)); // Transparent background
+        panel.setBackground(new Color(0, 0, 0, 0)); 
         panel.setLayout(null);
         panel.setBounds(0, 0, 1060, 660);
 
