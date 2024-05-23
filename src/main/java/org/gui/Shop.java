@@ -133,6 +133,13 @@ public class Shop extends Default{
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
         button.setBackground(Color.decode(getColor1()));
         button.setForeground(Color.decode(getColor1()));
+        button.addActionListener(e->{
+            App.main_panel.removeAll();
+            Farm farm = new Farm();
+            App.main_panel.add(farm);
+            App.main_panel.revalidate();
+            App.main_panel.repaint();
+        });
         panel.add(button);
         return panel;
     }

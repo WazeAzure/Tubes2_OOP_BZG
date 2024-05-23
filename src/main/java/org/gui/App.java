@@ -4,7 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class App extends Default{
-    JFrame frame = new JFrame();
+    public static JFrame frame = new JFrame();
+    public static JPanel main_panel = new JPanel();
 
     private void initialize() {
         frame.setTitle("Shop GUI");
@@ -13,7 +14,12 @@ public class App extends Default{
         frame.setResizable(false);
         frame.setBackground(Color.decode("#F1E4C3"));
 
-        JPanel main = main_panel();
+        main_panel.setBackground(Color.decode(getColor1()));
+        main_panel.setLayout(null);
+        main_panel.setPreferredSize(new Dimension(1060, 700));
+
+        Farm farm_player1 = new Farm();
+        main_panel.add(farm_player1);
 
         JPanel empty1 = new JPanel();
         empty1.setPreferredSize(new Dimension(1100, 20));
@@ -30,7 +36,7 @@ public class App extends Default{
 
         frame.add(empty1, BorderLayout.NORTH);
         frame.add(empty3, BorderLayout.SOUTH);
-        frame.add(main, BorderLayout.CENTER);
+        frame.add(main_panel, BorderLayout.CENTER);
         frame.add(empty2, BorderLayout.EAST);
         frame.add(empty4, BorderLayout.WEST);
 
@@ -45,10 +51,10 @@ public class App extends Default{
         panel.setLayout(null);
         panel.setPreferredSize(new Dimension(1060, 700));
         Shop shop = new Shop();
-        Farm farm = new Farm(this.frame);
+        Farm farm = new Farm();
 //        panel.add(shop.page_shop());
 
-        ShuffleCardDialog shuffleCardDialog = new ShuffleCardDialog(this.frame);
+        ShuffleCardDialog shuffleCardDialog = new ShuffleCardDialog();
         shuffleCardDialog.render(4);
         panel.add(farm);
         return panel;

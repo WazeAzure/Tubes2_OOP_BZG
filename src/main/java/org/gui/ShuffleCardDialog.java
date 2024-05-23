@@ -4,13 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ShuffleCardDialog {
-    private final JFrame rootFrame;
     private int choosedCard;
 
     // Inisialisasi dulu
-    public ShuffleCardDialog(JFrame rootFrame) {
-//        super(rootFrame,"Shuffle Card",ModalityType.APPLICATION_MODAL);
-        this.rootFrame = rootFrame;
+    public ShuffleCardDialog() {
+//        super(App.frame,"Shuffle Card",ModalityType.APPLICATION_MODAL);
 //        this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 //        this.setSize(500,500);
 //        this.setLocationRelativeTo(rootFrame);
@@ -20,10 +18,10 @@ public class ShuffleCardDialog {
 
     public void render(int numCardShuffle){
         this.choosedCard=0;
-        JDialog shuffleDialog = new JDialog(rootFrame,"Shuffle Card",true);
+        JDialog shuffleDialog = new JDialog(App.frame,"Shuffle Card",true);
         shuffleDialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         shuffleDialog.setSize(240,410);
-        shuffleDialog.setLocationRelativeTo(rootFrame);
+        shuffleDialog.setLocationRelativeTo(App.frame);
 
         JPanel contentPanel = new JPanel();
         contentPanel.setBounds(0,0,240,410);
