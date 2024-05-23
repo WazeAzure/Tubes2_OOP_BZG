@@ -14,6 +14,8 @@ public class Ladang {
     private int curWidth;
     private int curHeight;
     private Map<String, Harvestable> kumpulanPetak = new HashMap<>();
+    private int layoutTurn; // -1 berati lagi default
+    private int layoutChange; // -1 lagi mengecil +1 lagi membesar
 
     public Ladang(int Width, int Height){
         curWidth = 1;
@@ -26,6 +28,8 @@ public class Ladang {
         for(int j = 0; j < Height-1; j++){
             addRow();
         }
+        layoutTurn = -1;
+        layoutChange = 0;
     }
     public Map<String, Harvestable> getLadang(){
         return kumpulanPetak;
@@ -163,7 +167,23 @@ public class Ladang {
             throw new Exception("Ga bisa kocak");
         }
     }
-
+    public List<Harvestable> placeCard(Kartu card, Boolean self) throws Exception{
+        List<Harvestable> l = new ArrayList<>();
+        if(card.getKategori().equals("Item")){
+            if(card.getNama().equals("Layout") && self){
+                makeBigger();
+                layoutChange = 1;
+                layoutTurn = 6;
+            } else if (card.getNama().equals("Layout") && !self){} {
+                l = makeSmaller();
+                layoutChange = -1;
+                layoutTurn = 6;
+            }
+            return l;
+        }else{
+            throw new Exception("Salah method");
+        }
+    }
 
     // panen digunakan untuk memanggil method panen pada Harvestable
     public Product panen(String coor) throws Exception{
