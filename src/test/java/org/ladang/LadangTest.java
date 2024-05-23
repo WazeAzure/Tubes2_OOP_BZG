@@ -1,5 +1,6 @@
 package org.ladang;
 
+import org.config.Config;
 import org.junit.jupiter.api.Test;
 import org.kartu.harvestable.Harvestable;
 
@@ -53,23 +54,38 @@ class LadangTest {
         Ladang l = new Ladang(4, 5);
         List<Harvestable> l2 = l.removeCol();
         System.out.println(l.getLadang().entrySet());
-        System.out.println();
+        List<String> list = new ArrayList<String>(l.getLadang().keySet());
+        Collections.sort(list);
+        System.out.println(list);
         System.out.println(l2);
     }
 
     @Test
     void makeBigger() {
+        Ladang l = new Ladang(4, 5);
+        l.makeBigger();
+        System.out.println(l.getLadang().keySet());
     }
 
     @Test
     void makeSmaller() {
+        Ladang l = new Ladang(4, 5);
+        l.makeSmaller();
+        System.out.println(l.getLadang().keySet());
     }
 
     @Test
     void getObject() {
+        Config c = new Config();
+        c.loadConfig();
         Ladang l = new Ladang(4, 5);
-        l.placeCard(null,"A1");
-        l.getObject("A1");
+        try{
+            l.placeCard(Config.buildTumbuhan("Biji Jagung"),"A1");
+        }catch(Exception e){
+
+        }
+        System.out.println("masuk");
+        System.out.println(l.getObject("A1").getNama());
     }
 
     @Test
@@ -90,5 +106,11 @@ class LadangTest {
 
     @Test
     void getInfo() {
+    }
+
+    @Test
+    void destroyRegion(){
+        Ladang l = new Ladang(4, 5);
+        l.destroyRegion();
     }
 }
