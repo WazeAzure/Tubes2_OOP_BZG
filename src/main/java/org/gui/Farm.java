@@ -6,14 +6,16 @@ import java.awt.dnd.*;
 
 public class Farm extends JPanel implements DragGestureListener {
     private CardPlaceholder sourceDragPanel;
+    // private App app;
 
-    public Farm(){
+    public Farm(App app) {
+        // this.app = app;
         this.setLayout(null);
-        this.setBounds(0,0,1060,700);
+        this.setBounds(0, 0, 1060, 700);
         this.setBackground(Color.GREEN);
 
         // KOLOM KIRI
-        LadangPanel ladangPanel = new LadangPanel(this,App.frame);
+        LadangPanel ladangPanel = new LadangPanel(this, App.frame);
         this.add(ladangPanel);
 
         DeckAktif deckAktif = new DeckAktif(this);
@@ -28,20 +30,20 @@ public class Farm extends JPanel implements DragGestureListener {
         JPanel namaCurrPlayerPanel = new JPanel();
         namaCurrPlayerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         namaCurrPlayerPanel.add(namaCurrPlayer);
-        namaCurrPlayerPanel.setBounds(520+42, 355,150,30);
+        namaCurrPlayerPanel.setBounds(562, 355, 150, 30);
         this.add(namaCurrPlayerPanel);
 
         // Button next
         JButton nextButton = new JButton("Next");
         nextButton.setFocusable(false);
-        nextButton.setPreferredSize(new Dimension(130,40));
+        nextButton.setPreferredSize(new Dimension(130, 40));
         nextButton.addActionListener(e -> {
             // logic ganti player terus render player selanjutnya
         });
         JPanel nextButtonPanel = new JPanel();
         nextButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         nextButtonPanel.add(nextButton);
-        nextButtonPanel.setBounds(520+45,355+10+30+10,150,50);
+        nextButtonPanel.setBounds(565, 405, 150, 50);
         this.add(nextButtonPanel);
 
         // info deck
@@ -49,22 +51,21 @@ public class Farm extends JPanel implements DragGestureListener {
         deck.setFont(new Font("Serif", Font.BOLD, 30));
         JPanel flowPanel = new JPanel();
         flowPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        flowPanel.setBounds(0,70,150,40);
+        flowPanel.setBounds(0, 70, 150, 40);
         flowPanel.add(deck);
         JPanel deckPanel = new JPanel();
         deckPanel.setLayout(null);
         deckPanel.add(flowPanel);
-        deckPanel.setBounds(520+45,355+10+30+10+50+30,150,200);
+        deckPanel.setBounds(565, 495, 150, 200);
         this.add(deckPanel);
 
         // KOLOM KANAN
         // label jumlah turn
         JLabel turnLabel = new JLabel("Turn : XX");
-        // turnLabel.setFont(new Font("Serif", Font.BOLD, 30));
         JPanel turnLabelPanel = new JPanel();
         turnLabelPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         turnLabelPanel.add(turnLabel);
-        turnLabelPanel.setBounds(520+45+150+45,0,300,40);
+        turnLabelPanel.setBounds(760, 0, 300, 40);
         this.add(turnLabelPanel);
 
         // label gulden Player 1
@@ -72,7 +73,7 @@ public class Farm extends JPanel implements DragGestureListener {
         JPanel infoPlayer1Panel = new JPanel();
         infoPlayer1Panel.setLayout(new FlowLayout(FlowLayout.CENTER));
         infoPlayer1Panel.add(infoPlayer1);
-        infoPlayer1Panel.setBounds(520+45+150+45,40+20,300,40);
+        infoPlayer1Panel.setBounds(760, 60, 300, 40);
         this.add(infoPlayer1Panel);
 
         // label gulden Player 2
@@ -80,84 +81,97 @@ public class Farm extends JPanel implements DragGestureListener {
         JPanel infoPlayer2Panel = new JPanel();
         infoPlayer2Panel.setLayout(new FlowLayout(FlowLayout.CENTER));
         infoPlayer2Panel.add(infoPlayer2);
-        infoPlayer2Panel.setBounds(520+45+150+45,40+20+40+10,300,40);
+        infoPlayer2Panel.setBounds(760, 110, 300, 40);
         this.add(infoPlayer2Panel);
 
         // Button ladang lawan
         JButton buttonLadangLawan = new JButton("Ladang Lawan");
         buttonLadangLawan.setFocusable(false);
-        buttonLadangLawan.setPreferredSize(new Dimension(280,30));
+        buttonLadangLawan.setPreferredSize(new Dimension(280, 30));
         buttonLadangLawan.addActionListener(e -> {
-           // logic ngerender ladang lawan
+            // logic ngerender ladang lawan
         });
         JPanel buttonLadangLawanPanel = new JPanel();
         buttonLadangLawanPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        buttonLadangLawanPanel.setBounds(520+45+150+45,40+20+40+10+40+20,300,40);
+        buttonLadangLawanPanel.setBounds(760, 170, 300, 40);
         buttonLadangLawanPanel.add(buttonLadangLawan);
         this.add(buttonLadangLawanPanel);
 
         // Button save state
         JButton saveState = new JButton("Save State");
         saveState.setFocusable(false);
-        saveState.setPreferredSize(new Dimension(280,30));
+        saveState.setPreferredSize(new Dimension(280, 30));
         saveState.addActionListener(e -> {
             // logic ngesave state, render page save
+            Save save = new Save(app);
+            App.main_panel.removeAll();
+            App.main_panel.add(save.page_save());
+            App.main_panel.revalidate();
+            App.main_panel.repaint();
         });
         JPanel saveStatePanel = new JPanel();
         saveStatePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        saveStatePanel.setBounds(520+45+150+45,40+20+40+10+40+20+40+10,300,40);
+        saveStatePanel.setBounds(760, 230, 300, 40);
         saveStatePanel.add(saveState);
         this.add(saveStatePanel);
 
         // Button load state
         JButton loadState = new JButton("Load State");
         loadState.setFocusable(false);
-        loadState.setPreferredSize(new Dimension(280,30));
+        loadState.setPreferredSize(new Dimension(280, 30));
         loadState.addActionListener(e -> {
             // logic ngerender load state
+            Load load = new Load(app);
+            App.main_panel.removeAll();
+            App.main_panel.add(load.page_load());
+            App.main_panel.revalidate();
+            App.main_panel.repaint();
         });
         JPanel loadStatePanel = new JPanel();
         loadStatePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        loadStatePanel.setBounds(520+45+150+45,40+20+40+10+40+20+40+10+40+10,300,40);
+        loadStatePanel.setBounds(760, 290, 300, 40);
         loadStatePanel.add(loadState);
         this.add(loadStatePanel);
 
         // Button load plugin
         JButton loadPlugin = new JButton("Load Plugin");
         loadPlugin.setFocusable(false);
-        loadPlugin.setPreferredSize(new Dimension(280,30));
+        loadPlugin.setPreferredSize(new Dimension(280, 30));
         loadPlugin.addActionListener(e -> {
             // logic ngerender load plugin
+            Plugin plugin = new Plugin(app);
+            App.main_panel.removeAll();
+            App.main_panel.add(plugin.page_plugin());
+            App.main_panel.revalidate();
+            App.main_panel.repaint();
         });
         JPanel loadPluginPanel = new JPanel();
         loadPluginPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        loadPluginPanel.setBounds(520+45+150+45,40+20+40+10+40+20+40+10+40+10+40+10,300,40);
+        loadPluginPanel.setBounds(760, 350, 300, 40);
         loadPluginPanel.add(loadPlugin);
         this.add(loadPluginPanel);
 
         // toko
         JButton buttonToko = new JButton("Toko");
         buttonToko.setFocusable(false);
-        buttonToko.setPreferredSize(new Dimension(290,295));
+        buttonToko.setPreferredSize(new Dimension(290, 295));
         buttonToko.addActionListener(e -> {
             // logic ngerender toko
-            Shop shop = new Shop();
+            Shop shop = new Shop(app);
             App.main_panel.removeAll();
             App.main_panel.add(shop.page_shop());
             App.main_panel.revalidate();
             App.main_panel.repaint();
-            return;
         });
         JPanel buttonTokoPanel = new JPanel();
-//        buttonTokoPanel.setBackground(((JPanel) this.getParent()).getBackground());
         buttonTokoPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        buttonTokoPanel.setBounds(520+45+150+45,40+20+40+10+40+20+40+10+40+10+40+10+40+20,300,305);
+        buttonTokoPanel.setBounds(760, 410, 300, 305);
         buttonTokoPanel.add(buttonToko);
         this.add(buttonTokoPanel);
     }
 
     public void dragGestureRecognized(DragGestureEvent event) {
-        this.sourceDragPanel=null;
+        this.sourceDragPanel = null;
         var cursor = Cursor.getDefaultCursor();
         var panel = (CardPanel) event.getComponent();
 
@@ -165,18 +179,18 @@ public class Farm extends JPanel implements DragGestureListener {
             cursor = DragSource.DefaultMoveDrop;
         }
         this.sourceDragPanel = (CardPlaceholder) panel.getParent();
-        try{
+        try {
             event.startDrag(cursor, panel);
-        }catch (Exception e){
+        } catch (Exception e) {
             // Do nothing
         }
     }
 
-    public CardPlaceholder getSourceDragPanel(){
+    public CardPlaceholder getSourceDragPanel() {
         return this.sourceDragPanel;
     }
 
-    public void setNullSourceDragPanel(){
+    public void setNullSourceDragPanel() {
         this.sourceDragPanel = null;
     }
 }

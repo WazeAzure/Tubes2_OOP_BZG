@@ -3,12 +3,11 @@ package org.gui;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class Shop {
+public class Shop extends Default {
     private App app;
 
     public Shop(App app) {
@@ -138,11 +137,11 @@ public class Shop {
             e.printStackTrace();
         }
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
-        button.setBackground(Color.decode(getColor1()));
-        button.setForeground(Color.decode(getColor1()));
-        button.addActionListener(e->{
+        button.setBackground(Color.decode(app.getColor1()));
+        button.setForeground(Color.decode(app.getColor1()));
+        button.addActionListener(e -> {
             App.main_panel.removeAll();
-            Farm farm = new Farm();
+            Farm farm = new Farm(app);
             App.main_panel.add(farm);
             App.main_panel.revalidate();
             App.main_panel.repaint();

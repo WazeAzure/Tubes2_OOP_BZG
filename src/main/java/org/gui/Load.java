@@ -127,8 +127,11 @@ public class Load extends Default{
     }
 
     public void backB() {
-        app.page = 1;
-        app.updateMainPanel();
+        Farm farm = new Farm(app);
+        App.main_panel.removeAll();
+        App.main_panel.add(farm);
+        App.main_panel.revalidate();
+        App.main_panel.repaint();
     }
 
     private JPanel load() {

@@ -8,8 +8,6 @@ public class App extends Default {
     public static JPanel main_panel = new JPanel();
 
     private void initialize() {
-        JFrame frame = new JFrame();
-
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension screenSize = toolkit.getScreenSize();
         int screenWidth = screenSize.width;
@@ -22,13 +20,13 @@ public class App extends Default {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        frame.setLocation((screenWidth - getWidth()) / 2, (screenHeight - getHeight()) / 2 - 20);
+        frame.setLocation((screenWidth - frame.getWidth()) / 2, (screenHeight - frame.getHeight()) / 2 - 20);
 
         main_panel.setBackground(Color.decode(getColor1()));
         main_panel.setLayout(null);
         main_panel.setPreferredSize(new Dimension(1060, 700));
 
-        Farm farm_player1 = new Farm();
+        Farm farm_player1 = new Farm(this);
         main_panel.add(farm_player1);
 
         JPanel empty1 = new JPanel();
@@ -58,51 +56,6 @@ public class App extends Default {
 
         frame.pack();
         frame.setVisible(true);
-    }
-
-    private JPanel main_panel() {
-        JPanel panel = new JPanel(new CardLayout());
-        panel.setBackground(Color.decode(getColor1()));
-        panel.setLayout(null);
-        panel.setPreferredSize(new Dimension(1060, 700));
-        Shop shop = new Shop();
-        Farm farm = new Farm();
-        // panel.add(shop.page_shop());
-
-        ShuffleCardDialog shuffleCardDialog = new ShuffleCardDialog();
-        shuffleCardDialog.render(4);
-        panel.add(farm);
-        return panel;
-    }
-
-    public void showPage(JPanel panel, int page) {
-        CardLayout cl = (CardLayout) (panel.getLayout());
-        switch (page) {
-            case 1:
-                cl.show(panel, "farm1");
-                break;
-            case 2:
-                cl.show(panel, "farm2");
-                break;
-            case 3:
-                cl.show(panel, "shop");
-                break;
-            case 4:
-                cl.show(panel, "save");
-                break;
-            case 5:
-                cl.show(panel, "load");
-                break;
-            case 6:
-                cl.show(panel, "plugin");
-                break;
-        }
-    }
-
-    public void updateMainPanel() {
-        showPage(mainPanel, page);
-        frame.revalidate();
-        frame.repaint();
     }
 
     public static void main(String[] args) {

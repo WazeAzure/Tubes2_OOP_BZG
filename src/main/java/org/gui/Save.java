@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 
-public class Save {
+public class Save extends Default{
     private App app;
 
     public Save(App app) {
@@ -96,8 +96,11 @@ public class Save {
     }
 
     public void backB() {
-        app.page = 1;
-        app.updateMainPanel();
+        Farm farm = new Farm(app);
+        App.main_panel.removeAll();
+        App.main_panel.add(farm);
+        App.main_panel.revalidate();
+        App.main_panel.repaint();
     }
 
     private JPanel save() {

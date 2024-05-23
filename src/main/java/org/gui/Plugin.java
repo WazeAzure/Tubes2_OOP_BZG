@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class Plugin extends Default{
+public class Plugin extends Default {
     private App app;
     private File selectedFile;
 
@@ -51,7 +51,6 @@ public class Plugin extends Default{
         fileNameField.setFont(new Font("Arial", Font.BOLD, 14));
         fileNameField.setBackground(Color.decode(getColor3()));
         fileNameField.setForeground(Color.BLACK);
-
         fileNameField.setEditable(false);
         fileNameField.setBounds(50, 100, 280, 30);
         panel.add(fileNameField);
@@ -64,7 +63,7 @@ public class Plugin extends Default{
             ImageIcon icon = new ImageIcon(resizedImage);
 
             chooseFileButton.setIcon(icon);
-            chooseFileButton.setPreferredSize(new Dimension(120, 40)); 
+            chooseFileButton.setPreferredSize(new Dimension(120, 40));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -91,7 +90,7 @@ public class Plugin extends Default{
             ImageIcon icon = new ImageIcon(resizedImage);
 
             backButton.setIcon(icon);
-            backButton.setPreferredSize(new Dimension(120, 40)); 
+            backButton.setPreferredSize(new Dimension(120, 40));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -105,11 +104,10 @@ public class Plugin extends Default{
             ImageIcon icon = new ImageIcon(resizedImage);
 
             uploadButton.setIcon(icon);
-            uploadButton.setPreferredSize(new Dimension(120, 40)); 
+            uploadButton.setPreferredSize(new Dimension(120, 40));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        buttonPanel.add(uploadButton);
         buttonPanel.add(uploadButton);
 
         backButton.addActionListener(e -> backB());
@@ -136,8 +134,11 @@ public class Plugin extends Default{
     }
 
     public void backB() {
-        app.page = 1;
-        app.updateMainPanel();
+        Farm farm = new Farm(app);
+        App.main_panel.removeAll();
+        App.main_panel.add(farm);
+        App.main_panel.revalidate();
+        App.main_panel.repaint();
     }
 
     private JPanel plugin() {
@@ -151,7 +152,7 @@ public class Plugin extends Default{
 
     public JPanel page_plugin() {
         JPanel panel = new JPanel();
-        panel.setBackground(new Color(0, 0, 0, 0)); 
+        panel.setBackground(new Color(0, 0, 0, 0));
         panel.setLayout(null);
         panel.setBounds(0, 0, 1060, 660);
 
