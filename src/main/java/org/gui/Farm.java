@@ -6,13 +6,15 @@ import java.awt.dnd.*;
 
 public class Farm extends JPanel implements DragGestureListener {
     private CardPlaceholder sourceDragPanel;
+    private final JFrame rootFrame;
 
-    public Farm(){
+    public Farm(JFrame rootFrame){
         this.setLayout(null);
         this.setBounds(0,0,1060,700);
         this.setBackground(Color.GREEN);
+        this.rootFrame = rootFrame;
 
-        LadangPanel ladangPanel = new LadangPanel(this);
+        LadangPanel ladangPanel = new LadangPanel(this,this.rootFrame);
         this.add(ladangPanel);
 
         DeckAktif deckAktif = new DeckAktif(this);

@@ -4,9 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CardPlaceholder extends JPanel {
-    private CardPanel panelCard;
-    private int width;
-    private int height;
+    protected CardPanel panelCard;
+    protected int width;
+    protected int height;
 
     public CardPlaceholder(int x, int y, int width, int height) {
         this.setLayout(null);

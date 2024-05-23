@@ -1,6 +1,7 @@
 package org.gui;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class DeckAktif extends JPanel {
     private Farm farm;
@@ -14,6 +15,7 @@ public class DeckAktif extends JPanel {
     public DeckAktif(Farm farm) {
         this.farm = farm;
         this.setLayout(null);
+        this.setBackground(Color.decode("#F1E4C3"));
         int widthPadding = Math.floorDiv(widthDeckAktif-(6*widthCard),7);
         heightDeckAktif+=(2*widthPadding);
         this.setBounds(0, 565, widthDeckAktif, heightDeckAktif);

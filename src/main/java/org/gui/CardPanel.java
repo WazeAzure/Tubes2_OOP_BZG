@@ -3,6 +3,9 @@ package org.gui;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.*;
 
 public class CardPanel extends JPanel implements Transferable, Serializable {
@@ -24,6 +27,16 @@ public class CardPanel extends JPanel implements Transferable, Serializable {
         this.y = y;
         this.width = width;
         this.height = height;
+//        this.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                // This block will execute ONLY when the panel itself is clicked
+//                System.out.println("JPanel was clicked!");
+//
+//                // Add your custom logic here for handling the click event
+//                // (e.g., change panel color, update text, trigger an action)
+//            }
+//        });
         render();
     }
 

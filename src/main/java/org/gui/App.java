@@ -17,12 +17,16 @@ public class App extends Default{
 
         JPanel empty1 = new JPanel();
         empty1.setPreferredSize(new Dimension(1100, 20));
+        empty1.setBackground(Color.GREEN);
         JPanel empty3 = new JPanel();
         empty3.setPreferredSize(new Dimension(1100, 20));
+        empty3.setBackground(Color.GREEN);
         JPanel empty2 = new JPanel();
         empty2.setPreferredSize(new Dimension(20, 660));
         JPanel empty4 = new JPanel();
+        empty2.setBackground(Color.GREEN);
         empty4.setPreferredSize(new Dimension(20, 660));
+        empty4.setBackground(Color.GREEN);
 
         frame.add(empty1, BorderLayout.NORTH);
         frame.add(empty3, BorderLayout.SOUTH);
@@ -41,7 +45,7 @@ public class App extends Default{
         panel.setLayout(null);
         panel.setPreferredSize(new Dimension(1060, 700));
         Shop shop = new Shop();
-        Farm farm = new Farm();
+        Farm farm = new Farm(this.frame);
 //        panel.add(shop.page_shop());
         panel.add(farm);
         return panel;

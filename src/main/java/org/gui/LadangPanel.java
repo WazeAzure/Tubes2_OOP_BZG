@@ -6,6 +6,7 @@ import java.awt.dnd.*;
 
 public class LadangPanel extends JPanel {
     private Farm farm;
+    private final JFrame rootFrame;
 
     private boolean isExpanded;
     private boolean isShrinked;
@@ -30,12 +31,13 @@ public class LadangPanel extends JPanel {
 //    private final int widthLadang = 515;
 //    private final int heightLadang = 545;
 
-    public LadangPanel(Farm farm) {
+    public LadangPanel(Farm farm, JFrame rootFrame) {
         // Inisialisasi awal pasti dalam keadaan normal
         this.farm = farm;
+        this.rootFrame = rootFrame;
         this.setLayout(null);
         this.setBounds(0,0,widthLadang,heightLadang);
-        this.setBackground(Color.PINK);
+        this.setBackground(Color.decode("#C6A969"));
         normalRender();
 //        expandedRender();
 //        shrinkedRender();
@@ -60,7 +62,7 @@ public class LadangPanel extends JPanel {
                 int heightPadding = Math.floorDiv(heightLadang-(nRowNormal*heightPetakNormal),nRowNormal+1);
                 int x = (j+1)*widthPadding + (j*widthPetakNormal);
                 int y = (i+1)*heightPadding + (i*heightPetakNormal);
-                PetakLadangPlaceholder petakLadang = new PetakLadangPlaceholder(x,y,widthPetakNormal,heightPetakNormal,i,j);
+                PetakLadangPlaceholder petakLadang = new PetakLadangPlaceholder(x,y,widthPetakNormal,heightPetakNormal,i,j,this.rootFrame);
                 this.add(petakLadang);
                 new CardDropTargetListener(petakLadang,farm);
                 if(i==0 && j==0){
@@ -94,7 +96,7 @@ public class LadangPanel extends JPanel {
                 int heightPadding = Math.floorDiv(heightLadang-(nRowExpanded*heightPetakExpanded),nRowExpanded+1);
                 int x = (j+1)*widthPadding + (j*widthPetakExpanded);
                 int y = (i+1)*heightPadding + (i*heightPetakExpanded);
-                PetakLadangPlaceholder petakLadang = new PetakLadangPlaceholder(x,y,widthPetakExpanded,heightPetakExpanded,i,j);
+                PetakLadangPlaceholder petakLadang = new PetakLadangPlaceholder(x,y,widthPetakExpanded,heightPetakExpanded,i,j,this.rootFrame);
                 this.add(petakLadang);
                 new CardDropTargetListener(petakLadang,farm);
                 if(i==0 && j==0){
@@ -128,7 +130,7 @@ public class LadangPanel extends JPanel {
                 int heightPadding = Math.floorDiv(heightLadang-(nRowShrinked*heightPetakShrinked),nRowShrinked+1);
                 int x = (j+1)*widthPadding + (j*widthPetakShrinked);
                 int y = (i+1)*heightPadding + (i*heightPetakShrinked);
-                PetakLadangPlaceholder petakLadang = new PetakLadangPlaceholder(x,y,widthPetakShrinked,heightPetakShrinked,i,j);
+                PetakLadangPlaceholder petakLadang = new PetakLadangPlaceholder(x,y,widthPetakShrinked,heightPetakShrinked,i,j,this.rootFrame);
                 this.add(petakLadang);
                 new CardDropTargetListener(petakLadang,farm);
                 if(i==0 && j==0){
