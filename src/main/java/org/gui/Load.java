@@ -75,7 +75,8 @@ public class Load {
         backButton.addActionListener(e -> backB());
         loadButton.addActionListener(e -> {
             String selectedFormat = (String) dropdown.getSelectedItem();
-            loadB(panel, selectedFormat);
+            String folderPath = (String) folder.getText();
+            loadB(panel, selectedFormat, folderPath);
         });
 
         buttonPanel.add(backButton);
@@ -89,8 +90,8 @@ public class Load {
         return panel;
     }
 
-    public void loadB(Component panel, String selectedFormat) {
-        JOptionPane.showMessageDialog(panel, "Load " + selectedFormat);
+    public void loadB(Component panel, String selectedFormat, String path) {
+        JOptionPane.showMessageDialog(panel, "Load " + path + selectedFormat );
         // TODO: Add algoritma load
     }
 

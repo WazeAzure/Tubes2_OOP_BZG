@@ -1,10 +1,10 @@
 package org.gui;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import javax.imageio.ImageIO;
 
 public class Plugin {
     private App app;
@@ -25,7 +25,7 @@ public class Plugin {
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             if (image != null) {
-                g.drawImage(image, 0, 0, 1060, 660, this);
+                g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
             }
         }
 
@@ -37,7 +37,7 @@ public class Plugin {
 
     private JPanel pluginComponent() {
         JPanel panel = new JPanel();
-        panel.setBackground(Color.decode(app.getColor3()));
+        panel.setOpaque(false); // Make the panel transparent
         panel.setLayout(null);
         panel.setBounds(0, 0, 500, 250);
 
@@ -45,10 +45,12 @@ public class Plugin {
         title.setHorizontalAlignment(SwingConstants.CENTER);
         title.setFont(new Font("Serif", Font.BOLD, 24));
         title.setBounds(0, 20, 500, 50);
+        panel.add(title);
 
         JTextField fileNameField = new JTextField("No file selected");
         fileNameField.setEditable(false);
         fileNameField.setBounds(50, 100, 280, 30);
+        panel.add(fileNameField);
 
         JButton chooseFileButton = new JButton("Choose File");
         chooseFileButton.setBounds(350, 100, 100, 30);
@@ -60,14 +62,27 @@ public class Plugin {
                 fileNameField.setText(selectedFile.getName());
             }
         });
+        panel.add(chooseFileButton);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
-        buttonPanel.setBounds(20, 165, 460, 35);
-        buttonPanel.setBackground(Color.decode(app.getColor3()));
+        buttonPanel.setOpaque(false); // Make the panel transparent
+        buttonPanel.setBounds(20, 150, 460, 40);
 
-        JButton backButton = new JButton("Back");
-        JButton uploadButton = new JButton("Load");
+        JButton backButton = new JButton();
+        backButton.setBackground(Color.decode(app.getColor1()));
+        try {
+            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/back.png"));
+            Image resizedImage = img.getScaledInstance(120, 40, Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon(resizedImage);
+
+            backButton.setIcon(icon);
+            backButton.setPreferredSize(new Dimension(120, 40)); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         buttonPanel.add(backButton);
+
+        JButton uploadButton = new JButton("Load");
         buttonPanel.add(uploadButton);
 
         backButton.addActionListener(e -> backB());
@@ -79,9 +94,6 @@ public class Plugin {
             }
         });
 
-        panel.add(title);
-        panel.add(fileNameField);
-        panel.add(chooseFileButton);
         panel.add(buttonPanel);
 
         return panel;
@@ -90,7 +102,7 @@ public class Plugin {
     public void uploadB(Component panel, File file) {
         if (file != null && file.exists()) {
             JOptionPane.showMessageDialog(panel, "Open file: " + file.getName());
-            // TODO: Add algoritma plugin
+            // TODO: Add plugin logic
         } else {
             JOptionPane.showMessageDialog(panel, "File does not exist.");
         }
@@ -103,6 +115,7 @@ public class Plugin {
 
     private JPanel plugin() {
         JPanel panel = new JPanel();
+        panel.setOpaque(false); // Make the panel transparent
         panel.setLayout(null);
         panel.setBounds(280, 205, 500, 250);
         panel.add(pluginComponent());
@@ -111,7 +124,7 @@ public class Plugin {
 
     public JPanel page_plugin() {
         JPanel panel = new JPanel();
-        panel.setBackground(Color.decode(app.getColor1()));
+        panel.setBackground(new Color(0, 0, 0, 0)); // Transparent background
         panel.setLayout(null);
         panel.setBounds(0, 0, 1060, 660);
 
@@ -119,7 +132,7 @@ public class Plugin {
         imagePan.setBounds(0, 0, 1060, 660);
 
         try {
-            BufferedImage myImage = ImageIO.read(new File("src\\main\\java\\org\\gui\\assets\\bg.png"));
+            BufferedImage myImage = ImageIO.read(new File("src\\main\\java\\org\\gui\\assets\\bgv3.png"));
             imagePan.setImage(myImage);
         } catch (Exception e) {
             e.printStackTrace();

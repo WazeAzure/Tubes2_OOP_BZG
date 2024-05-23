@@ -76,7 +76,8 @@ public class Save {
         backButton.addActionListener(e -> backB());
         saveButton.addActionListener(e -> {
             String selectedFormat = (String) dropdown.getSelectedItem();
-            saveB(panel, selectedFormat);
+            String path = (String) folder.getText();
+            saveB(panel, selectedFormat, path);
         });
 
         buttonPanel.add(backButton);
@@ -89,8 +90,8 @@ public class Save {
         return panel;
     }
 
-    public void saveB(Component panel, String selectedFormat) {
-        JOptionPane.showMessageDialog(panel, "Save " + selectedFormat);
+    public void saveB(Component panel, String selectedFormat, String path) {
+        JOptionPane.showMessageDialog(panel, "Save " + path + selectedFormat);
         // TODO: Add algoritma save
     }
 

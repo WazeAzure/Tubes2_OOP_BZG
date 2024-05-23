@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class App extends Default {
-    protected int page = 6;
+    protected int page = 4;
     JFrame frame;
     JPanel mainPanel;
     Farm farm1;
