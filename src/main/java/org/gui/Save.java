@@ -120,7 +120,7 @@ public class Save {
         imagePan.setBounds(0, 0, 1060, 660);
 
         try {
-            BufferedImage myImage = ImageIO.read(new File("src\\main\\java\\org\\gui\\assets\\bg.png"));
+            BufferedImage myImage = ImageIO.read(new File("src\\main\\java\\org\\gui\\assets\\bgv3.png"));
             imagePan.setImage(myImage);
         } catch (Exception e) {
             e.printStackTrace();
