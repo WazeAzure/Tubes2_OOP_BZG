@@ -9,6 +9,7 @@ public class Default {
     // Color 
     private String color1 = "#F1E4C3";
     private String color2 = "#614124";
+    private String color3 = "#C6A969";
 
     protected int getWidth(){
         return screen_width;
@@ -24,5 +25,9 @@ public class Default {
 
     protected String getColor2(){
         return color2;
+    }
+
+    protected String getColor3(){
+        return color3;
     }
 }
