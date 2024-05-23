@@ -27,16 +27,7 @@ public class CardPanel extends JPanel implements Transferable, Serializable {
         this.y = y;
         this.width = width;
         this.height = height;
-//        this.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                // This block will execute ONLY when the panel itself is clicked
-//                System.out.println("JPanel was clicked!");
-//
-//                // Add your custom logic here for handling the click event
-//                // (e.g., change panel color, update text, trigger an action)
-//            }
-//        });
+        this.setBounds(x, y, width, height);
         render();
     }
 

@@ -47,6 +47,9 @@ public class App extends Default{
         Shop shop = new Shop();
         Farm farm = new Farm(this.frame);
 //        panel.add(shop.page_shop());
+
+        ShuffleCardDialog shuffleCardDialog = new ShuffleCardDialog(this.frame);
+        shuffleCardDialog.render(4);
         panel.add(farm);
         return panel;
     }
