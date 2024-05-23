@@ -139,7 +139,7 @@ public class Ladang {
                    Harvestable h = getObject(coor);
                    h.setValueEfek(h.getValuePanen());
                    panen(coor);
-               }else if(card.getNama().equals("Accelerate") || card.getNama().equals("Protect") || card.getNama().equals("Trap") ) {
+               }else if(card.getNama().equals("Accelerate") || card.getNama().equals("Protect") || card.getNama().equals("Trap") || card.getNama().equals("Delay") ) {
                    Harvestable h = getObject(coor);
                    h.applyEfek(card.getNama());
                }
