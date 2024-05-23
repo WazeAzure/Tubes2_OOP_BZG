@@ -1,6 +1,7 @@
 package org.ladang;
 import org.kartu.Kartu;
 import org.kartu.harvestable.Harvestable;
+import org.kartu.harvestable.hewan.Hewan;
 import org.kartu.harvestable.tumbuhan.Tumbuhan;
 import org.kartu.product.Product;
 
@@ -129,18 +130,34 @@ public class Ladang {
 
     public void placeCard(Kartu card, String coor) throws Exception{
         if(card.getKategori().equals("Item")){
-           if(card.getNama().equals("Destroy")){
-               removeObject(coor);
-           }else if (card.getNama().equals("Instant Harvest")){
-               Harvestable h = getObject(coor);
-               h.setValueEfek(h.getValuePanen());
-               panen(coor);
-           }else if(card.getNama().equals("Accelerate") || card.getNama().equals("Protect") || card.getNama().equals("Trap") ) {
-               Harvestable h = getObject(coor);
-               h.applyEfek(card.getNama());
+           if (kumpulanPetak.get(coor) == null){
+               throw new Exception("Kosong");
+           }else{
+               if(card.getNama().equals("Destroy")){
+                   removeObject(coor);
+               }else if (card.getNama().equals("Instant Harvest")){
+                   Harvestable h = getObject(coor);
+                   h.setValueEfek(h.getValuePanen());
+                   panen(coor);
+               }else if(card.getNama().equals("Accelerate") || card.getNama().equals("Protect") || card.getNama().equals("Trap") ) {
+                   Harvestable h = getObject(coor);
+                   h.applyEfek(card.getNama());
+               }
            }
         }else if(card.getKategori().equals("Karnivora") || card.getKategori().equals("Herbivora") || card.getKategori().equals("Omnivora") || card.getKategori().equals("Tumbuhan")) {
-            kumpulanPetak.put(coor, (Harvestable) card);
+            if (kumpulanPetak.get(coor) != null){
+                throw new Exception("Udh ada isinya");
+            }else{
+                kumpulanPetak.put(coor, (Harvestable) card);
+            }
+        }else if (card.getKategori().equals("Produk Hewan") || card.getKategori().equals("Produk Tanaman")){
+            if (kumpulanPetak.get(coor) == null){
+                throw new Exception("Gak ada isinya");
+            }else{
+                if(kumpulanPetak.get(coor).getKategori().equals("Karnivora") || kumpulanPetak.get(coor).getKategori().equals("Herbivora") || kumpulanPetak.get(coor).getKategori().equals("Omnivora")){
+                    ((Hewan)kumpulanPetak.get(coor)).makan(card);
+                }
+            }
         }
         else{
             throw new Exception("Ga bisa kocak");
