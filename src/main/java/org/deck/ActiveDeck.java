@@ -31,4 +31,8 @@ public class ActiveDeck{
         }
         return count;
     }
+
+    public Kartu[] getListKartu() {
+        return listKartu;
+    }
 }

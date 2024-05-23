@@ -84,8 +84,12 @@ public class ShuffleDeck{
         for(int i = 0; i < jumlah; i++){
             randomInt = random.nextInt(listKartu.size());
             list.add(listKartu.get(randomInt));
-            listKartu.remove(listKartu.get(randomInt));
         }
         return list;
+    }
+    public void removeFromDeck(List<Kartu> lk){
+        for(Kartu k : lk){
+            listKartu.remove(k);
+        }
     }
 }
