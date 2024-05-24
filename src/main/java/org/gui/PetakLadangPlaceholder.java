@@ -60,7 +60,7 @@ public class PetakLadangPlaceholder extends CardPlaceholder {
                 int imageHeight = 130;
                 ImageIcon icon;
                 try {
-                    BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/Hewan/" + card.getNama()+ ".png"));
+                    BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/" + card.getImageURL()+ ".png"));
                     Image resizedImage = img.getScaledInstance(imageHeight, imageHeight, Image.SCALE_SMOOTH);
                     icon = new ImageIcon(resizedImage);
                 } catch (Exception b) {

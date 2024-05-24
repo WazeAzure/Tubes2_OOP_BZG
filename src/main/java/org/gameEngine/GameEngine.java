@@ -128,7 +128,7 @@ public class GameEngine {
         if (turn != 21) {
             turn += 1;
             for (Pemain p : pemain) {
-//                p.getLadang().growAllPlant();
+                p.getLadang().growAllPlant();
             }
             gameState = 0;
         } else {

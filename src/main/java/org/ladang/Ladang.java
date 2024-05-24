@@ -161,8 +161,8 @@ public class Ladang {
     public void growAllPlant(){
         for(var entry: kumpulanPetak.getGrid().entrySet()){
             if(entry.getValue() != null){
-                if(entry.getValue().getKategori().equals("Tanaman")){
-                ((Tumbuhan)entry.getValue()).tumbuh();
+                if(entry.getValue().getKategori().equals("Tumbuhan")){
+                    ((Tumbuhan)entry.getValue()).tumbuh();
                 }
             }
         }

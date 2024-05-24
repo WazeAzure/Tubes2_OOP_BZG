@@ -25,8 +25,6 @@ public class CardDropTargetListener extends DropTargetAdapter {
                 CardPlaceholder sourcePanel = this.dgl.getSourceDragPanel();
                 String sourceClass = sourcePanel.getClass().getName();
                 String targetClass = this.panel.getClass().getName();
-                System.out.println(sourceClass);
-                System.out.println(targetClass);
                 CardPanel card1 = (CardPanel) tr.getTransferData(CardPanel.card);
                 try {
                     if (sourceClass.equals("org.gui.DeckAktifPlaceHolder") && targetClass.equals("org.gui.DeckAktifPlaceHolder")) {
@@ -41,7 +39,6 @@ public class CardDropTargetListener extends DropTargetAdapter {
                         DeckAktifPlaceHolder source = (DeckAktifPlaceHolder) sourcePanel;
                         PetakLadangPlaceholder dest = (PetakLadangPlaceholder) this.panel;
                         App.gameEngine.dndDeckLadang(source.getIdx(), dest.getRow(), dest.getCol());
-                        System.out.println(App.gameEngine.getCurrentPemain().getLadang().getObject(Ladang.parseToKey(dest.getCol(), dest.getRow())).getNama());
                     } else {
                         event.rejectDrop();
                         return;
@@ -49,7 +46,6 @@ public class CardDropTargetListener extends DropTargetAdapter {
                     var ds = new DragSource();
                     ds.createDefaultDragGestureRecognizer(card1, DnDConstants.ACTION_MOVE, this.dgl);
                     event.dropComplete(true);
-                    System.out.println("BERHASIL");
                 } catch (Exception b) {
                     System.out.println("Error: " + b.getMessage());
                 }
