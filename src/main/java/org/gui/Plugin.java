@@ -98,7 +98,7 @@ public class Plugin {
             //  Call dari gameEngine. Lalu passing file.getAbsolutePathFile()
             //
             FileHandling fh = new FileHandling();
-            fh.loadPlugin(String.valueOf(file.getAbsoluteFile()));
+//            fh.loadPlugin(String.valueOf(file.getAbsoluteFile()));
             fh.load("C:\\Users\\Asus Tuf Gaming\\IdeaProjects\\Tubes2_OOP_BZG\\testfile\\xml", "xml");
         } else {
             JOptionPane.showMessageDialog(panel, "File does not exist.");

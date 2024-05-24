@@ -32,6 +32,10 @@ public class FileHandling {
         try {
             Class c = Class.forName("org.plugins.LoaderTXT");
             this.pluginMap.put("txt", c);
+
+            Class d = Class.forName("org.plugins.LoaderXML");
+            this.pluginMap.put("xml", d);
+
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -122,7 +126,7 @@ public class FileHandling {
                     final List<Class<?>> interfaces = Arrays.asList(c.getInterfaces());
                     interfaces.forEach(itf -> {
                         System.out.println(itf.getName());
-                        if (itf.getName().equals("FileLoader")) {
+                        if (itf.getName().endsWith(".FileLoader")) {
                             try {
                             Method t = c.getMethod("getSupportedExtension");
                             Object o = c.getDeclaredConstructor().newInstance();
