@@ -4,7 +4,6 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class BearAttack {
     private double timeLeft;
@@ -38,7 +37,7 @@ public class BearAttack {
                     border.setTitle("Bear Attack! Time Left: " + String.format("%.1f", timeLeft)); // Update the title once before the loop
                     transparentPanel.repaint();
                 });
-                // Timer for countdown
+                // COuntdown
                 while (timeLeft > 0.0) {
                     timeLeft -= 0.1;
 
