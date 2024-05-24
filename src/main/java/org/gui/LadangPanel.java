@@ -40,7 +40,7 @@ public class LadangPanel extends JPanel {
         this.rootFrame = rootFrame;
         this.setLayout(null);
         this.setBounds(0,0,widthLadang,heightLadang);
-        this.setBackground(Color.decode("#C6A969"));
+        this.setBackground(Color.decode("#F1E4C3"));
         normalRender();
 //        expandedRender();
 //        shrinkedRender();

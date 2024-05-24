@@ -11,7 +11,7 @@ public class CardPlaceholder extends JPanel {
     public CardPlaceholder(int x, int y, int width, int height) {
         this.setLayout(null);
         this.setBounds(x, y, width, height);
-        this.setBackground(Color.BLUE);
+        this.setBackground(Color.decode("#614124"));
         this.width = width;
         this.height = height;
     }

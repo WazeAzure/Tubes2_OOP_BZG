@@ -1,8 +1,11 @@
 package org.gui;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.dnd.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 import org.toko.*;
 
@@ -16,9 +19,12 @@ public class Farm extends JPanel implements DragGestureListener {
         this.app = app;
         this.setLayout(null);
         this.setBounds(0, 0, 1060, 700);
-        this.setBackground(Color.GREEN);
+        
+        
+        this.setBackground(Color.decode("#F1E4C3"));
         this.render();
     }
+
     public void render() {
         this.removeAll();
         // KOLOM KIRI
@@ -92,24 +98,50 @@ public class Farm extends JPanel implements DragGestureListener {
         this.add(infoPlayer2Panel);
 
         // Button ladang lawan
-        JButton buttonLadangLawan = new JButton("Ladang Lawan");
+
+        JButton buttonLadangLawan = new JButton();
+        try {
+            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/ladanglawan.png"));
+            Image resizedImage = img.getScaledInstance(240, 40, Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon(resizedImage);
+
+            buttonLadangLawan.setIcon(icon);
+            buttonLadangLawan.setPreferredSize(new Dimension(240, 40)); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         buttonLadangLawan.setFocusable(false);
-        buttonLadangLawan.setPreferredSize(new Dimension(280, 30));
+        buttonLadangLawan.setPreferredSize(new Dimension(240, 40));
         buttonLadangLawan.addActionListener(e -> {
-            // logic ngerender ladang lawan
+            // logic to render ladang lawan
             currentLadang = 1;
             this.render();
         });
+
         JPanel buttonLadangLawanPanel = new JPanel();
         buttonLadangLawanPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        buttonLadangLawanPanel.setBounds(760, 170, 300, 40);
+        buttonLadangLawanPanel.setBounds(760, 170, 300, 50); 
+        buttonLadangLawanPanel.setBackground(Color.decode("#F1E4C3"));
         buttonLadangLawanPanel.add(buttonLadangLawan);
-        this.add(buttonLadangLawanPanel);
 
+        this.add(buttonLadangLawanPanel);
         // Button save state
-        JButton saveState = new JButton("Save State");
-        saveState.setFocusable(false);
-        saveState.setPreferredSize(new Dimension(280, 30));
+
+        JButton saveState = new JButton();
+        try {
+            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/savestate.png"));
+            Image resizedImage = img.getScaledInstance(240, 40, Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon(resizedImage);
+
+            saveState.setIcon(icon);
+            saveState.setPreferredSize(new Dimension(240, 40)); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        saveState.setFocusable(true);
+        saveState.setPreferredSize(new Dimension(240, 40));
         saveState.addActionListener(e -> {
             // logic ngesave state, render page save
             Save save = new Save(app);
@@ -120,14 +152,26 @@ public class Farm extends JPanel implements DragGestureListener {
         });
         JPanel saveStatePanel = new JPanel();
         saveStatePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        saveStatePanel.setBounds(760, 230, 300, 40);
+        saveStatePanel.setBounds(760, 230, 300, 50);
         saveStatePanel.add(saveState);
+        saveStatePanel.setBackground(Color.decode("#F1E4C3"));
         this.add(saveStatePanel);
 
         // Button load state
-        JButton loadState = new JButton("Load State");
+        JButton loadState = new JButton();
+        try {
+            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/loadstate.png"));
+            Image resizedImage = img.getScaledInstance(240, 40, Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon(resizedImage);
+
+            loadState.setIcon(icon);
+            loadState.setPreferredSize(new Dimension(240, 40)); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         loadState.setFocusable(false);
-        loadState.setPreferredSize(new Dimension(280, 30));
+        loadState.setPreferredSize(new Dimension(240, 40));
         loadState.addActionListener(e -> {
             // logic ngerender load state
             Load load = new Load(app);
@@ -138,14 +182,27 @@ public class Farm extends JPanel implements DragGestureListener {
         });
         JPanel loadStatePanel = new JPanel();
         loadStatePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        loadStatePanel.setBounds(760, 290, 300, 40);
+        loadStatePanel.setBounds(760, 290, 300, 50);
+        loadStatePanel.setBackground(Color.decode("#F1E4C3"));
+
         loadStatePanel.add(loadState);
         this.add(loadStatePanel);
 
         // Button load plugin
-        JButton loadPlugin = new JButton("Load Plugin");
+
+        JButton loadPlugin = new JButton();
+        try {
+            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/loadplugin.png"));
+            Image resizedImage = img.getScaledInstance(240, 40, Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon(resizedImage);
+
+            loadPlugin.setIcon(icon);
+            loadPlugin.setPreferredSize(new Dimension(240, 40)); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         loadPlugin.setFocusable(false);
-        loadPlugin.setPreferredSize(new Dimension(280, 30));
+        loadPlugin.setPreferredSize(new Dimension(240, 40));
         loadPlugin.addActionListener(e -> {
             // logic ngerender load plugin
             Plugin plugin = new Plugin(app);
@@ -156,8 +213,9 @@ public class Farm extends JPanel implements DragGestureListener {
         });
         JPanel loadPluginPanel = new JPanel();
         loadPluginPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        loadPluginPanel.setBounds(760, 350, 300, 40);
+        loadPluginPanel.setBounds(760, 350, 300, 50);
         loadPluginPanel.add(loadPlugin);
+        loadPluginPanel.setBackground(Color.decode("#F1E4C3"));
         this.add(loadPluginPanel);
 
         // toko
