@@ -1,6 +1,8 @@
 package org.gui;
 
 import javax.imageio.ImageIO;
+import org.config.FileHandling;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -70,6 +72,7 @@ public class Plugin extends Default {
         chooseFileButton.setBounds(350, 100, 120, 40);
         chooseFileButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
             int returnVal = fileChooser.showOpenDialog(panel);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 selectedFile = fileChooser.getSelectedFile();
@@ -134,6 +137,13 @@ public class Plugin extends Default {
             se.setFile(sound_track);
             se.play();
             
+            // TODO: Add algoritma plugin
+            // TODO: HAPUS BAGIAN INI karena bad testing method.
+            //  Call dari gameEngine. Lalu passing file.getAbsolutePathFile()
+            //
+            FileHandling fh = new FileHandling();
+//            fh.loadPlugin(String.valueOf(file.getAbsoluteFile()));
+            fh.load("C:\\Users\\Asus Tuf Gaming\\IdeaProjects\\Tubes2_OOP_BZG\\testfile\\xml", "xml");
         } else {
             JOptionPane.showMessageDialog(panel, "File does not exist.");
         }

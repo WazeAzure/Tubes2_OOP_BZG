@@ -23,6 +23,7 @@ public class Config {
     private static HashMap<String, Karnivora> listKarnivora;
     private static HashMap<String, Herbivora> listHerbivora;
     private static HashMap<String, Omnivora> listOmnivora;
+    private static HashMap<String, String> listKategori;
 
     private String testfileDirectory = "testfile";
 
@@ -57,12 +58,15 @@ public class Config {
 
                     if(split[1].equals("Karnivora")){
                         Config.listKarnivora.put(name, new Karnivora(name, "Karnivora", "..", weightToHarvest));
+                        Config.listKategori.put(name, "Karnivora");
                     }
                     else if(split[1].equals("Herbivora")){
                         Config.listHerbivora.put(name, new Herbivora(name, "Herbivora", "..", weightToHarvest));
+                        Config.listKategori.put(name, "Herbivora");
                     }
                     else if(split[1].equals("Omnivora")){
                         Config.listOmnivora.put(name, new Omnivora(name, "Omnivora", "..", weightToHarvest));
+                        Config.listKategori.put(name, "Omnivora");
                     }
                 }
                 else if(split[0].equals("Produk")){
@@ -80,6 +84,7 @@ public class Config {
                     else if(split[1].equals("Tanaman")){
                         Config.listProductPlant.put(name, new Product(name, "ProdukTanaman", "..", price, weightAdded));
                     }
+                    Config.listKategori.put(name, "Produk");
                 }
                 else if(split[0].equals("Tanaman")){
                     String name = split[2];
@@ -90,10 +95,12 @@ public class Config {
                     int dayToHarvest = Integer.parseInt(split[1]);
 
                     Config.listTumbuhan.put(name, new Tumbuhan(name, "Tumbuhan", "..", dayToHarvest));
+                    Config.listKategori.put(name, "Tumbuhan");
                 }
                 else if(split[0].equals("Item")){
                     String name = split[1];
                     Config.listItem.put(name, new Item(name, "Item", ".."));
+                    Config.listKategori.put(name, "Item");
                 }
             }
         } catch (FileNotFoundException e) {

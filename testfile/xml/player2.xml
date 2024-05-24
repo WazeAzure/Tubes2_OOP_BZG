@@ -1,0 +1,27 @@
+<PLAYER>
+    <JUMLAH_GULDEN>300</JUMLAH_GULDEN>
+    <JUMLAH_DECK>38</JUMLAH_DECK>
+    <JUMLAH_DECK_AKTIF>2</JUMLAH_DECK_AKTIF>
+    <DECK>
+        <KARTU>
+            <LOKASI>A01</LOKASI>
+            <NAMA>BERUANG</NAMA>
+        </KARTU>
+        <KARTU>
+            <LOKASI>B01</LOKASI>
+            <NAMA>BERUANG</NAMA>
+        </KARTU>
+    </DECK>
+    <JUMLAH_KARTU_LADANG>1</JUMLAH_KARTU_LADANG>
+    <LADANG>
+        <KARTU>
+            <LOKASI>B02</LOKASI>
+            <NAMA>AYAM</NAMA>
+            <UMUR_BERAT>0</UMUR_BERAT>
+            <JUMLAH_ITEM_AKTIF>0</JUMLAH_ITEM_AKTIF>
+            <ITEM_AKTIF>
+                <!-- No active items -->
+            </ITEM_AKTIF>
+        </KARTU>
+    </LADANG>
+</PLAYER>

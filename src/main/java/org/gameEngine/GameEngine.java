@@ -10,6 +10,7 @@ import org.toko.Toko;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class GameEngine {
     private Integer turn;
@@ -17,6 +18,7 @@ public class GameEngine {
     private Config config;
     private Toko toko;
     private Integer gameState;
+    private Map<String, Class> pluginMap;
     private FileHandling fileHandling;
 
     public GameEngine() {
@@ -152,5 +154,35 @@ public class GameEngine {
 
     public void addKartuToDeck(List<Kartu> listKartu) {
         getCurrentPemain().getActiveDeck().addCard(listKartu);
+    }
+
+    public void addPlugin(String filePath) {
+        // TODO: bikin fungsi untuk load plugin
+        fileHandling.loadPlugin(filePath);
+    }
+
+    public void setTurn(int turn){
+        this.turn = turn;
+    }
+
+    public void setItemInToko(String name, int qty) {
+        this.toko.setItemStock(name, qty);
+    }
+
+    public void setPemainGulden(int pemain, int gulden){
+        this.pemain.get(pemain).setUang(gulden);
+    }
+
+    public void setPemainJumlahDeck(int pemain, int jumlahDeck){
+        // TODO: Add method to set pemain jumlah kartu di dek aktif
+
+    }
+
+    public void setKartuDeckAktif(int pemain, String koordinat, String kartu){
+        // TODO: bikin fungsi set di dek aktif
+    }
+
+    public void setKartuLadang(){
+        // TODO: bikin fungsi set suatu kartu di ladang
     }
 }
