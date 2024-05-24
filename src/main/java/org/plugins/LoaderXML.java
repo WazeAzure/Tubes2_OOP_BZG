@@ -119,14 +119,13 @@ public class LoaderXML implements FileLoader {
                     int umurBerat = Integer.parseInt(ladangElement.getElementsByTagName("UMUR_BERAT").item(0).getTextContent());
                     int jumlahItemAktif = Integer.parseInt(ladangElement.getElementsByTagName("JUMLAH_ITEM_AKTIF").item(0).getTextContent());
 
-                    String[] itemAktif = new String[jumlahItemAktif];
+                    List<String> itemAktif = new ArrayList<>();
                     int counter = 0;
                     NodeList itemAktifNodes = ladangElement.getElementsByTagName("ITEM_AKTIF").item(0).getChildNodes();
                     for (int j = 0; j < itemAktifNodes.getLength(); j++) {
                         Node itemAktifNode = itemAktifNodes.item(j);
                         if (itemAktifNode.getNodeType() == Node.ELEMENT_NODE) {
-                            itemAktif[counter] = itemAktifNode.getTextContent();
-                            counter++;
+                            itemAktif.add(itemAktifNode.getTextContent());
                         }
                     }
 
@@ -174,14 +173,12 @@ public class LoaderXML implements FileLoader {
                     int umurBerat = Integer.parseInt(ladangElement.getElementsByTagName("UMUR_BERAT").item(0).getTextContent());
                     int jumlahItemAktif = Integer.parseInt(ladangElement.getElementsByTagName("JUMLAH_ITEM_AKTIF").item(0).getTextContent());
 
-                    String[] itemAktif = new String[jumlahItemAktif];
-                    int counter = 0;
+                    List<String> itemAktif = new ArrayList<>();
                     NodeList itemAktifNodes = ladangElement.getElementsByTagName("ITEM_AKTIF").item(0).getChildNodes();
                     for (int j = 0; j < itemAktifNodes.getLength(); j++) {
                         Node itemAktifNode = itemAktifNodes.item(j);
                         if (itemAktifNode.getNodeType() == Node.ELEMENT_NODE) {
-                            itemAktif[counter] = itemAktifNode.getTextContent();
-                            counter++;
+                            itemAktif.add(itemAktifNode.getTextContent());
                         }
                     }
 
@@ -194,6 +191,11 @@ public class LoaderXML implements FileLoader {
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void saveFile(String folderPath) throws Exception {
+
     }
 
     @Override
@@ -247,5 +249,40 @@ public class LoaderXML implements FileLoader {
     @Override
     public List<InfoKartuLadang> getListKartuLadang(int pemain) {
         return this.listKartuLadang[pemain];
+    }
+
+    @Override
+    public void setCurrentTurn(int turn) {
+
+    }
+
+    @Override
+    public void setNTokoItem(int n) {
+
+    }
+
+    @Override
+    public void setItemAndQty(List<InfoItemShop> shop) {
+
+    }
+
+    @Override
+    public void setGulden(int pemain, int gulden) {
+
+    }
+
+    @Override
+    public void setJumlahDeck(int pemain, int jumlahDeck) {
+
+    }
+
+    @Override
+    public void setKartuDeckAktif(int pemain, List<InfoKartuAktif> kartuDeckAktif) {
+
+    }
+
+    @Override
+    public void setListKartuLadang(int pemain, List<InfoKartuLadang> kartuLadang) {
+
     }
 }

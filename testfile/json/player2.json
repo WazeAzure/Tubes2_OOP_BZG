@@ -1,5 +1,4 @@
 {
-  "PLAYER": {
     "JUMLAH_GULDEN": 300,
     "JUMLAH_DECK": 38,
     "JUMLAH_DECK_AKTIF": 2,
@@ -15,7 +14,7 @@
         }
       ]
     },
-    "JUMLAH_KARTU_LADANG": "1",
+    "JUMLAH_KARTU_LADANG": 1,
     "LADANG": {
       "KARTU": [
       {
@@ -27,5 +26,4 @@
       }
       ]
     }
-  }
 }

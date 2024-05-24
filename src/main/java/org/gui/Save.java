@@ -131,6 +131,9 @@ public class Save extends Default{
         Music se = new Music();
         se.setFile(sound_track);
         se.play();
+
+        // add algorithm
+        App.gameEngine.saveFile("testfile" + File.separator + path, selectedFormat);
     }
 
     public void backB() {

@@ -54,9 +54,7 @@ public class LoaderJSON implements FileLoader {
             int currentTurn = (int) (long) root.get("CURRENT_TURN");
             int jumlahItemDiShop = (int) (long) root.get("JUMLAH_ITEM_DI_SHOP");
 
-            System.out.println("CURRENT_TURN: " + currentTurn);
             this.turn = currentTurn;
-            System.out.println("JUMLAH_ITEM_DI_SHOP: " + jumlahItemDiShop);
             this.nShopItem = jumlahItemDiShop;
 
             // Get the "SHOPS" object
@@ -70,12 +68,104 @@ public class LoaderJSON implements FileLoader {
                 int itemQty = (int) (long) itemObject.get("ITEM_QTY");
 
                 this.listItemShop.add(new InfoItemShop(itemName, itemQty));
-
-                System.out.println("ITEM_NAME: " + itemName + ", ITEM_QTY: " + itemQty);
             }
         } catch (Exception e){
             e.printStackTrace();
         }
+
+        /* Handle Player1 */
+        try {
+            String contentPlayer1 = new String(Files.readAllBytes(Paths.get(player1.getAbsolutePath())));
+            JSONObject root = (JSONObject) JSONValue.parse(contentPlayer1);
+
+            this.gulden[0] = (int) (long) root.get("JUMLAH_GULDEN");
+            this.jumlahDeck[0] = (int) (long) root.get("JUMLAH_DECK");
+
+            int deckAktif = (int) (long) root.get("JUMLAH_DECK_AKTIF");
+            JSONObject Deck = (JSONObject) root.get("DECK");
+            JSONArray kartuDeck = (JSONArray) Deck.get("KARTU");
+            for(Object kartu: kartuDeck){
+                JSONObject itemObject = (JSONObject) kartu;
+                String lokasi = (String) itemObject.get("LOKASI");
+                String nama = (String) itemObject.get("NAMA");
+
+                this.listKartuDeck[0].add(new InfoKartuAktif(lokasi, nama));
+            }
+
+            int nKartuLadang = (int) (long) root.get("JUMLAH_KARTU_LADANG");
+            JSONObject Ladang = (JSONObject) root.get("LADANG");
+            JSONArray kartuLadang = (JSONArray) Ladang.get("KARTU");
+            for(Object kartu: kartuLadang){
+                JSONObject itemObject = (JSONObject) kartu;
+                String lokasi = (String) itemObject.get("LOKASI");
+                String nama = (String) itemObject.get("NAMA");
+                int umurBerat = (int) (long) itemObject.get("UMUR_BERAT");
+                int jumlahItemAktif = (int) (long) itemObject.get("JUMLAH_ITEM_AKTIF");
+
+                JSONObject itemAktif = (JSONObject) itemObject.get("ITEM_AKTIF");
+                JSONArray listItem = (JSONArray) itemAktif.get("ITEM");
+
+                List<String> listItemAktif = new ArrayList<>();
+                for(Object s : listItem){
+                    listItemAktif.add((String) s);
+                }
+
+                InfoKartuLadang p = new InfoKartuLadang(lokasi, nama, umurBerat, jumlahItemAktif, listItemAktif);
+                this.listKartuLadang[0].add(p);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        /* Handle Player2 */
+        try {
+            String contentPlayer2 = new String(Files.readAllBytes(Paths.get(player2.getAbsolutePath())));
+            JSONObject root = (JSONObject) JSONValue.parse(contentPlayer2);
+
+            this.gulden[1] = (int) (long) root.get("JUMLAH_GULDEN");
+            this.jumlahDeck[1] = (int) (long) root.get("JUMLAH_DECK");
+
+            int deckAktif = (int) (long) root.get("JUMLAH_DECK_AKTIF");
+            JSONObject Deck = (JSONObject) root.get("DECK");
+            JSONArray kartuDeck = (JSONArray) Deck.get("KARTU");
+            for(Object kartu: kartuDeck){
+                JSONObject itemObject = (JSONObject) kartu;
+                String lokasi = (String) itemObject.get("LOKASI");
+                String nama = (String) itemObject.get("NAMA");
+
+                this.listKartuDeck[1].add(new InfoKartuAktif(lokasi, nama));
+            }
+
+            int nKartuLadang = (int) (long) root.get("JUMLAH_KARTU_LADANG");
+            JSONObject Ladang = (JSONObject) root.get("LADANG");
+            JSONArray kartuLadang = (JSONArray) Ladang.get("KARTU");
+            for(Object kartu: kartuLadang){
+                JSONObject itemObject = (JSONObject) kartu;
+                String lokasi = (String) itemObject.get("LOKASI");
+                String nama = (String) itemObject.get("NAMA");
+                int umurBerat = (int) (long) itemObject.get("UMUR_BERAT");
+                int jumlahItemAktif = (int) (long) itemObject.get("JUMLAH_ITEM_AKTIF");
+
+                JSONArray listItem = (JSONArray) itemObject.get("ITEM_AKTIF");
+
+                List<String> listItemAktif = new ArrayList<>();
+                int counter = 0;
+                for(Object s : listItem){
+                    listItemAktif.add((String) s);
+                    counter++;
+                }
+
+                InfoKartuLadang p = new InfoKartuLadang(lokasi, nama, umurBerat, jumlahItemAktif, listItemAktif);
+                this.listKartuLadang[1].add(p);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void saveFile(String folderPath) throws Exception {
+
     }
 
     @Override
@@ -129,5 +219,40 @@ public class LoaderJSON implements FileLoader {
     @Override
     public List<InfoKartuLadang> getListKartuLadang(int pemain) {
         return this.listKartuLadang[pemain];
+    }
+
+    @Override
+    public void setCurrentTurn(int turn) {
+
+    }
+
+    @Override
+    public void setNTokoItem(int n) {
+
+    }
+
+    @Override
+    public void setItemAndQty(List<InfoItemShop> shop) {
+
+    }
+
+    @Override
+    public void setGulden(int pemain, int gulden) {
+
+    }
+
+    @Override
+    public void setJumlahDeck(int pemain, int jumlahDeck) {
+
+    }
+
+    @Override
+    public void setKartuDeckAktif(int pemain, List<InfoKartuAktif> kartuDeckAktif) {
+
+    }
+
+    @Override
+    public void setListKartuLadang(int pemain, List<InfoKartuLadang> kartuLadang) {
+
     }
 }
