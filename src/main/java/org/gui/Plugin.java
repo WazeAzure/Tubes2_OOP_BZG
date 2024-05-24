@@ -52,22 +52,22 @@ public class Plugin extends Default {
         fileNameField.setBackground(Color.decode(getColor3()));
         fileNameField.setForeground(Color.BLACK);
         fileNameField.setEditable(false);
-        fileNameField.setBounds(50, 100, 280, 30);
+        fileNameField.setBounds(50, 100, 280, 40);
         panel.add(fileNameField);
 
         JButton chooseFileButton = new JButton();
         chooseFileButton.setBackground(Color.decode(app.getColor1()));
         try {
-            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/choose2.png"));
-            Image resizedImage = img.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/choose.png"));
+            Image resizedImage = img.getScaledInstance(120, 40, Image.SCALE_SMOOTH);
             ImageIcon icon = new ImageIcon(resizedImage);
 
             chooseFileButton.setIcon(icon);
-            chooseFileButton.setPreferredSize(new Dimension(40, 40));
+            chooseFileButton.setPreferredSize(new Dimension(120, 40));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        chooseFileButton.setBounds(350, 100, 100, 30);
+        chooseFileButton.setBounds(350, 100, 120, 40);
         chooseFileButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
             int returnVal = fileChooser.showOpenDialog(panel);
@@ -128,6 +128,12 @@ public class Plugin extends Default {
         if (file != null && file.exists()) {
             JOptionPane.showMessageDialog(panel, "Open file: " + file.getName());
             // TODO: Add plugin logic
+
+            String sound_track = "src\\main\\java\\org\\gui\\assets\\save.wav";
+            Music se = new Music();
+            se.setFile(sound_track);
+            se.play();
+            
         } else {
             JOptionPane.showMessageDialog(panel, "File does not exist.");
         }
@@ -171,6 +177,10 @@ public class Plugin extends Default {
         }
 
         panel.add(imagePan);
+        String sound_track = "src\\main\\java\\org\\gui\\assets\\save.wav";
+        Music se = new Music();
+        se.setFile(sound_track);
+        se.play();
 
         JPanel pluginPanel = plugin();
         panel.add(pluginPanel);

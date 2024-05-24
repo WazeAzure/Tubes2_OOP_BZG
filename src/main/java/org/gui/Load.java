@@ -2,8 +2,6 @@ package org.gui;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -124,6 +122,10 @@ public class Load extends Default{
     public void loadB(Component panel, String selectedFormat, String path) {
         JOptionPane.showMessageDialog(panel, "Load " + path + selectedFormat );
         // TODO: Add load logic
+        String sound_track = "src\\main\\java\\org\\gui\\assets\\save.wav";
+        Music se = new Music();
+        se.setFile(sound_track);
+        se.play();
     }
 
     public void backB() {
@@ -163,6 +165,10 @@ public class Load extends Default{
         }
 
         panel.add(imagePan);
+        String sound_track = "src\\main\\java\\org\\gui\\assets\\save.wav";
+        Music se = new Music();
+        se.setFile(sound_track);
+        se.play();
 
         JPanel loadPanel = load();
         panel.add(loadPanel);

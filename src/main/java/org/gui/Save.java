@@ -44,17 +44,26 @@ public class Save extends Default{
         JLabel title = new JLabel("Save");
         title.setHorizontalAlignment(SwingConstants.CENTER);
         title.setFont(new Font("Serif", Font.BOLD, 24));
-        title.setBounds(0, 20, 500, 50);
+        title.setBounds(0, 35, 500, 50);
 
         JLabel label = new JLabel("Folder: ");
         label.setFont(new Font("Serif", Font.PLAIN, 20));
+        label.setOpaque(false);
 
         JTextField folder = new JTextField();
         folder.setPreferredSize(new Dimension(150, 30));
+        folder.setFont(new Font("Arial", Font.BOLD, 14));
+        folder.setBackground(Color.decode(getColor3()));
+        folder.setForeground(Color.BLACK);
 
         String[] format = {"txt", "yaml", "png"};
         JComboBox<String> dropdown = new JComboBox<>(format);
         dropdown.setPreferredSize(new Dimension(150, 30));
+
+        dropdown.setPreferredSize(new Dimension(150, 30));
+        dropdown.setFont(new Font("Arial", Font.BOLD, 14));
+        dropdown.setBackground(Color.decode(getColor3()));
+        dropdown.setForeground(Color.BLACK);
 
         JPanel entry = new JPanel();
         entry.setLayout(new BoxLayout(entry, BoxLayout.X_AXIS));
@@ -68,9 +77,9 @@ public class Save extends Default{
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonPanel.setBounds(80, 165, 340, 50);
+        buttonPanel.setBackground(Color.decode(getColor1()));
         
         JButton backButton = new JButton();
-        backButton.setBackground(Color.decode(app.getColor1()));
         try {
             BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/back.png"));
             Image resizedImage = img.getScaledInstance(120, 40, Image.SCALE_SMOOTH);
@@ -84,9 +93,8 @@ public class Save extends Default{
         buttonPanel.add(backButton);
 
         JButton saveButton = new JButton();
-        saveButton.setBackground(Color.decode(app.getColor1()));
         try {
-            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/back.png"));
+            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/save.png"));
             Image resizedImage = img.getScaledInstance(120, 40, Image.SCALE_SMOOTH);
             ImageIcon icon = new ImageIcon(resizedImage);
 
@@ -119,6 +127,10 @@ public class Save extends Default{
     public void saveB(Component panel, String selectedFormat, String path) {
         JOptionPane.showMessageDialog(panel, "Save " + path + selectedFormat);
         // TODO: Add algoritma save
+        String sound_track = "src\\main\\java\\org\\gui\\assets\\save.wav";
+        Music se = new Music();
+        se.setFile(sound_track);
+        se.play();
     }
 
     public void backB() {
@@ -160,6 +172,10 @@ public class Save extends Default{
             e.printStackTrace();
         }
 
+        String sound_track = "src\\main\\java\\org\\gui\\assets\\save.wav";
+        Music se = new Music();
+        se.setFile(sound_track);
+        se.play();
         panel.add(imagePan);
 
         JPanel savePanel = save();
