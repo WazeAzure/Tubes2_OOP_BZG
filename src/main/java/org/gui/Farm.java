@@ -56,13 +56,32 @@ public class Farm extends JPanel implements DragGestureListener {
         this.add(deckAktif);
 
         // KOLOM TENGAH
-        // (optional) gambar character (520+45,0,150,355)
+        JPanel imgPanel = new JPanel();
+        imgPanel.setLayout(null);
+
+        try {
+            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/p1.png"));
+            Image resizedImage = img.getScaledInstance(150, 355, Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon(resizedImage);
+
+            JLabel imgLabel = new JLabel(icon);
+            imgLabel.setBounds(0, 0, 150, 355);
+            imgPanel.add(imgLabel);
+            imgPanel.setPreferredSize(new Dimension(150, 255));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        imgPanel.setBounds(565, 0, 150, 355); 
+        this.add(imgPanel);
 
         // label nama dari currentplayer
         JLabel namaCurrPlayer = new JLabel("Player " + App.gameEngine.getCurrentPemain().getPlayerNumber());
         namaCurrPlayer.setFont(new Font("Serif", Font.BOLD, 20));
+        namaCurrPlayer.setBackground(Color.decode("#F1E4C3"));
         JPanel namaCurrPlayerPanel = new JPanel();
         namaCurrPlayerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        namaCurrPlayerPanel.setBackground(Color.decode("#F1E4C3"));
         namaCurrPlayerPanel.add(namaCurrPlayer);
         namaCurrPlayerPanel.setBounds(562, 355, 150, 30);
         this.add(namaCurrPlayerPanel);
