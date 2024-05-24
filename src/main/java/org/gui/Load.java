@@ -1,5 +1,7 @@
 package org.gui;
 
+import org.gameEngine.GameEngine;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -126,6 +128,8 @@ public class Load extends Default{
         Music se = new Music();
         se.setFile(sound_track);
         se.play();
+
+        App.gameEngine.loadSaveFile("testfile" + File.separator + path, selectedFormat);
     }
 
     public void backB() {

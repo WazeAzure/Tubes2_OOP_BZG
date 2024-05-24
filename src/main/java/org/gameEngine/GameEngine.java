@@ -43,7 +43,7 @@ public class GameEngine {
         gameState = 0;
 
         Object self;
-//        fileHandling = new FileHandling(this);
+        fileHandling = new FileHandling(this);
     }
 
     public Pemain getCurrentPemain() {
@@ -184,5 +184,9 @@ public class GameEngine {
 
     public void setKartuLadang(){
         // TODO: bikin fungsi set suatu kartu di ladang
+    }
+
+    public void loadSaveFile(String filepath, String extension) {
+        fileHandling.load(filepath, extension);
     }
 }

@@ -35,6 +35,7 @@ public class Config {
         Config.listKarnivora = new HashMap<>();
         Config.listHerbivora = new HashMap<>();
         Config.listOmnivora = new HashMap<>();
+        Config.listKategori =  new HashMap<>();
     }
 
     public void loadConfig(){
