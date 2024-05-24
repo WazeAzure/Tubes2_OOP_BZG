@@ -219,9 +219,22 @@ public class Farm extends JPanel implements DragGestureListener {
         this.add(loadPluginPanel);
 
         // toko
-        JButton buttonToko = new JButton("Toko");
+        JButton buttonToko = new JButton();
+
+        try {
+            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/shops.png"));
+            Image resizedImage = img.getScaledInstance(220, 220, Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon(resizedImage);
+
+            buttonToko.setIcon(icon);
+            buttonToko.setPreferredSize(new Dimension(220, 220)); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         buttonToko.setFocusable(false);
-        buttonToko.setPreferredSize(new Dimension(290, 295));
+        buttonToko.setPreferredSize(new Dimension(220, 220));
+        buttonToko.setOpaque(false);
         buttonToko.addActionListener(e -> {
             // logic ngerender toko
             Toko toko = new Toko();
@@ -234,7 +247,9 @@ public class Farm extends JPanel implements DragGestureListener {
         JPanel buttonTokoPanel = new JPanel();
         buttonTokoPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         buttonTokoPanel.setBounds(760, 410, 300, 305);
+        buttonTokoPanel.setOpaque(false);
         buttonTokoPanel.add(buttonToko);
+
         this.add(buttonTokoPanel);
 
         this.revalidate();
