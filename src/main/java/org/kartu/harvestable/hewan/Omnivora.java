@@ -9,7 +9,7 @@ public class Omnivora extends Hewan {
     }
 
     public void makan(Kartu kartu) throws Exception {
-        if (kartu.getKategori().equals("Produk Hewan") || kartu.getKategori().equals("Produk Tumbuhan")) {
+        if (kartu.getKategori().equals("Produk Hewan") || kartu.getKategori().equals("Produk Tanaman")) {
             Product p = (Product) kartu;
             value += p.getBerat();
             valueEfek += p.getBerat();

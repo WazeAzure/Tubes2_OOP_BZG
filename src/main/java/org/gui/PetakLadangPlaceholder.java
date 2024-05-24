@@ -113,7 +113,7 @@ public class PetakLadangPlaceholder extends CardPlaceholder {
 
                 card.getItemAktif().forEach(
                         (key, value)
-                                -> contohList.add(key + " (" + value +" + )"));
+                                -> contohList.add(key + " (" + value +")"));
 
                 // Loop tiap jenis item yang ada di list
                 // Jadi kl pke map buat ngemap nama_item : jml_item
@@ -128,7 +128,15 @@ public class PetakLadangPlaceholder extends CardPlaceholder {
                 // Component button Panen
                 int buttonY = 20 + 6*30 + itemAktifY;
                 JButton panenButton = new JButton("Panen");
-                panenButton.setEnabled(card.isSiapPanen());
+                panenButton.setEnabled(card.isSiapPanen() && App.gameEngine.getCurrentPemain().getActiveDeck().remainingSlot() != 0);
+                    panenButton.addActionListener(a -> {
+                        try {
+                            App.gameEngine.panen(idx_i, idx_j);
+                            App.farm.render();
+                        } catch (Exception b) {
+                        }
+                        infoDialog.dispose();
+                    });
                 panenButton.setFocusable(false);
                 JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
                 buttonPanel.add(panenButton);

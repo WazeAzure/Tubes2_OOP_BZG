@@ -94,7 +94,7 @@ public class Ladang {
         }
     }
 
-    public void placeCard(Kartu card, String coor) throws Exception{
+    public Kartu placeCard(Kartu card, String coor) throws Exception{
         if(card.getKategori().equals("Item")){
            if (getObject(coor) == null){
                throw new Exception("Kosong");
@@ -104,7 +104,7 @@ public class Ladang {
                }else if (card.getNama().equals("Instant Harvest")){
                    Harvestable h = getObject(coor);
                    h.setValueEfek(h.getValuePanen());
-                   panen(coor);
+                   return panen(coor);
                }else if(card.getNama().equals("Accelerate") || card.getNama().equals("Protect") || card.getNama().equals("Trap") || card.getNama().equals("Delay") ) {
                    Harvestable h = getObject(coor);
                    h.applyEfek(card.getNama());
@@ -112,22 +112,25 @@ public class Ladang {
            }
         }else if(card.getKategori().equals("Karnivora") || card.getKategori().equals("Herbivora") || card.getKategori().equals("Omnivora") || card.getKategori().equals("Tumbuhan")) {
             if (getObject(coor) != null){
-                throw new Exception("Udh ada isinya");
+                throw new Exception("Sudah ditempati!");
             }else{
                 kumpulanPetak.put2(coor, (Harvestable) card);
             }
         }else if (card.getKategori().equals("Produk Hewan") || card.getKategori().equals("Produk Tanaman")){
             if (getObject(coor) == null){
-                throw new Exception("Gak ada isinya");
+                throw new Exception("Tidak ada isinya");
             }else{
                 if(getObject(coor).getKategori().equals("Karnivora") || getObject(coor).getKategori().equals("Herbivora") || getObject(coor).getKategori().equals("Omnivora")){
                     ((Hewan)getObject(coor)).makan(card);
+                } else {
+                    throw new Exception("Tumbuhan tidak bisa makan!");
                 }
             }
         }
         else{
-            throw new Exception("Ga bisa kocak");
+            throw new Exception("Error: invalid placing");
         }
+        return null;
     }
     public List<Harvestable> placeCard(Kartu card, Boolean self) throws Exception{
         List<Harvestable> l = new ArrayList<>();

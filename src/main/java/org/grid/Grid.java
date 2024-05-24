@@ -106,7 +106,7 @@ public class Grid<T> {
         kumpulanPetak.put(key, value);
     }
     public void remove(String key){
-        kumpulanPetak.remove(key);
+        kumpulanPetak.put(key, null);
     }
     public T getObj(String key){
         return kumpulanPetak.getOrDefault(key, null);

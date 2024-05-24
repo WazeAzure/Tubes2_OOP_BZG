@@ -30,7 +30,7 @@ public class Farm extends JPanel implements DragGestureListener {
         // (optional) gambar character (520+45,0,150,355)
 
         // label nama dari currentplayer
-        JLabel namaCurrPlayer = new JLabel("Player 1");
+        JLabel namaCurrPlayer = new JLabel("Player " + App.gameEngine.getCurrentPemain().getPlayerNumber());
         namaCurrPlayer.setFont(new Font("Serif", Font.BOLD, 20));
         JPanel namaCurrPlayerPanel = new JPanel();
         namaCurrPlayerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -44,6 +44,10 @@ public class Farm extends JPanel implements DragGestureListener {
         nextButton.setPreferredSize(new Dimension(130, 40));
         nextButton.addActionListener(e -> {
             // logic ganti player terus render player selanjutnya
+            App.gameEngine.nextTurn();
+            this.render();
+            ShuffleCardDialog shuffleCardDialog = new ShuffleCardDialog(app);
+            shuffleCardDialog.render(app.gameEngine.getCurrentPemain().getActiveDeck().remainingSlot());
         });
         JPanel nextButtonPanel = new JPanel();
         nextButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -52,7 +56,7 @@ public class Farm extends JPanel implements DragGestureListener {
         this.add(nextButtonPanel);
 
         // info deck
-        JLabel deck = new JLabel("xx/40");
+        JLabel deck = new JLabel(App.gameEngine.getCurrentPemain().getShuffleDeck().getRemainingCard() + "/40");
         deck.setFont(new Font("Serif", Font.BOLD, 30));
         JPanel flowPanel = new JPanel();
         flowPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -66,7 +70,7 @@ public class Farm extends JPanel implements DragGestureListener {
 
         // KOLOM KANAN
         // label jumlah turn
-        JLabel turnLabel = new JLabel("Turn : XX");
+        JLabel turnLabel = new JLabel("Turn : " + App.gameEngine.getTurn());
         JPanel turnLabelPanel = new JPanel();
         turnLabelPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         turnLabelPanel.add(turnLabel);
@@ -74,7 +78,7 @@ public class Farm extends JPanel implements DragGestureListener {
         this.add(turnLabelPanel);
 
         // label gulden Player 1
-        JLabel infoPlayer1 = new JLabel("Player 1 : xx Gulden");
+        JLabel infoPlayer1 = new JLabel("Player 1 : " + app.gameEngine.getListPemain().get(0).getUang() + " Gulden");
         JPanel infoPlayer1Panel = new JPanel();
         infoPlayer1Panel.setLayout(new FlowLayout(FlowLayout.CENTER));
         infoPlayer1Panel.add(infoPlayer1);
@@ -82,7 +86,7 @@ public class Farm extends JPanel implements DragGestureListener {
         this.add(infoPlayer1Panel);
 
         // label gulden Player 2
-        JLabel infoPlayer2 = new JLabel("Player 2 : xx Gulden");
+        JLabel infoPlayer2 = new JLabel("Player 2 : " + app.gameEngine.getListPemain().get(1).getUang() + " Gulden");
         JPanel infoPlayer2Panel = new JPanel();
         infoPlayer2Panel.setLayout(new FlowLayout(FlowLayout.CENTER));
         infoPlayer2Panel.add(infoPlayer2);

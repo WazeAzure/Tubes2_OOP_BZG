@@ -132,7 +132,7 @@ public class Plugin extends Default {
             JOptionPane.showMessageDialog(panel, "Open file: " + file.getName());
             // TODO: Add plugin logic
 
-            String sound_track = "src\\main\\java\\org\\gui\\assets\\save.wav";
+            String sound_track = "src/main/java/org/gui/assets/save.wav";
             Music se = new Music();
             se.setFile(sound_track);
             se.play();
@@ -144,7 +144,7 @@ public class Plugin extends Default {
             App.gameEngine.addPlugin(String.valueOf(file.getAbsoluteFile()));
 //            FileHandling fh = new FileHandling();
 //            fh.loadPlugin(String.valueOf(file.getAbsoluteFile()));
-//            fh.load("C:\\Users\\Asus Tuf Gaming\\IdeaProjects\\Tubes2_OOP_BZG\\testfile\\xml", "xml");
+//            fh.load("C:/Users/Asus Tuf Gaming/IdeaProjects/Tubes2_OOP_BZG/testfile/xml", "xml");
         } else {
             JOptionPane.showMessageDialog(panel, "File does not exist.");
         }
@@ -156,7 +156,7 @@ public class Plugin extends Default {
         app.main_panel.add(farm);
         app.main_panel.revalidate();
         app.main_panel.repaint();
-        String sound_track = "src\\main\\java\\org\\gui\\assets\\horse.wav";
+        String sound_track = "src/main/java/org/gui/assets/horse.wav";
         Music se = new Music();
         se.setFile(sound_track);
         se.play();
@@ -181,14 +181,14 @@ public class Plugin extends Default {
         imagePan.setBounds(0, 0, 1060, 660);
 
         try {
-            BufferedImage myImage = ImageIO.read(new File("src\\main\\java\\org\\gui\\assets\\bgv3.png"));
+            BufferedImage myImage = ImageIO.read(new File("src/main/java/org/gui/assets/bgv3.png"));
             imagePan.setImage(myImage);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         panel.add(imagePan);
-        String sound_track = "src\\main\\java\\org\\gui\\assets\\save.wav";
+        String sound_track = "src/main/java/org/gui/assets/save.wav";
         Music se = new Music();
         se.setFile(sound_track);
         se.play();

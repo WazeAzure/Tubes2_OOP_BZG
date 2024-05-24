@@ -51,7 +51,7 @@ public class CardPanel extends JPanel implements Transferable, Serializable {
 
         ImageIcon icon;
         try {
-            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/Hewan/" + kartu.getNama() + ".png"));
+            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/" + kartu.getImageURL() + ".png"));
             Image resizedImage = img.getScaledInstance(widthImage, heightImage, Image.SCALE_SMOOTH);
             icon = new ImageIcon(resizedImage);
         } catch (Exception e) {

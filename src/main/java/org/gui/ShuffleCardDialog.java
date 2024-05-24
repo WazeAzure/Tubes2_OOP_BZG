@@ -65,6 +65,7 @@ public class ShuffleCardDialog {
         okButton.setFocusable(false);
         okButton.addActionListener(e -> {
             App.gameEngine.getCurrentPemain().getActiveDeck().addCard(currentListKartu);
+            App.gameEngine.getCurrentPemain().getShuffleDeck().removeFromDeck(currentListKartu);
             shuffleDialog.dispose();
             app.farm.render();
         });

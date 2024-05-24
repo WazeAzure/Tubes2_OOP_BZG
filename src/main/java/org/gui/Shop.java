@@ -53,7 +53,7 @@ public class Shop extends Default {
         panel.setBackground(Color.decode(app.getColor2()));
 
         for (int i = 0; i < 10; i++) {
-            ItemCard card = new ItemCard("Wibu" + i, "src\\main\\java\\org\\gui\\assets\\image.png", 5000, 2);
+            ItemCard card = new ItemCard("Wibu" + i, "src/main/java/org/gui/assets/image.png", 5000, 2);
             JPanel cardpanel = card.createCard();
             panel.add(cardpanel);
         }
@@ -83,7 +83,7 @@ public class Shop extends Default {
         panel.setBackground(Color.decode(app.getColor2()));
 
         for (int i = 0; i < 10; i++) {
-            DeckCard card = new DeckCard("Wibu" + i, "src\\main\\java\\org\\gui\\assets\\image.png", 5000, 2);
+            DeckCard card = new DeckCard("Wibu" + i, "src/main/java/org/gui/assets/image.png", 5000, 2);
             JPanel cardpanel = card.createCard();
             panel.add(cardpanel);
         }

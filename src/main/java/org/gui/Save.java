@@ -127,7 +127,7 @@ public class Save extends Default{
     public void saveB(Component panel, String selectedFormat, String path) {
         JOptionPane.showMessageDialog(panel, "Save " + path + selectedFormat);
         // TODO: Add algoritma save
-        String sound_track = "src\\main\\java\\org\\gui\\assets\\save.wav";
+        String sound_track = "src/main/java/org/gui/assets/save.wav";
         Music se = new Music();
         se.setFile(sound_track);
         se.play();
@@ -139,7 +139,7 @@ public class Save extends Default{
         app.main_panel.add(farm);
         app.main_panel.revalidate();
         app.main_panel.repaint();
-        String sound_track = "src\\main\\java\\org\\gui\\assets\\horse.wav";
+        String sound_track = "src/main/java/org/gui/assets/horse.wav";
         Music se = new Music();
         se.setFile(sound_track);
         se.play();
@@ -166,13 +166,13 @@ public class Save extends Default{
         imagePan.setBounds(0, 0, 1060, 660);
 
         try {
-            BufferedImage myImage = ImageIO.read(new File("src\\main\\java\\org\\gui\\assets\\bgv3.png"));
+            BufferedImage myImage = ImageIO.read(new File("src/main/java/org/gui/assets/bgv3.png"));
             imagePan.setImage(myImage);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        String sound_track = "src\\main\\java\\org\\gui\\assets\\save.wav";
+        String sound_track = "src/main/java/org/gui/assets/save.wav";
         Music se = new Music();
         se.setFile(sound_track);
         se.play();

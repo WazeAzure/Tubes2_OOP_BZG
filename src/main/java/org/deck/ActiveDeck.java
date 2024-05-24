@@ -32,7 +32,7 @@ public class ActiveDeck{
     public int remainingSlot(){
         int count = 0;
         for(var entry: listKartu.getGrid().entrySet()){
-            if(entry.getValue() != null){
+            if(entry.getValue() == null){
                 count++;
             }
         }

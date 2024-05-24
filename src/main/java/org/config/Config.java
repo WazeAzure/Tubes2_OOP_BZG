@@ -51,28 +51,32 @@ public class Config {
                 System.out.println(split[0]);
                 if(split[0].equals("Hewan")){
                     String name = split[3];
+                    String path = name;
                     if(split.length > 4){
+                        path = path + split[4];
                         name = name + " " + split[4];
                     }
 
                     int weightToHarvest = Integer.parseInt(split[2]);
 
                     if(split[1].equals("Karnivora")){
-                        Config.listKarnivora.put(name, new Karnivora(name, "Karnivora", "..", weightToHarvest));
+                        Config.listKarnivora.put(name, new Karnivora(name, "Karnivora", split[0] + "/" + path, weightToHarvest));
                         Config.listKategori.put(name, "Karnivora");
                     }
                     else if(split[1].equals("Herbivora")){
-                        Config.listHerbivora.put(name, new Herbivora(name, "Herbivora", "..", weightToHarvest));
+                        Config.listHerbivora.put(name, new Herbivora(name, "Herbivora", split[0] + "/" + path, weightToHarvest));
                         Config.listKategori.put(name, "Herbivora");
                     }
                     else if(split[1].equals("Omnivora")){
-                        Config.listOmnivora.put(name, new Omnivora(name, "Omnivora", "..", weightToHarvest));
+                        Config.listOmnivora.put(name, new Omnivora(name, "Omnivora", split[0] + "/" + path, weightToHarvest));
                         Config.listKategori.put(name, "Omnivora");
                     }
                 }
                 else if(split[0].equals("Produk")){
                     String name = split[4];
+                    String path = name;
                     if(split.length > 5){
+                        path = path + split[5];
                         name = name + " " + split[5];
                     }
 
@@ -80,27 +84,34 @@ public class Config {
                     int price = Integer.parseInt(split[3]);
 
                     if(split[1].equals("Hewan")){
-                        Config.listProductAnimal.put(name, new Product(name, "ProdukHewan", "..", price, weightAdded));
+                        Config.listProductAnimal.put(name, new Product(name, "Produk Hewan", split[0] + "/" + path, price, weightAdded));
                     }
                     else if(split[1].equals("Tanaman")){
-                        Config.listProductPlant.put(name, new Product(name, "ProdukTanaman", "..", price, weightAdded));
+                        Config.listProductPlant.put(name, new Product(name, "Produk Tanaman", split[0] + "/" + path, price, weightAdded));
                     }
                     Config.listKategori.put(name, "Produk");
                 }
                 else if(split[0].equals("Tanaman")){
                     String name = split[2];
+                    String path = name;
                     if(split.length > 3){
+                        path = path + split[3];
                         name = name + " " + split[3];
                     }
 
                     int dayToHarvest = Integer.parseInt(split[1]);
 
-                    Config.listTumbuhan.put(name, new Tumbuhan(name, "Tumbuhan", "..", dayToHarvest));
+                    Config.listTumbuhan.put(name, new Tumbuhan(name, "Tumbuhan", split[0] + "/" + path, dayToHarvest));
                     Config.listKategori.put(name, "Tumbuhan");
                 }
                 else if(split[0].equals("Item")){
                     String name = split[1];
-                    Config.listItem.put(name, new Item(name, "Item", ".."));
+                    String path = name;
+                    if(split.length > 2){
+                        path = path + split[2];
+                        name = name + " " + split[2];
+                    }
+                    Config.listItem.put(name, new Item(name, "Item", split[0] + "/" + path));
                     Config.listKategori.put(name, "Item");
                 }
             }
