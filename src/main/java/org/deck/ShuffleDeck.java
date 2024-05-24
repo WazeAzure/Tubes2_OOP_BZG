@@ -8,14 +8,14 @@ import java.util.*;
 public class ShuffleDeck{
     private List<Kartu> listKartu;
 
-    public ShuffleDeck(){
+    public ShuffleDeck(int n){
         listKartu = new ArrayList<>();
         Random random = new Random();
         Map<String, ? extends Kartu > map;
         List<String> list;
         int index;
         int max;
-        for(int i = 0; i < 40; i++){
+        for(int i = 0; i < n; i++){
             int randomInt = random.nextInt(7);
             switch (randomInt){
                 case 0:
