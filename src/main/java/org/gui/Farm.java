@@ -2,6 +2,7 @@ package org.gui;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.dnd.*;
 import java.awt.image.BufferedImage;
@@ -89,6 +90,7 @@ public class Farm extends JPanel implements DragGestureListener {
         // Button next
         JButton nextButton = new JButton("Next");
         nextButton.setFocusable(false);
+        nextButton.setEnabled(!BearAttack.isBearAtack);
         nextButton.setPreferredSize(new Dimension(130, 40));
         nextButton.addActionListener(e -> {
             // logic ganti player terus render player selanjutnya
@@ -156,6 +158,7 @@ public class Farm extends JPanel implements DragGestureListener {
         // Button ladang lawan
 
         JButton buttonLadangLawan = new JButton();
+        buttonLadangLawan.setEnabled(!BearAttack.isBearAtack);
         try {
             BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/ladanglawan.png"));
             Image resizedImage = img.getScaledInstance(240, 40, Image.SCALE_SMOOTH);
@@ -185,6 +188,7 @@ public class Farm extends JPanel implements DragGestureListener {
         // Button save state
 
         JButton saveState = new JButton();
+        saveState.setEnabled(!BearAttack.isBearAtack);
         try {
             BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/savestate.png"));
             Image resizedImage = img.getScaledInstance(240, 40, Image.SCALE_SMOOTH);
@@ -215,6 +219,7 @@ public class Farm extends JPanel implements DragGestureListener {
 
         // Button load state
         JButton loadState = new JButton();
+        loadState.setEnabled(!BearAttack.isBearAtack);
         try {
             BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/loadstate.png"));
             Image resizedImage = img.getScaledInstance(240, 40, Image.SCALE_SMOOTH);
@@ -247,6 +252,7 @@ public class Farm extends JPanel implements DragGestureListener {
         // Button load plugin
 
         JButton loadPlugin = new JButton();
+        loadPlugin.setEnabled(!BearAttack.isBearAtack);
         try {
             BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/loadplugin.png"));
             Image resizedImage = img.getScaledInstance(240, 40, Image.SCALE_SMOOTH);
@@ -276,7 +282,7 @@ public class Farm extends JPanel implements DragGestureListener {
 
         // toko
         JButton buttonToko = new JButton();
-
+        buttonToko.setEnabled(!BearAttack.isBearAtack);
         try {
             BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/shops.png"));
             Image resizedImage = img.getScaledInstance(220, 220, Image.SCALE_SMOOTH);
@@ -307,6 +313,14 @@ public class Farm extends JPanel implements DragGestureListener {
         buttonTokoPanel.add(buttonToko);
 
         this.add(buttonTokoPanel);
+
+//        JPanel transparentPanel = new JPanel();
+//        transparentPanel.setOpaque(false);
+//        TitledBorder border = new TitledBorder(BorderFactory.createLineBorder(Color.RED, 7),"TES");
+//        transparentPanel.setBounds(0,0,300,300);
+//        transparentPanel.setBorder(border);
+//        this.add(transparentPanel);
+//        this.setComponentZOrder(transparentPanel,0);
 
         this.revalidate();
         this.repaint();
