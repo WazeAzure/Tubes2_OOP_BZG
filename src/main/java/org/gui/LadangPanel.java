@@ -1,5 +1,8 @@
 package org.gui;
 
+import org.ladang.Ladang;
+import org.gameEngine.GameEngine;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.dnd.*;
@@ -56,6 +59,12 @@ public class LadangPanel extends JPanel {
 
     private void normalRender(){
         this.removeAll();
+        Ladang showLadang;
+        if (Farm.currentLadang == 0) {
+            showLadang = App.gameEngine.getCurrentPemain().getLadang();
+        } else {
+            showLadang = App.gameEngine.getCurrentLawan().getLadang();
+        }
         for(int i=0; i<nRowNormal; i++){
             for(int j=0; j<nColNormal; j++){
                 int widthPadding = Math.floorDiv(widthLadang-(nColNormal*widthPetakNormal),nColNormal+1);
@@ -65,23 +74,32 @@ public class LadangPanel extends JPanel {
                 PetakLadangPlaceholder petakLadang = new PetakLadangPlaceholder(x,y,widthPetakNormal,heightPetakNormal,i,j,this.rootFrame);
                 this.add(petakLadang);
                 new CardDropTargetListener(petakLadang,farm);
-                if(i==0 && j==0){
-                    CardPanel cardPanel = new CardPanel(0,0,petakLadang.getWidth(),petakLadang.getHeight());
+                if (showLadang.getObject(Ladang.parseToKey(j, i)) != null) {
+                    System.out.println(showLadang.getObject(Ladang.parseToKey(j, i)));
+                    System.out.println(i);
+                    System.out.println(j);
+                    CardPanel cardPanel = new CardPanel(0,0,petakLadang.getWidth(),petakLadang.getHeight(), showLadang.getObject(Ladang.parseToKey(j, i)));
                     petakLadang.setPanelCard(cardPanel);
                     var ds = new DragSource();
                     ds.createDefaultDragGestureRecognizer(cardPanel, DnDConstants.ACTION_MOVE, farm);
                 }
-                if(i==0 && j==1){
-                    CardPanel cardPanel = new CardPanel(0,0,petakLadang.getWidth(),petakLadang.getHeight());
-                    petakLadang.setPanelCard(cardPanel);
-                    var ds = new DragSource();
-                    ds.createDefaultDragGestureRecognizer(cardPanel, DnDConstants.ACTION_MOVE, farm);
-                } if(i==0 && j==2){
-                    CardPanel cardPanel = new CardPanel(0,0,petakLadang.getWidth(),petakLadang.getHeight());
-                    petakLadang.setPanelCard(cardPanel);
-                    var ds = new DragSource();
-                    ds.createDefaultDragGestureRecognizer(cardPanel, DnDConstants.ACTION_MOVE, farm);
-                }
+//                if(i==0 && j==0){
+//                    CardPanel cardPanel = new CardPanel(0,0,petakLadang.getWidth(),petakLadang.getHeight());
+//                    petakLadang.setPanelCard(cardPanel);
+//                    var ds = new DragSource();
+//                    ds.createDefaultDragGestureRecognizer(cardPanel, DnDConstants.ACTION_MOVE, farm);
+//                }
+//                if(i==0 && j==1){
+//                    CardPanel cardPanel = new CardPanel(0,0,petakLadang.getWidth(),petakLadang.getHeight());
+//                    petakLadang.setPanelCard(cardPanel);
+//                    var ds = new DragSource();
+//                    ds.createDefaultDragGestureRecognizer(cardPanel, DnDConstants.ACTION_MOVE, farm);
+//                } if(i==0 && j==2){
+//                    CardPanel cardPanel = new CardPanel(0,0,petakLadang.getWidth(),petakLadang.getHeight());
+//                    petakLadang.setPanelCard(cardPanel);
+//                    var ds = new DragSource();
+//                    ds.createDefaultDragGestureRecognizer(cardPanel, DnDConstants.ACTION_MOVE, farm);
+//                }
             }
         }
         this.repaint();
@@ -90,6 +108,12 @@ public class LadangPanel extends JPanel {
 
     private void expandedRender(){
         this.removeAll();
+        Ladang showLadang;
+        if (Farm.currentLadang == 0) {
+            showLadang = App.gameEngine.getCurrentPemain().getLadang();
+        } else {
+            showLadang = App.gameEngine.getCurrentLawan().getLadang();
+        }
         for(int i=0; i<nRowExpanded; i++){
             for(int j=0; j<nColExpanded; j++){
                 int widthPadding = Math.floorDiv(widthLadang-(nColExpanded*widthPetakExpanded),nColExpanded+1);
@@ -99,19 +123,8 @@ public class LadangPanel extends JPanel {
                 PetakLadangPlaceholder petakLadang = new PetakLadangPlaceholder(x,y,widthPetakExpanded,heightPetakExpanded,i,j,this.rootFrame);
                 this.add(petakLadang);
                 new CardDropTargetListener(petakLadang,farm);
-                if(i==0 && j==0){
-                    CardPanel cardPanel = new CardPanel(0,0,petakLadang.getWidth(),petakLadang.getHeight());
-                    petakLadang.setPanelCard(cardPanel);
-                    var ds = new DragSource();
-                    ds.createDefaultDragGestureRecognizer(cardPanel, DnDConstants.ACTION_MOVE, farm);
-                }
-                if(i==0 && j==1){
-                    CardPanel cardPanel = new CardPanel(0,0,petakLadang.getWidth(),petakLadang.getHeight());
-                    petakLadang.setPanelCard(cardPanel);
-                    var ds = new DragSource();
-                    ds.createDefaultDragGestureRecognizer(cardPanel, DnDConstants.ACTION_MOVE, farm);
-                } if(i==0 && j==2){
-                    CardPanel cardPanel = new CardPanel(0,0,petakLadang.getWidth(),petakLadang.getHeight());
+                if (showLadang.getObject(Ladang.parseToKey(i, j)) != null) {
+                    CardPanel cardPanel = new CardPanel(x,y,petakLadang.getWidth(),petakLadang.getHeight(), showLadang.getObject(Ladang.parseToKey(i, j)));
                     petakLadang.setPanelCard(cardPanel);
                     var ds = new DragSource();
                     ds.createDefaultDragGestureRecognizer(cardPanel, DnDConstants.ACTION_MOVE, farm);
@@ -124,6 +137,12 @@ public class LadangPanel extends JPanel {
 
     private void shrinkedRender(){
         this.removeAll();
+        Ladang showLadang;
+        if (Farm.currentLadang == 0) {
+            showLadang = App.gameEngine.getCurrentPemain().getLadang();
+        } else {
+            showLadang = App.gameEngine.getCurrentLawan().getLadang();
+        }
         for(int i=0; i<nRowShrinked; i++){
             for(int j=0; j<nColShrinked; j++){
                 int widthPadding = Math.floorDiv(widthLadang-(nColShrinked*widthPetakShrinked),nColShrinked+1);
@@ -133,19 +152,8 @@ public class LadangPanel extends JPanel {
                 PetakLadangPlaceholder petakLadang = new PetakLadangPlaceholder(x,y,widthPetakShrinked,heightPetakShrinked,i,j,this.rootFrame);
                 this.add(petakLadang);
                 new CardDropTargetListener(petakLadang,farm);
-                if(i==0 && j==0){
-                    CardPanel cardPanel = new CardPanel(0,0,petakLadang.getWidth(),petakLadang.getHeight());
-                    petakLadang.setPanelCard(cardPanel);
-                    var ds = new DragSource();
-                    ds.createDefaultDragGestureRecognizer(cardPanel, DnDConstants.ACTION_MOVE, farm);
-                }
-                if(i==0 && j==1){
-                    CardPanel cardPanel = new CardPanel(0,0,petakLadang.getWidth(),petakLadang.getHeight());
-                    petakLadang.setPanelCard(cardPanel);
-                    var ds = new DragSource();
-                    ds.createDefaultDragGestureRecognizer(cardPanel, DnDConstants.ACTION_MOVE, farm);
-                } if(i==0 && j==2){
-                    CardPanel cardPanel = new CardPanel(0,0,petakLadang.getWidth(),petakLadang.getHeight());
+                if (showLadang.getObject(Ladang.parseToKey(i, j)) != null) {
+                    CardPanel cardPanel = new CardPanel(x,y,petakLadang.getWidth(),petakLadang.getHeight(), showLadang.getObject(Ladang.parseToKey(i, j)));
                     petakLadang.setPanelCard(cardPanel);
                     var ds = new DragSource();
                     ds.createDefaultDragGestureRecognizer(cardPanel, DnDConstants.ACTION_MOVE, farm);

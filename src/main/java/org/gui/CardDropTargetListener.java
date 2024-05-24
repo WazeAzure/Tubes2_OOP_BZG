@@ -1,5 +1,7 @@
 package org.gui;
 
+import org.ladang.Ladang;
+
 import java.awt.dnd.*;
 
 public class CardDropTargetListener extends DropTargetAdapter {
@@ -19,21 +21,47 @@ public class CardDropTargetListener extends DropTargetAdapter {
         try {
             event.acceptDrop(DnDConstants.ACTION_MOVE);
             var tr = event.getTransferable();
-            if (event.isDataFlavorSupported(CardPanel.card) && this.panel.getPanelCard() == null) {
-                CardPanel card1 = (CardPanel) tr.getTransferData(CardPanel.card);
+            if (event.isDataFlavorSupported(CardPanel.card)) {
                 CardPlaceholder sourcePanel = this.dgl.getSourceDragPanel();
-                sourcePanel.setPanelEmpty();
-                var ds = new DragSource();
-                this.panel.setPanelCard(card1);
-                ds.createDefaultDragGestureRecognizer(card1, DnDConstants.ACTION_MOVE, this.dgl);
-                PetakLadangPlaceholder petakLadangPlaceholder = (PetakLadangPlaceholder) this.panel;
-                event.dropComplete(true);
-                return;
+                String sourceClass = sourcePanel.getClass().getName();
+                String targetClass = this.panel.getClass().getName();
+                System.out.println(sourceClass);
+                System.out.println(targetClass);
+                CardPanel card1 = (CardPanel) tr.getTransferData(CardPanel.card);
+                try {
+                    if (sourceClass.equals("org.gui.DeckAktifPlaceHolder") && targetClass.equals("org.gui.DeckAktifPlaceHolder")) {
+                        DeckAktifPlaceHolder source = (DeckAktifPlaceHolder) sourcePanel;
+                        DeckAktifPlaceHolder dest = (DeckAktifPlaceHolder) this.panel;
+                        App.gameEngine.dndDeckDeck(source.getIdx(), dest.getIdx());
+                    } else if (sourceClass.equals("org.gui.PetakLadangPlaceholder") && targetClass.equals("org.gui.PetakLadangPlaceholder")){
+                        PetakLadangPlaceholder source = (PetakLadangPlaceholder) sourcePanel;
+                        PetakLadangPlaceholder dest = (PetakLadangPlaceholder) this.panel;
+                        App.gameEngine.dndLadangLadang(source.getCol(), source.getRow(), dest.getCol(), dest.getRow());
+                    } else if (sourceClass.equals("org.gui.DeckAktifPlaceHolder") && targetClass.equals("org.gui.PetakLadangPlaceholder")) {
+                        DeckAktifPlaceHolder source = (DeckAktifPlaceHolder) sourcePanel;
+                        PetakLadangPlaceholder dest = (PetakLadangPlaceholder) this.panel;
+                        App.gameEngine.dndDeckLadang(source.getIdx(), dest.getRow(), dest.getCol());
+                        System.out.println(App.gameEngine.getCurrentPemain().getLadang().getObject(Ladang.parseToKey(dest.getCol(), dest.getRow())).getNama());
+                    } else {
+                        event.rejectDrop();
+                        return;
+                    }
+                    var ds = new DragSource();
+                    ds.createDefaultDragGestureRecognizer(card1, DnDConstants.ACTION_MOVE, this.dgl);
+                    event.dropComplete(true);
+                    System.out.println("BERHASIL");
+                } catch (Exception b) {
+                    System.out.println("Error: " + b.getMessage());
+                }
+            } else {
+                event.rejectDrop();
             }
-
-            event.rejectDrop();
         } catch (Exception e) {
             event.dropComplete(false);
         }
+        event.dropComplete(true);
+        this.dgl.render();
+        this.dgl.revalidate();
+        this.dgl.repaint();
     }
 }

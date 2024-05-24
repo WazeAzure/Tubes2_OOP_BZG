@@ -20,17 +20,18 @@ public class GameEngine {
     private FileHandling fileHandling;
 
     public GameEngine() {
+        // Inisialisasi Config
+        config = new Config();
+        config.loadConfig();
+
         // Inisialisasi turn;
         turn = 1;
 
         // Inisialisasi Pemain
         pemain = new ArrayList<Pemain>();
-        pemain.add(new Pemain(1, 0, new Ladang(4, 5)));
-        pemain.add(new Pemain(2, 0, new Ladang(4, 5)));
+        pemain.add(new Pemain(1));
+        pemain.add(new Pemain(2));
 
-        // Inisialisasi Config
-        config = new Config();
-        config.loadConfig();
 
         // Inisialisasi Toko
         toko = new Toko();
@@ -43,23 +44,23 @@ public class GameEngine {
 //        fileHandling = new FileHandling(this);
     }
 
-    Pemain getCurrentPemain() {
+    public Pemain getCurrentPemain() {
         return pemain.get((turn-1) % 2);
     }
 
-    Pemain getCurrentLawan() {
+    public Pemain getCurrentLawan() {
         return pemain.get(turn % 2);
     }
 
-    List<Pemain> getListPemain() {
+    public List<Pemain> getListPemain() {
         return pemain;
     }
 
-    Integer getTurn() {
+    public Integer getTurn() {
         return turn;
     }
 
-    Integer getGameState() {
+    public Integer getGameState() {
         return gameState;
     }
 
@@ -67,11 +68,11 @@ public class GameEngine {
         this.gameState = gameState;
     }
 
-    Toko getToko() {
+    public Toko getToko() {
         return toko;
     }
 
-    Config getConfig() {
+    public Config getConfig() {
         return config;
     }
 
@@ -97,6 +98,7 @@ public class GameEngine {
             throw new Exception("Pemindahan Tidak valid!");
         } else {
             getCurrentPemain().getLadang().placeCard(sourceCard, Ladang.parseToKey(colDest, rowDest));
+            getCurrentPemain().getActiveDeck().getListKartu()[indexSource] = null;
         }
     }
 
@@ -140,8 +142,12 @@ public class GameEngine {
         getCurrentPemain().setUang(getCurrentPemain().getUang() + toko.sell(produk));
     }
 
-    public List<Kartu> shuffleDeck(int jumlah) {
-        return getCurrentPemain().getShuffleDeck().getShuffleKartu(jumlah);
+    public List<Kartu> shuffleDeck() {
+        int jumlahKartu = getCurrentPemain().getActiveDeck().remainingSlot();
+        if (jumlahKartu > 4) {
+            jumlahKartu = 4;
+        }
+        return getCurrentPemain().getShuffleDeck().getShuffleKartu(jumlahKartu);
     }
 
     public void addKartuToDeck(List<Kartu> listKartu) {

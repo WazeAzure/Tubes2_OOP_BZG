@@ -43,6 +43,7 @@ public class Toko {
            for(int i = 0; i < jumlah; i++){
                kartu.add(Config.buildProduct(produk));
            }
+           stok.put(produk, stok.get(produk) - jumlah);
            return kartu;
         }
         throw new Exception("Duit lu gak cukup");

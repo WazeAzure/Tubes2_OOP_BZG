@@ -12,10 +12,10 @@ public class ActiveDeck{
         Arrays.fill(listKartu, null);
     }
     public void addCard(List<Kartu> card){
-        int j=0;
-        for(int i = 0; i < listKartu.length; i++){
+        int i=0;
+        for(int j = 0; j < card.size(); j++){
             if(listKartu[i] == null){
-                listKartu[i] = card.get(j++);
+                listKartu[i++] = card.get(j);
             }
         }
     }

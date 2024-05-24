@@ -15,12 +15,16 @@ public class Pemain {
         ladang = new Ladang(5, 4);
         uang = 0;
         this.playerNumber = playerNumber;
+        this.deck = new ShuffleDeck();
+        this.activeDeck = new ActiveDeck();
     }
 
-    public Pemain(Integer playerNumber, Integer uang, Ladang ladang) {
+    public Pemain(Integer playerNumber, Integer uang, Ladang ladang, ShuffleDeck deck, ActiveDeck activeDeck) {
         this.playerNumber = playerNumber;
         this.uang = uang;
         this.ladang = ladang;
+        this.deck = deck;
+        this.activeDeck = activeDeck;
     }
 
     public Integer getPlayerNumber() {

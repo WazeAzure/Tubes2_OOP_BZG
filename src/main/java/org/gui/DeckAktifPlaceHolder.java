@@ -7,4 +7,8 @@ public class DeckAktifPlaceHolder extends CardPlaceholder{
         super(x, y, width, height);
         this.idx = idx;
     }
+
+    public int getIdx() {
+        return idx;
+    }
 }
