@@ -14,6 +14,27 @@ public class Farm extends JPanel implements DragGestureListener {
     private App app;
     public static Integer currentLadang;
 
+    private class ImageLabel extends JLabel {
+        private Image backgroundImage;
+
+        public ImageLabel(String text, Image backgroundImage) {
+            super(text);
+            this.backgroundImage = backgroundImage;
+            setFont(new Font("Serif", Font.BOLD, 30));
+            setHorizontalTextPosition(CENTER);
+            setVerticalTextPosition(CENTER);
+            setForeground(Color.BLACK); // Set text color
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            if (backgroundImage != null) {
+                g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+            }
+        }
+    }
+
     public Farm(App app) {
         currentLadang = 0;
         this.app = app;
@@ -60,16 +81,27 @@ public class Farm extends JPanel implements DragGestureListener {
         this.add(nextButtonPanel);
 
         // info deck
-        JLabel deck = new JLabel("xx/40");
+        BufferedImage imgb = null;
+        try {
+            imgb = ImageIO.read(new File("src/main/java/org/gui/assets/totalcard.png"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        JLabel deck = new ImageLabel("xx/40", imgb);
+        deck.setPreferredSize(new Dimension(150, 150)); 
+
         deck.setFont(new Font("Serif", Font.BOLD, 30));
         JPanel flowPanel = new JPanel();
         flowPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        flowPanel.setBounds(0, 70, 150, 40);
+        flowPanel.setBounds(0, 30, 150, 150);
         flowPanel.add(deck);
+        flowPanel.setBackground(Color.decode("#F1E4C3"));
         JPanel deckPanel = new JPanel();
         deckPanel.setLayout(null);
         deckPanel.add(flowPanel);
         deckPanel.setBounds(565, 495, 150, 200);
+        deckPanel.setBackground(Color.decode("#F1E4C3"));
         this.add(deckPanel);
 
         // KOLOM KANAN
