@@ -58,12 +58,12 @@ public class Plugin extends Default {
         JButton chooseFileButton = new JButton();
         chooseFileButton.setBackground(Color.decode(app.getColor1()));
         try {
-            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/choose.png"));
-            Image resizedImage = img.getScaledInstance(120, 40, Image.SCALE_SMOOTH);
+            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/choose2.png"));
+            Image resizedImage = img.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
             ImageIcon icon = new ImageIcon(resizedImage);
 
             chooseFileButton.setIcon(icon);
-            chooseFileButton.setPreferredSize(new Dimension(120, 40));
+            chooseFileButton.setPreferredSize(new Dimension(40, 40));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -139,6 +139,10 @@ public class Plugin extends Default {
         App.main_panel.add(farm);
         App.main_panel.revalidate();
         App.main_panel.repaint();
+        String sound_track = "src\\main\\java\\org\\gui\\assets\\horse.wav";
+        Music se = new Music();
+        se.setFile(sound_track);
+        se.play();
     }
 
     private JPanel plugin() {

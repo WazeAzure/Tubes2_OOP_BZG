@@ -52,6 +52,7 @@ public class App extends Default {
         String sound_track = "src\\main\\java\\org\\gui\\assets\\bs1.wav";
         Music se = new Music();
         se.setFile(sound_track);
+        se.setVolume(0.7f);
         se.loop();
 
         frame.pack();

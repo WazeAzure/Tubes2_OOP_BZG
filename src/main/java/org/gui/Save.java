@@ -101,6 +101,10 @@ public class Save extends Default{
         App.main_panel.add(farm);
         App.main_panel.revalidate();
         App.main_panel.repaint();
+        String sound_track = "src\\main\\java\\org\\gui\\assets\\horse.wav";
+        Music se = new Music();
+        se.setFile(sound_track);
+        se.play();
     }
 
     private JPanel save() {
