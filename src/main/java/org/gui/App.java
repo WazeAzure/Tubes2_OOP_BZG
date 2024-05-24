@@ -21,9 +21,10 @@ public class App extends Default {
         frame.setLayout(new BorderLayout());
         frame.setResizable(false);
         frame.pack();
-        frame.setLocationRelativeTo(null);
+        // frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        frame.setLocation((screenWidth - frame.getWidth()) / 2, (screenHeight - frame.getHeight()) / 2 - 20);
+        System.out.println(screenHeight);
+        frame.setLocation((screenWidth - getWidth()) / 2, (screenHeight - getHeight()) / 2 - 20);
 
         main_panel.setBackground(Color.decode(getColor1()));
         main_panel.setLayout(null);
@@ -34,17 +35,17 @@ public class App extends Default {
 
         JPanel empty1 = new JPanel();
         empty1.setPreferredSize(new Dimension(1100, 20));
-        empty1.setBackground(Color.GREEN);
+        empty1.setBackground(Color.decode(getColor3()));
         JPanel empty3 = new JPanel();
         empty3.setPreferredSize(new Dimension(1100, 20));
-        empty3.setBackground(Color.GREEN);
+        empty3.setBackground(Color.decode(getColor3()));
         JPanel empty2 = new JPanel();
         empty2.setPreferredSize(new Dimension(20, 660));
         empty2.setBackground(Color.decode(getColor1()));
         JPanel empty4 = new JPanel();
-        empty2.setBackground(Color.GREEN);
+        empty2.setBackground(Color.decode(getColor3()));
         empty4.setPreferredSize(new Dimension(20, 660));
-        empty4.setBackground(Color.GREEN);
+        empty4.setBackground(Color.decode(getColor3()));
 
         frame.add(empty1, BorderLayout.NORTH);
         frame.add(empty3, BorderLayout.SOUTH);
@@ -55,7 +56,7 @@ public class App extends Default {
         String sound_track = "src\\main\\java\\org\\gui\\assets\\bs1.wav";
         Music se = new Music();
         se.setFile(sound_track);
-        se.setVolume(0.7f);
+        se.setVolume(0.85f);
         se.loop();
 
         frame.pack();

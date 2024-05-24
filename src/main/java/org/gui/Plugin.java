@@ -80,7 +80,7 @@ public class Plugin extends Default {
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
         buttonPanel.setOpaque(false);
-        buttonPanel.setBounds(20, 150, 460, 40);
+        buttonPanel.setBounds(20, 150, 460, 50);
 
         JButton backButton = new JButton();
         backButton.setBackground(Color.decode(app.getColor1()));

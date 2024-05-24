@@ -39,6 +39,7 @@ public class Save extends Default{
         panel.setBackground(Color.decode(app.getColor3()));
         panel.setLayout(null);
         panel.setBounds(0, 0, 500, 250);
+        panel.setOpaque(false);
 
         JLabel title = new JLabel("Save");
         title.setHorizontalAlignment(SwingConstants.CENTER);
@@ -63,15 +64,43 @@ public class Save extends Default{
         entry.add(folder);
         entry.add(Box.createHorizontalStrut(10));
         entry.add(dropdown);
-        entry.setBackground(Color.decode(app.getColor3()));
+        panel.setOpaque(false);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        buttonPanel.setBounds(80, 165, 340, 35);
-        JButton backButton = new JButton("Back");
-        JButton saveButton = new JButton("Save");
+        buttonPanel.setBounds(80, 165, 340, 50);
+        
+        JButton backButton = new JButton();
+        backButton.setBackground(Color.decode(app.getColor1()));
+        try {
+            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/back.png"));
+            Image resizedImage = img.getScaledInstance(120, 40, Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon(resizedImage);
+
+            backButton.setIcon(icon);
+            backButton.setPreferredSize(new Dimension(120, 40)); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        buttonPanel.add(backButton);
+
+        JButton saveButton = new JButton();
+        saveButton.setBackground(Color.decode(app.getColor1()));
+        try {
+            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/back.png"));
+            Image resizedImage = img.getScaledInstance(120, 40, Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon(resizedImage);
+
+            saveButton.setIcon(icon);
+            saveButton.setPreferredSize(new Dimension(120, 40)); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        buttonPanel.add(saveButton);
+
         buttonPanel.add(backButton);
         buttonPanel.add(saveButton);
         buttonPanel.setBackground(Color.decode(app.getColor3()));
+        buttonPanel.setOpaque(false);
 
         backButton.addActionListener(e -> backB());
         saveButton.addActionListener(e -> {
@@ -79,9 +108,6 @@ public class Save extends Default{
             String path = (String) folder.getText();
             saveB(panel, selectedFormat, path);
         });
-
-        buttonPanel.add(backButton);
-        buttonPanel.add(saveButton);
 
         panel.add(title);
         panel.add(entry);
@@ -114,6 +140,7 @@ public class Save extends Default{
         panel.setBounds(280, 205, 500, 250);
         panel.setBackground(Color.BLUE);
         panel.add(saveComponent());
+        panel.setOpaque(false);
         return panel;
     }
 
