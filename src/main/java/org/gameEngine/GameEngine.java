@@ -98,6 +98,7 @@ public class GameEngine {
             throw new Exception("Pemindahan Tidak valid!");
         } else {
             getCurrentPemain().getLadang().placeCard(sourceCard, Ladang.parseToKey(colDest, rowDest));
+            getCurrentPemain().getActiveDeck().getListKartu()[indexSource] = null;
         }
     }
 

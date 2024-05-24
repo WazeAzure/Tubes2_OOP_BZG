@@ -78,7 +78,7 @@ public class LadangPanel extends JPanel {
                     System.out.println(showLadang.getObject(Ladang.parseToKey(j, i)));
                     System.out.println(i);
                     System.out.println(j);
-                    CardPanel cardPanel = new CardPanel(x,y,petakLadang.getWidth(),petakLadang.getHeight(), showLadang.getObject(Ladang.parseToKey(j, i)));
+                    CardPanel cardPanel = new CardPanel(0,0,petakLadang.getWidth(),petakLadang.getHeight(), showLadang.getObject(Ladang.parseToKey(j, i)));
                     petakLadang.setPanelCard(cardPanel);
                     var ds = new DragSource();
                     ds.createDefaultDragGestureRecognizer(cardPanel, DnDConstants.ACTION_MOVE, farm);
