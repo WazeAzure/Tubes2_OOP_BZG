@@ -30,6 +30,9 @@ public class Toko {
     public List<Kartu> getListCard(){
         return new ArrayList<>(daftar.values());
     }
+    public Integer getStok(String kartu){
+        return stok.get(kartu);
+    }
     public int totalHarga(String produk, int jumlah){
         return ((Product)daftar.get(produk)).getHarga() * jumlah;
     }
