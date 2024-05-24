@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.dnd.*;
 
+import org.toko.*;
+
 public class Farm extends JPanel implements DragGestureListener {
     private CardPlaceholder sourceDragPanel;
     private App app;
@@ -160,7 +162,8 @@ public class Farm extends JPanel implements DragGestureListener {
         buttonToko.setPreferredSize(new Dimension(290, 295));
         buttonToko.addActionListener(e -> {
             // logic ngerender toko
-            Shop shop = new Shop(app);
+            Toko toko = new Toko();
+            Shop shop = new Shop(app, toko);
             app.main_panel.removeAll();
             app.main_panel.add(shop.page_shop());
             app.main_panel.revalidate();

@@ -7,11 +7,16 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+import org.kartu.Kartu;
+import org.toko.*;
+
 public class Shop extends Default {
     private App app;
+    private Toko toko;
 
-    public Shop(App app) {
+    public Shop(App app, Toko toko) {
         this.app = app;
+        this.toko = toko;
     }
 
     private class ImagePanel extends JComponent {
@@ -52,8 +57,10 @@ public class Shop extends Default {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
         panel.setBackground(Color.decode(app.getColor2()));
 
-        for (int i = 0; i < 10; i++) {
-            ItemCard card = new ItemCard("Wibu" + i, "src\\main\\java\\org\\gui\\assets\\image.png", 5000, 2);
+        java.util.List<Kartu> list = toko.getListCard();
+
+        for (Kartu kartu : list) {
+                ItemCard card = new ItemCard(kartu.getNama(), kartu.getImageURL(), toko.totalHarga(kartu.getNama(), 1), toko.getStok(kartu.getNama()));
             JPanel cardpanel = card.createCard();
             panel.add(cardpanel);
         }
