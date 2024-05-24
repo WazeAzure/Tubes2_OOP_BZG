@@ -11,7 +11,7 @@ import org.kartu.product.Product;
 public class Toko {
     private Map<String,Kartu> daftar;
     private Map<String, Integer> stok;
-    public Toko(Config config) {
+    public Toko() {
         daftar = new HashMap<>();
         for(var p: Config.getListProductAnimal().entrySet()){
             daftar.put(p.getKey(), p.getValue());
@@ -24,18 +24,22 @@ public class Toko {
         // isi dari config
 
     }
-    public List<String> getInfo(int i){
-        return new ArrayList<>();
-    }
+//    public List<String> getInfo(int i){
+//        return new ArrayList<>();
+//    }
     public List<Kartu> getListCard(){
         return new ArrayList<>(daftar.values());
     }
     public int totalHarga(String produk, int jumlah){
         return ((Product)daftar.get(produk)).getHarga() * jumlah;
     }
-    public Kartu buy(String produk, int jumlah, int uang) throws Exception{
+    public List<Kartu> buy(String produk, int jumlah, int uang) throws Exception{
+        List<Kartu> kartu = new ArrayList<>();
         if(uang >= totalHarga(produk, jumlah)){
-            return Config.buildProduct(produk);
+           for(int i = 0; i < jumlah; i++){
+               kartu.add(Config.buildProduct(produk));
+           }
+           return kartu;
         }
         throw new Exception("Duit lu gak cukup");
     }
