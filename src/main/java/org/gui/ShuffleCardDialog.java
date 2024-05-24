@@ -3,7 +3,9 @@ package org.gui;
 import org.kartu.Kartu;
 import java.util.List;
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ShuffleCardDialog {
     private int choosedCard;
@@ -67,7 +69,58 @@ public class ShuffleCardDialog {
             App.gameEngine.getCurrentPemain().getActiveDeck().addCard(currentListKartu);
             App.gameEngine.getCurrentPemain().getShuffleDeck().removeFromDeck(currentListKartu);
             shuffleDialog.dispose();
+            BearAttack.isBearAtack=true;
             app.farm.render();
+            new BearAttack(app);
+//            JPanel transparentPanel = new JPanel();
+//            transparentPanel.setOpaque(false);
+//            TitledBorder border = new TitledBorder(BorderFactory.createLineBorder(Color.RED, 7),"TES");
+//            int ladang_i_top_left = 0; // ini angka percobaan
+//            int ladang_j_top_left = 0; // ini angka percobaan
+//            int XbearRegion = ladang_j_top_left * (LadangPanel.widthPaddingNormal+LadangPanel.widthPetakNormal);
+//            int YbearRegion = ladang_i_top_left * (LadangPanel.heightPaddingNormal+LadangPanel.heightPetakNormal);
+//
+//            int ladang_i_bottom_right = 2;
+//            int ladang_j_bottom_right = 1;
+//            int widthBearPanel = ((ladang_j_bottom_right-ladang_j_top_left+1)*LadangPanel.widthPetakNormal) + ((ladang_j_bottom_right-ladang_j_top_left+2)*LadangPanel.widthPaddingNormal);
+//            int heightBearPanel = ((ladang_i_bottom_right-ladang_i_top_left+1)*LadangPanel.heightPetakNormal) + ((ladang_i_bottom_right-ladang_i_top_left+2)*LadangPanel.heightPaddingNormal);
+//
+//            transparentPanel.setBounds(XbearRegion,YbearRegion,widthBearPanel,heightBearPanel);
+//            transparentPanel.setBorder(border);
+//            app.farm.add(transparentPanel);
+//            app.farm.setComponentZOrder(transparentPanel,0);
+//            AtomicReference<Double> timeLeft = new AtomicReference<>(5.0);
+//            new Thread(() -> {
+//                try {
+//                    Thread.sleep(5000); // Simulate bear attack after 5 seconds
+////                    bearAttack = true;
+//                    SwingUtilities.invokeLater(() -> {
+//                        border.setTitle("Bear Attack! Time Left: " + String.format("%.1f", timeLeft)); // Update the title once before the loop
+////                        border.setBorder(BorderFactory.createLineBorder(Color.RED, 5));
+//                        transparentPanel.repaint();
+//                    });Variable used in lambda expression should be final or effectively final
+//                    double updatedTimeLeft = 5.0;
+//                    // Timer for countdown
+//                    while (updatedTimeLeft > 0) {
+//                        updatedTimeLeft -= 0.1;
+//                        SwingUtilities.invokeLater(() -> {
+//                            border.setTitle("Bear Attack! Time Left: " + String.format("%.1f", updatedTimeLeft));
+//                            transparentPanel.repaint();
+//                        });
+//                        Thread.sleep(100); // Update every 0.1 seconds
+//                    }
+//
+////                    if (bearAttack) {
+////                        // Bear attack ended (handle game logic here)
+////                        SwingUtilities.invokeLater(() -> {
+////                            border.setTitle("Bear Defeated!");
+////                            border.setBorder(BorderFactory.createEmptyBorder()); // Remove red border
+////                        });
+////                    }
+//                } catch (InterruptedException interrupt) {
+//                    interrupt.printStackTrace();
+//                }
+//            }).start();
         });
         okButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         okButtonPanel.add(okButton);
@@ -76,9 +129,5 @@ public class ShuffleCardDialog {
 
         shuffleDialog.add(contentPanel);
         shuffleDialog.setVisible(true);
-    }
-
-    private void logicShuffle(){
-
     }
 }

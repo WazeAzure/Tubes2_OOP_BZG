@@ -11,26 +11,34 @@ public class LadangPanel extends JPanel {
     private Farm farm;
     private final JFrame rootFrame;
 
-    private boolean isExpanded;
-    private boolean isShrinked;
-    // Normal (4x5) memiliki kode = 0
-    private final int nRowNormal = 4;
-    private final int nColNormal = 5;
-    private final int widthPetakNormal = 90;
-    private final int heightPetakNormal = 120;
-    // Expanded (5x6) memiliki kode = 1
-    private final int nRowExpanded = 5;
-    private final int nColExpanded = 6;
-    private final int widthPetakExpanded = 75;
-    private final int heightPetakExpanded = 96;
-    // Shrinked (3x4) memiliki kode = -1
-    private final int nRowShrinked = 3;
-    private final int nColShrinked = 4;
-    private final int widthPetakShrinked= 120;
-    private final int heightPetakShrinked= 170;
+    public final static int widthLadang = 520;
+    public final static int heightLadang = 550;
 
-    private final int widthLadang = 520;
-    private final int heightLadang = 550;
+    public static boolean isExpanded;
+    public static boolean isShrinked;
+    // Normal (4x5) memiliki kode = 0
+    public static final int nRowNormal = 4;
+    public static final int nColNormal = 5;
+    public final static int widthPetakNormal = 90;
+    public final static int widthPaddingNormal = Math.floorDiv(widthLadang-(nColNormal*widthPetakNormal),nColNormal+1);
+    public static final int heightPetakNormal = 120;
+    public final static int heightPaddingNormal = Math.floorDiv(heightLadang-(nRowNormal*heightPetakNormal),nRowNormal+1);
+
+    // Expanded (5x6) memiliki kode = 1
+    public static final int nRowExpanded = 5;
+    public static final int nColExpanded = 6;
+    public static final int widthPetakExpanded = 75;
+    public final static int widthPaddingExpanded= Math.floorDiv(widthLadang-(nColExpanded*widthPetakExpanded),nColExpanded+1);
+    public static final int heightPetakExpanded = 96;
+    public final static int heightPaddingExpanded = Math.floorDiv(heightLadang-(nRowExpanded*heightPetakExpanded),nRowExpanded+1);
+    // Shrinked (3x4) memiliki kode = -1
+    public static final int nRowShrinked = 3;
+    public static final int nColShrinked = 4;
+    public static final int widthPetakShrinked= 120;
+    public final static int widthPaddingShrinked = Math.floorDiv(widthLadang-(nColShrinked*widthPetakShrinked),nColShrinked+1);
+    public static final int heightPetakShrinked= 170;
+    public final static int heightPaddingShrinked = Math.floorDiv(heightLadang-(nRowShrinked*heightPetakShrinked),nRowShrinked+1);
+
 //    private final int widthLadang = 515;
 //    private final int heightLadang = 545;
 
@@ -67,10 +75,8 @@ public class LadangPanel extends JPanel {
         }
         for(int i=0; i<nRowNormal; i++){
             for(int j=0; j<nColNormal; j++){
-                int widthPadding = Math.floorDiv(widthLadang-(nColNormal*widthPetakNormal),nColNormal+1);
-                int heightPadding = Math.floorDiv(heightLadang-(nRowNormal*heightPetakNormal),nRowNormal+1);
-                int x = (j+1)*widthPadding + (j*widthPetakNormal);
-                int y = (i+1)*heightPadding + (i*heightPetakNormal);
+                int x = (j+1)*widthPaddingNormal + (j*widthPetakNormal);
+                int y = (i+1)*heightPaddingNormal + (i*heightPetakNormal);
                 PetakLadangPlaceholder petakLadang = new PetakLadangPlaceholder(x,y,widthPetakNormal,heightPetakNormal,i,j,this.rootFrame);
                 this.add(petakLadang);
                 new CardDropTargetListener(petakLadang,farm);
@@ -96,10 +102,8 @@ public class LadangPanel extends JPanel {
         }
         for(int i=0; i<nRowExpanded; i++){
             for(int j=0; j<nColExpanded; j++){
-                int widthPadding = Math.floorDiv(widthLadang-(nColExpanded*widthPetakExpanded),nColExpanded+1);
-                int heightPadding = Math.floorDiv(heightLadang-(nRowExpanded*heightPetakExpanded),nRowExpanded+1);
-                int x = (j+1)*widthPadding + (j*widthPetakExpanded);
-                int y = (i+1)*heightPadding + (i*heightPetakExpanded);
+                int x = (j+1)*widthPaddingExpanded + (j*widthPetakExpanded);
+                int y = (i+1)*heightPaddingExpanded + (i*heightPetakExpanded);
                 PetakLadangPlaceholder petakLadang = new PetakLadangPlaceholder(x,y,widthPetakExpanded,heightPetakExpanded,i,j,this.rootFrame);
                 this.add(petakLadang);
                 new CardDropTargetListener(petakLadang,farm);
@@ -125,10 +129,8 @@ public class LadangPanel extends JPanel {
         }
         for(int i=0; i<nRowShrinked; i++){
             for(int j=0; j<nColShrinked; j++){
-                int widthPadding = Math.floorDiv(widthLadang-(nColShrinked*widthPetakShrinked),nColShrinked+1);
-                int heightPadding = Math.floorDiv(heightLadang-(nRowShrinked*heightPetakShrinked),nRowShrinked+1);
-                int x = (j+1)*widthPadding + (j*widthPetakShrinked);
-                int y = (i+1)*heightPadding + (i*heightPetakShrinked);
+                int x = (j+1)*widthPaddingShrinked + (j*widthPetakShrinked);
+                int y = (i+1)*heightPaddingShrinked + (i*heightPetakShrinked);
                 PetakLadangPlaceholder petakLadang = new PetakLadangPlaceholder(x,y,widthPetakShrinked,heightPetakShrinked,i,j,this.rootFrame);
                 this.add(petakLadang);
                 new CardDropTargetListener(petakLadang,farm);
