@@ -1,0 +1,30 @@
+{
+  "gamestate": {
+    "CURRENT_TURN": "1",
+    "JUMLAH_ITEM_DI_SHOP": "5",
+    "SHOPS": {
+      "ITEM": [
+        {
+          "ITEM_NAME": "SIRIP_HIU",
+          "ITEM_QTY": "5"
+        },
+        {
+          "ITEM_NAME": "SUSU",
+          "ITEM_QTY": "2"
+        },
+        {
+          "ITEM_NAME": "DAGING_DOMBA",
+          "ITEM_QTY": "3"
+        },
+        {
+          "ITEM_NAME": "DAGING_KUDA",
+          "ITEM_QTY": "10"
+        },
+        {
+          "ITEM_NAME": "DAGING_BERUANG",
+          "ITEM_QTY": "1"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "PLAYER": {
+    "JUMLAH_GULDEN": 300,
+    "JUMLAH_DECK": 38,
+    "JUMLAH_DECK_AKTIF": 2,
+    "DECK": {
+      "KARTU": [
+        {
+          "LOKASI": "A01",
+          "NAMA": "BERUANG"
+        },
+        {
+          "LOKASI": "B01",
+          "NAMA": "BERUANG"
+        }
+      ]
+    },
+    "JUMLAH_KARTU_LADANG": "1",
+    "LADANG": {
+      "KARTU": [
+      {
+        "LOKASI": "B02",
+        "NAMA": "AYAM",
+        "UMUR_BERAT": 0,
+        "JUMLAH_ITEM_AKTIF": 0,
+        "ITEM_AKTIF": []
+      }
+      ]
+    }
+  }
+}

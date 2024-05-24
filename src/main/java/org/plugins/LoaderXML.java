@@ -50,6 +50,7 @@ public class LoaderXML implements FileLoader {
 
     @Override
     public void loadFile(String folderPath) throws Exception {
+
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
 
