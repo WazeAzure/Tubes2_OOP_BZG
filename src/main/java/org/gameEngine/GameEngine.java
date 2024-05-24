@@ -150,8 +150,9 @@ public class GameEngine {
         getCurrentPemain().getActiveDeck().addCard(listKartu);
     }
 
-    public void addPlugin() {
-
+    public void addPlugin(String filePath) {
+        // TODO: bikin fungsi untuk load plugin
+        fileHandling.loadPlugin(filePath);
     }
 
     public void setTurn(int turn){
@@ -165,19 +166,17 @@ public class GameEngine {
     public void setPemainGulden(int pemain, int gulden){
         this.pemain.get(pemain).setUang(gulden);
     }
-    public void addPlugin() {
+
+    public void setPemainJumlahDeck(int pemain, int jumlahDeck){
+        // TODO: Add method to set pemain jumlah kartu di dek aktif
 
     }
 
-    public void setTurn(int turn){
-        this.turn = turn;
+    public void setKartuDeckAktif(int pemain, String koordinat, String kartu){
+        // TODO: bikin fungsi set di dek aktif
     }
 
-    public void setItemInToko(String name, int qty) {
-        this.toko.setItemStock(name, qty);
-    }
-
-    public void setPemainGulden(int pemain, int gulden){
-        this.pemain.get(pemain).setUang(gulden);
+    public void setKartuLadang(){
+        // TODO: bikin fungsi set suatu kartu di ladang
     }
 }

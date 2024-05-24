@@ -94,13 +94,12 @@ public class Plugin {
         if (file != null && file.exists()) {
             JOptionPane.showMessageDialog(panel, "Open file: " + file.getName());
             // TODO: Add algoritma plugin
+            // TODO: HAPUS BAGIAN INI karena bad testing method.
+            //  Call dari gameEngine. Lalu passing file.getAbsolutePathFile()
+            //
             FileHandling fh = new FileHandling();
-            try {
-                fh.loadPlugin(String.valueOf(file.getAbsoluteFile()));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+            fh.loadPlugin(String.valueOf(file.getAbsoluteFile()));
+            fh.load("C:\\Users\\Asus Tuf Gaming\\IdeaProjects\\Tubes2_OOP_BZG\\testfile\\xml", "xml");
         } else {
             JOptionPane.showMessageDialog(panel, "File does not exist.");
         }

@@ -17,86 +17,98 @@ import java.io.FileReader;
 
 import org.pemain.Pemain;
 import org.plugins.FileLoader;
+import org.plugins.InfoItemShop;
+import org.plugins.InfoKartuAktif;
+import org.plugins.InfoKartuLadang;
 
 public class FileHandling {
     private HashMap<String, Class> pluginMap;
     private GameEngine gameEngine;
 
+    public FileHandling(){
+        this.pluginMap = new HashMap<>();
+
+        // initiate txt reader
+        try {
+            Class c = Class.forName("org.plugins.LoaderTXT");
+            this.pluginMap.put("txt", c);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public FileHandling(GameEngine gameEngine){
         this.pluginMap = new HashMap<>();
         this.gameEngine = gameEngine;
+
+        // initiate txt reader
+        try {
+            Class c = Class.forName("org.plugins.LoaderTXT");
+            this.pluginMap.put("txt", c);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void save() {
+
     }
 
     public void load(String folderPath, String extention){
         // ASUMSIKAN folderPath ABSOLUTE PATH
 
-        System.out.println(folderPath);
-        File file = new File(folderPath);
+        // TODO: BERSIHKAN SELURUH STATE - LADANG - DEK AKTIF
 
-        File gamestate = new File(folderPath + "\\gamestate" + extention);
-        File player1 = new File(folderPath + "\\player1" + extention);
-        File player2 = new File(folderPath + "\\player2" + extention);
-
-        /* Handle GameState */
         try {
-            BufferedReader brGamestate = new BufferedReader(new FileReader(gamestate));
-            // read current turn
-            int turn = Integer.parseInt(brGamestate.readLine());
-            gameEngine.setTurn(turn);
-
-            // set shop items
-            int n = Integer.parseInt(brGamestate.readLine());
-            for(int i=0; i<n; i++){
-                String[] pair = brGamestate.readLine().trim().split(" ");
-                gameEngine.setItemInToko(pair[0], Integer.parseInt(pair[1]));
+            if(!this.pluginMap.containsKey(extention)){
+                System.out.println(this.pluginMap);
+                System.out.println("Plugin Not Exist!");
+                return;
             }
-        } catch (Exception e){
+
+            FileLoader fl = (FileLoader) this.pluginMap.get(extention).getConstructor().newInstance();
+
+            // load file
+            fl.loadFile(folderPath);
+
+            // TODO: RESET GAME STATE - PLAYER 1 - PLAYER 2
+
+            /* get Game State info */
+            int currentTurn = fl.getCurrentTurn();
+            int nTokoItem = fl.getNTokoItem();
+            List<InfoItemShop> li = fl.getItemAndQty();
+
+            /* get Player 1 info */
+            int player = fl.getCurrentPlayer();
+            int gulden = fl.getGulden(0);
+            int jumlahDeck = fl.getJumlahDeck(0);
+            List<InfoKartuAktif> p = fl.getKartuDeckAktif(0);
+            List<InfoKartuLadang> q = fl.getListKartuLadang(0);
+
+            /* get Player 2 info */
+            fl.getCurrentPlayer();
+            fl.getGulden(1);
+            fl.getJumlahDeck(1);
+            fl.getKartuDeckAktif(1);
+            fl.getListKartuLadang(1);
+
+
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        /* Handle Player 1 */
-        try {
-            BufferedReader brPlayer1 = new BufferedReader(new FileReader());
-            // read gold
-            int gold = Integer.parseInt(brPlayer1.readLine());
-            gameEngine.setPemainGulden(0, gold);
-
-            int deck = Integer.parseInt(brPlayer1.readLine());
-            gameEngine.setP
-
-            // set shop items
-            int n = Integer.parseInt(brPlayer1.readLine());
-            for(int i=0; i<n; i++){
-                String[] pair = brPlayer1.readLine().trim().split(" ");
-                gameEngine.setItemInToko(pair[0], Integer.parseInt(pair[1]));
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
-
-
-//        if(fileName.contains("player1")){
-//            // untuk file player
-//            // catatan: file saved memiliki nama tetao
-//
-//        }
-//        else if(fileName.contains("player2")){
-//
-//        }
-//        else if(fileName.contains("gamestate")){
-//
-//        }
     }
 
-    public void loadPlugin(String fileName) throws Exception {
-        fileName = "C:\\Users\\Asus Tuf Gaming\\IdeaProjects\\Tubes2_OOP_BZG\\testfile\\LoaderXML.jar";
+    public void loadPlugin(String filePath) {
+        // TODO: Hapus hard code filePath
+        filePath = "C:\\Users\\Asus Tuf Gaming\\IdeaProjects\\Tubes2_OOP_BZG\\testfile\\LoaderXML.jar";
 
         try {
-            URL jarUrl= new File(fileName).toURI().toURL();
+            URL jarUrl= new File(filePath).toURI().toURL();
             URLClassLoader urlClassLoader = new URLClassLoader(new URL[]{jarUrl});
 
-            JarFile jarFile = new JarFile(fileName);
+            JarFile jarFile = new JarFile(filePath);
             Enumeration<JarEntry> entries = jarFile.entries();
 
             while (entries.hasMoreElements()) {

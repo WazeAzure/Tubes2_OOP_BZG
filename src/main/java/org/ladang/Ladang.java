@@ -116,7 +116,6 @@ public class Ladang {
         return kumpulanPetak.getOrDefault(coor, null);
     }
 
-
     // ngecek apakah placement kartu valid
     public Boolean validateItemCardPlacement(Kartu card, String coor){
         if(card.getKategori().equals("Item")){
