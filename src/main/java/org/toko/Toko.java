@@ -13,6 +13,7 @@ public class Toko {
     private Map<String, Integer> stok;
     public Toko() {
         daftar = new HashMap<>();
+        stok = new HashMap<>();
         for(var p: Config.getListProductAnimal().entrySet()){
             daftar.put(p.getKey(), p.getValue());
             stok.put(p.getKey(), 0);

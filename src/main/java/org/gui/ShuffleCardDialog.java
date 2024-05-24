@@ -5,23 +5,19 @@ import java.awt.*;
 
 public class ShuffleCardDialog {
     private int choosedCard;
+    private App app;
 
     // Inisialisasi dulu
-    public ShuffleCardDialog() {
-//        super(App.frame,"Shuffle Card",ModalityType.APPLICATION_MODAL);
-//        this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-//        this.setSize(500,500);
-//        this.setLocationRelativeTo(rootFrame);
-//        this.setLayout(null);
-//        this.setUndecorated(true);
+    public ShuffleCardDialog(App app) {
+        this.app = app;
     }
 
     public void render(int numCardShuffle){
         this.choosedCard=0;
-        JDialog shuffleDialog = new JDialog(App.frame,"Shuffle Card",true);
+        JDialog shuffleDialog = new JDialog(app.frame,"Shuffle Card",true);
         shuffleDialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         shuffleDialog.setSize(240,410);
-        shuffleDialog.setLocationRelativeTo(App.frame);
+        shuffleDialog.setLocationRelativeTo(app.frame);
 
         JPanel contentPanel = new JPanel();
         contentPanel.setBounds(0,0,240,410);

@@ -1,11 +1,14 @@
 package org.gui;
 
+import org.gameEngine.GameEngine;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class App extends Default {
-    public static JFrame frame = new JFrame();
-    public static JPanel main_panel = new JPanel();
+    public JFrame frame = new JFrame();
+    public JPanel main_panel = new JPanel();
+    public GameEngine gameEngine = new GameEngine();
 
     private void initialize() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -57,6 +60,8 @@ public class App extends Default {
 
         frame.pack();
         frame.setVisible(true);
+        ShuffleCardDialog shuffleCardDialog = new ShuffleCardDialog(this);
+        shuffleCardDialog.render(4);
     }
 
     public static void main(String[] args) {

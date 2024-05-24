@@ -135,10 +135,10 @@ public class Plugin extends Default {
 
     public void backB() {
         Farm farm = new Farm(app);
-        App.main_panel.removeAll();
-        App.main_panel.add(farm);
-        App.main_panel.revalidate();
-        App.main_panel.repaint();
+        app.main_panel.removeAll();
+        app.main_panel.add(farm);
+        app.main_panel.revalidate();
+        app.main_panel.repaint();
         String sound_track = "src\\main\\java\\org\\gui\\assets\\horse.wav";
         Music se = new Music();
         se.setFile(sound_track);

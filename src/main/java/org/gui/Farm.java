@@ -6,16 +6,19 @@ import java.awt.dnd.*;
 
 public class Farm extends JPanel implements DragGestureListener {
     private CardPlaceholder sourceDragPanel;
-    // private App app;
+    private App app;
 
     public Farm(App app) {
-        // this.app = app;
+        this.app = app;
         this.setLayout(null);
         this.setBounds(0, 0, 1060, 700);
         this.setBackground(Color.GREEN);
-
+        this.render();
+    }
+    public void render() {
+        this.removeAll();
         // KOLOM KIRI
-        LadangPanel ladangPanel = new LadangPanel(this, App.frame);
+        LadangPanel ladangPanel = new LadangPanel(this, app.frame);
         this.add(ladangPanel);
 
         DeckAktif deckAktif = new DeckAktif(this);
@@ -104,10 +107,10 @@ public class Farm extends JPanel implements DragGestureListener {
         saveState.addActionListener(e -> {
             // logic ngesave state, render page save
             Save save = new Save(app);
-            App.main_panel.removeAll();
-            App.main_panel.add(save.page_save());
-            App.main_panel.revalidate();
-            App.main_panel.repaint();
+            app.main_panel.removeAll();
+            app.main_panel.add(save.page_save());
+            app.main_panel.revalidate();
+            app.main_panel.repaint();
         });
         JPanel saveStatePanel = new JPanel();
         saveStatePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -122,10 +125,10 @@ public class Farm extends JPanel implements DragGestureListener {
         loadState.addActionListener(e -> {
             // logic ngerender load state
             Load load = new Load(app);
-            App.main_panel.removeAll();
-            App.main_panel.add(load.page_load());
-            App.main_panel.revalidate();
-            App.main_panel.repaint();
+            app.main_panel.removeAll();
+            app.main_panel.add(load.page_load());
+            app.main_panel.revalidate();
+            app.main_panel.repaint();
         });
         JPanel loadStatePanel = new JPanel();
         loadStatePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -140,10 +143,10 @@ public class Farm extends JPanel implements DragGestureListener {
         loadPlugin.addActionListener(e -> {
             // logic ngerender load plugin
             Plugin plugin = new Plugin(app);
-            App.main_panel.removeAll();
-            App.main_panel.add(plugin.page_plugin());
-            App.main_panel.revalidate();
-            App.main_panel.repaint();
+            app.main_panel.removeAll();
+            app.main_panel.add(plugin.page_plugin());
+            app.main_panel.revalidate();
+            app.main_panel.repaint();
         });
         JPanel loadPluginPanel = new JPanel();
         loadPluginPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -158,10 +161,10 @@ public class Farm extends JPanel implements DragGestureListener {
         buttonToko.addActionListener(e -> {
             // logic ngerender toko
             Shop shop = new Shop(app);
-            App.main_panel.removeAll();
-            App.main_panel.add(shop.page_shop());
-            App.main_panel.revalidate();
-            App.main_panel.repaint();
+            app.main_panel.removeAll();
+            app.main_panel.add(shop.page_shop());
+            app.main_panel.revalidate();
+            app.main_panel.repaint();
         });
         JPanel buttonTokoPanel = new JPanel();
         buttonTokoPanel.setLayout(new FlowLayout(FlowLayout.CENTER));

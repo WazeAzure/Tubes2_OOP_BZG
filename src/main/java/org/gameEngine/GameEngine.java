@@ -40,7 +40,7 @@ public class GameEngine {
         gameState = 0;
 
         Object self;
-        fileHandling = new FileHandling(this);
+//        fileHandling = new FileHandling(this);
     }
 
     Pemain getCurrentPemain() {
