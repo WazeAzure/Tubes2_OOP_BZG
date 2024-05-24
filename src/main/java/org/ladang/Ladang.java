@@ -1,4 +1,5 @@
 package org.ladang;
+import org.grid.Grid;
 import org.kartu.Kartu;
 import org.kartu.harvestable.Harvestable;
 import org.kartu.harvestable.hewan.Hewan;
@@ -11,96 +12,58 @@ public class Ladang {
     public static final int Width_Default = 5;
     public static final int Height_Default = 4;
     public static final char[] chars = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','o','p','q','r','s','t','u','v','w','x','y','z'};
-    private int curWidth;
-    private int curHeight;
-    private Map<String, Harvestable> kumpulanPetak = new HashMap<>();
+    private Grid<Harvestable> kumpulanPetak;
     private int layoutTurn; // -1 berati lagi default
     private int layoutChange; // -1 lagi mengecil +1 lagi membesar
 
     public Ladang(int Width, int Height){
-        curWidth = 1;
-        curHeight = 1;
-        kumpulanPetak.put("A1", null);
-        for(int i = 0; i < Width-1; i++){
-            addCol();
-        }
-
-        for(int j = 0; j < Height-1; j++){
-            addRow();
-        }
+        kumpulanPetak = new Grid<>(Width, Height);
         layoutTurn = -1;
         layoutChange = 0;
     }
     public Map<String, Harvestable> getLadang(){
-        return kumpulanPetak;
+        return kumpulanPetak.getGrid();
     }
+
     // ke samping ABC ke bawah 1,2,3
     public void addRow(){
-        for(int i=0; i<this.curWidth; i++){
-            String key = Character.toString(chars[i]).toUpperCase()+ (curHeight+1);
-            kumpulanPetak.put(key, null);
-        }
-        curHeight++;
+        kumpulanPetak.addRow();
     }
 
     public void addCol(){
-        for(int i=0; i<this.curHeight; i++) {
-            String key = Character.toString(chars[curWidth]).toUpperCase() + (i+1);
-            kumpulanPetak.put(key, null);
-        }
-        curWidth++;
+        kumpulanPetak.addCol();
     }
     public List<Harvestable> removeRow(){
         List<Harvestable> l = new ArrayList<>();
-        Harvestable h;
-        for(int i=0; i<this.curWidth; i++){
-            String key = Character.toString(chars[i]).toUpperCase() + curHeight;
-            h = kumpulanPetak.get(key);
-            kumpulanPetak.remove(key);
-            if(h != null){
-                l.add(h);
+        List<String> ls = kumpulanPetak.removeRow();
+        for(String s: ls){
+            if(kumpulanPetak.getObj(s) != null){
+                l.add(kumpulanPetak.getObj(s));
             }
+            kumpulanPetak.remove(s);
         }
-        curHeight--;
         return l;
     }
 
     public List<Harvestable> removeCol(){
         List<Harvestable> l = new ArrayList<>();
-        Harvestable h;
-        for(int i=0; i<this.curHeight; i++) {
-            String key = chars[curWidth-1] + Integer.toString(i+1);
-            key = key.toUpperCase();
-            h = kumpulanPetak.get(key.toUpperCase());
-            kumpulanPetak.remove(key.toUpperCase());
-            if(h != null){
-                l.add(h);
+        List<String> ls = kumpulanPetak.removeCol();
+        for(String s: ls){
+            if(kumpulanPetak.getObj(s) != null){
+                l.add(kumpulanPetak.getObj(s));
             }
+            kumpulanPetak.remove(s);
         }
-        curWidth--;
         return l;
+
     }
     public static String parseToKey(int col, int row){
-        StringBuilder sb = new StringBuilder();
-        sb.append(chars[col]);
-        sb.append(row+1);
-        return sb.toString().toUpperCase();
+        return Grid.parseToKey(col,row);
     }
 
     // mulai dari 1 bukan 0
     public static List<Integer> parseFromKey(String key){
-        List<Integer> l = new ArrayList<>();
-        StringBuilder sb = new StringBuilder(key);
-        int col = sb.charAt(0) - 'A' + 1;
-        StringBuilder numeric = new StringBuilder();
-        for(int i=1; i<key.length(); i++){
-            numeric.append(sb.charAt(i));
-        }
-        int row = Integer.parseInt(numeric.toString());
-        l.add(col);
-        l.add(row);
-
-        return l;
+        return Grid.parseFromKey(key);
     }
 
     public void makeBigger(){
@@ -117,7 +80,7 @@ public class Ladang {
 //        return kumpulanPetak.containsKey(coor);
 //    }
     public Harvestable getObject(String coor){
-        return kumpulanPetak.getOrDefault(coor, null);
+        return kumpulanPetak.getObj(coor);
     }
 
     // ngecek apakah placement kartu valid
@@ -133,7 +96,7 @@ public class Ladang {
 
     public void placeCard(Kartu card, String coor) throws Exception{
         if(card.getKategori().equals("Item")){
-           if (kumpulanPetak.get(coor) == null){
+           if (getObject(coor) == null){
                throw new Exception("Kosong");
            }else{
                if(card.getNama().equals("Destroy")){
@@ -148,17 +111,17 @@ public class Ladang {
                }
            }
         }else if(card.getKategori().equals("Karnivora") || card.getKategori().equals("Herbivora") || card.getKategori().equals("Omnivora") || card.getKategori().equals("Tumbuhan")) {
-            if (kumpulanPetak.get(coor) != null){
+            if (getObject(coor) != null){
                 throw new Exception("Udh ada isinya");
             }else{
-                kumpulanPetak.put(coor, (Harvestable) card);
+                kumpulanPetak.put2(coor, (Harvestable) card);
             }
         }else if (card.getKategori().equals("Produk Hewan") || card.getKategori().equals("Produk Tanaman")){
-            if (kumpulanPetak.get(coor) == null){
+            if (getObject(coor) == null){
                 throw new Exception("Gak ada isinya");
             }else{
-                if(kumpulanPetak.get(coor).getKategori().equals("Karnivora") || kumpulanPetak.get(coor).getKategori().equals("Herbivora") || kumpulanPetak.get(coor).getKategori().equals("Omnivora")){
-                    ((Hewan)kumpulanPetak.get(coor)).makan(card);
+                if(getObject(coor).getKategori().equals("Karnivora") || getObject(coor).getKategori().equals("Herbivora") || getObject(coor).getKategori().equals("Omnivora")){
+                    ((Hewan)getObject(coor)).makan(card);
                 }
             }
         }
@@ -187,15 +150,17 @@ public class Ladang {
     // panen digunakan untuk memanggil method panen pada Harvestable
     public Product panen(String coor) throws Exception{
         Product product = getObject(coor).panen();
-        kumpulanPetak.put(coor, null);
+        kumpulanPetak.put2(coor, null);
         return product;
     }
 
     // growAllPlant untuk menambah umur dari semua tanaman pada ladang
     public void growAllPlant(){
-        for(var entry: kumpulanPetak.entrySet()){
-            if(entry.getValue().getKategori().equals("Tumbuhan")){
+        for(var entry: kumpulanPetak.getGrid().entrySet()){
+            if(entry.getValue() != null){
+                if(entry.getValue().getKategori().equals("Tanaman")){
                 ((Tumbuhan)entry.getValue()).tumbuh();
+                }
             }
         }
     }
@@ -218,12 +183,12 @@ public class Ladang {
         if(obj == null || obj2 != null){
             throw new Exception("Ga bisa kocak");
         }else{
-            kumpulanPetak.put(source, null);
-            kumpulanPetak.put(dest, obj);
+            kumpulanPetak.put2(source, null);
+            kumpulanPetak.put2(dest, obj);
         }
     }
     public void removeObject(String coor){
-        kumpulanPetak.put(coor, null);
+        kumpulanPetak.put2(coor, null);
     }
     public int regionSize(){
         Random random =  new Random();
@@ -233,11 +198,12 @@ public class Ladang {
         }
         return rand;
     }
+
     public List<String> destroyRegion(){
         Random random =  new Random();
         int size = regionSize();
         List<String> listDestroy = new ArrayList<>();
-        List<String> list = new ArrayList<>(kumpulanPetak.keySet());
+        List<String> list = new ArrayList<>(kumpulanPetak.getGrid().keySet());
         List<Integer> colrow = new ArrayList<>();
         int randomInt = random.nextInt(list.size());
         String start = list.get(randomInt);
@@ -245,82 +211,82 @@ public class Ladang {
         int col = colrow.get(0);
         int row = colrow.get(1);
         if(size == 1){
-            listDestroy.add(Character.toString('A' + col-1)  + row);
+            listDestroy.add(parseToKey(col-1,row-1));
         }else if(size == 2){
-           while(col + 1 > curWidth){
+           while(col + 1 > kumpulanPetak.getWidth()){
                randomInt = random.nextInt(list.size());
                start = list.get(randomInt);
                colrow = parseFromKey(start);
                col = colrow.get(0);
                row = colrow.get(1);
            }
-           listDestroy.add(Character.toString('A' + col-1)  + row);
+           listDestroy.add(parseToKey(col-1,row-1));
            col++;
-           listDestroy.add(Character.toString('A' + col-1)  + row);
+           listDestroy.add(parseToKey(col-1,row-1));
         }else if(size == 3){
-            while(col + 2 > curWidth){
+            while(col + 2 > kumpulanPetak.getWidth()){
                 randomInt = random.nextInt(list.size());
                 start = list.get(randomInt);
                 colrow = parseFromKey(start);
                 col = colrow.get(0);
                 row = colrow.get(1);
             }
-            listDestroy.add(Character.toString('A' + col-1)  + row);
+            listDestroy.add(parseToKey(col-1,row-1));
             col++;
-            listDestroy.add(Character.toString('A' + col-1)  + row);
+            listDestroy.add(parseToKey(col-1,row-1));
             col++;
-            listDestroy.add(Character.toString('A' + col-1)  + row);
+            listDestroy.add(parseToKey(col-1,row-1));
         }else if(size == 4){
-            while(col + 1 > curWidth || row + 1 > curHeight){
+            while(col + 1 > kumpulanPetak.getWidth() || row + 1 > kumpulanPetak.getHeight()){
                 randomInt = random.nextInt(list.size());
                 start = list.get(randomInt);
                 colrow = parseFromKey(start);
                 col = colrow.get(0);
                 row = colrow.get(1);
             }
-            listDestroy.add(Character.toString('A' + col-1)  + row);
+            listDestroy.add(parseToKey(col-1,row-1));
             col++;
-            listDestroy.add(Character.toString('A' + col-1)  + row);
+            listDestroy.add(parseToKey(col-1,row-1));
             row++;
-            listDestroy.add(Character.toString('A' + col-1)  + row);
+            listDestroy.add(parseToKey(col-1,row-1));
             col--;
-            listDestroy.add(Character.toString('A' + col-1)  + row);
+            listDestroy.add(parseToKey(col-1,row-1));
         }else if (size == 5){
-            while(col + 4 > curHeight){
+            while(col + 4 > kumpulanPetak.getHeight()){
                 randomInt = random.nextInt(list.size());
                 start = list.get(randomInt);
                 colrow = parseFromKey(start);
                 col = colrow.get(0);
                 row = colrow.get(1);
             }
-            listDestroy.add(Character.toString('A' + col-1)  + row);
+            listDestroy.add(parseToKey(col-1,row-1));
             row++;
-            listDestroy.add(Character.toString('A' + col-1)  + row);
+            listDestroy.add(parseToKey(col-1,row-1));
             row++;
-            listDestroy.add(Character.toString('A' + col-1)  + row);
+            listDestroy.add(parseToKey(col-1,row-1));
             row++;
-            listDestroy.add(Character.toString('A' + col-1)  + row);
+            listDestroy.add(parseToKey(col-1,row-1));
             row++;
-            listDestroy.add(Character.toString('A' + col-1)  + row);
+            listDestroy.add(parseToKey(col-1,row-1));
         }else if(size == 6){
-            while(col + 2 > curWidth || row + 1 > curHeight) {
+            while(col + 2 > kumpulanPetak.getWidth() || row + 1 > kumpulanPetak.getHeight()) {
                 randomInt = random.nextInt(list.size());
                 start = list.get(randomInt);
                 colrow = parseFromKey(start);
                 col = colrow.get(0);
                 row = colrow.get(1);
             }
-            listDestroy.add(Character.toString('A' + col-1)  + row);
+            listDestroy.add(parseToKey(col-1,row-1));
             col++;
-            listDestroy.add(Character.toString('A' + col-1)  + row);
+            listDestroy.add(parseToKey(col-1,row-1));
             col++;
-            listDestroy.add(Character.toString('A' + col-1)  + row);
+            listDestroy.add(parseToKey(col-1,row-1));
             row++;
-            listDestroy.add(Character.toString('A' + col-1)  + row);
+            listDestroy.add(parseToKey(col-1,row-1));
             col--;
-            listDestroy.add(Character.toString('A' + col-1)  + row);
+            listDestroy.add(parseToKey(col-1,row-1));
             col--;
-            listDestroy.add(Character.toString('A' + col-1)  + row);
+            listDestroy.add(parseToKey(col-1,row-1));
 
         }
         return listDestroy;

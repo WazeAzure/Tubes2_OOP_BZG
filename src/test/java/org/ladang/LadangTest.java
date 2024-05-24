@@ -25,6 +25,15 @@ class LadangTest {
     void addRow() {
         Ladang l = new Ladang(4, 5);
         l.addRow();
+        l.addRow();
+        l.addRow();
+        l.addRow();
+        l.addRow();
+        l.addRow();
+        l.addRow();
+        l.addRow();
+        l.addRow();
+        l.addRow();
         List<String> list = new ArrayList<String>(l.getLadang().keySet());
         Collections.sort(list);
         System.out.println(list);
@@ -110,6 +119,7 @@ class LadangTest {
 
     @Test
     void destroyRegion(){
+        System.out.println("Destroy");
         Ladang l = new Ladang(4, 5);
         for(String s: l.destroyRegion()){
             System.out.println(s);
