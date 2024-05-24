@@ -99,13 +99,13 @@ public class Ladang {
            if (getObject(coor) == null){
                throw new Exception("Kosong");
            }else{
-               if(card.getNama().equals("Destroy")){
+               if(card.getNama().equals("DESTROY")){
                    removeObject(coor);
-               }else if (card.getNama().equals("Instant Harvest")){
+               }else if (card.getNama().equals("INSTANT_HARVEST")){
                    Harvestable h = getObject(coor);
                    h.setValueEfek(h.getValuePanen());
                    return panen(coor);
-               }else if(card.getNama().equals("Accelerate") || card.getNama().equals("Protect") || card.getNama().equals("Trap") || card.getNama().equals("Delay") ) {
+               }else if(card.getNama().equals("ACCELERATE") || card.getNama().equals("PROTECT") || card.getNama().equals("TRAP") || card.getNama().equals("DELAY") ) {
                    Harvestable h = getObject(coor);
                    h.applyEfek(card.getNama());
                }
@@ -135,11 +135,11 @@ public class Ladang {
     public List<Harvestable> placeCard(Kartu card, Boolean self) throws Exception{
         List<Harvestable> l = new ArrayList<>();
         if(card.getKategori().equals("Item")){
-            if(card.getNama().equals("Layout") && self){
+            if(card.getNama().equals("LAYOUT") && self){
                 makeBigger();
                 layoutChange = 1;
                 layoutTurn = 6;
-            } else if (card.getNama().equals("Layout") && !self){} {
+            } else if (card.getNama().equals("LAYOUT") && !self){} {
                 l = makeSmaller();
                 layoutChange = -1;
                 layoutTurn = 6;
