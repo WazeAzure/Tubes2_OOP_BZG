@@ -2,8 +2,10 @@ package org.gameEngine;
 
 import org.config.Config;
 import org.config.FileHandling;
+import org.deck.ShuffleDeck;
 import org.grid.Grid;
 import org.kartu.Kartu;
+import org.kartu.harvestable.Harvestable;
 import org.ladang.Ladang;
 import org.pemain.Pemain;
 import org.toko.Toko;
@@ -168,6 +170,27 @@ public class GameEngine {
         fileHandling.loadPlugin(filePath);
     }
 
+    public void resetGame() {
+        // Inisialisasi turn;
+        turn = 1;
+
+        // Inisialisasi Pemain
+        pemain = new ArrayList<Pemain>();
+        pemain.add(new Pemain(1));
+        pemain.add(new Pemain(2));
+
+
+        // Inisialisasi Toko
+        toko = new Toko();
+
+        // Inisialisasi gameState
+        // 0 = Shuffle Kartu, 1 = Serangan Beruang, 2 = Aksi Bebas
+        gameState = 0;
+
+        Object self;
+        fileHandling = new FileHandling(this);
+    }
+
     public void setTurn(int turn){
         this.turn = turn;
     }
@@ -181,16 +204,22 @@ public class GameEngine {
     }
 
     public void setPemainJumlahDeck(int pemain, int jumlahDeck){
-        // TODO: Add method to set pemain jumlah kartu di dek aktif
-
+        this.getListPemain().get(pemain).setShuffleDeck(new ShuffleDeck(jumlahDeck));
     }
 
     public void setKartuDeckAktif(int pemain, String koordinat, String kartu){
-        // TODO: bikin fungsi set di dek aktif
+        this.getListPemain().get(pemain).getActiveDeck().getListKartu().put(koordinat, Config.buildKartu(kartu));
     }
 
-    public void setKartuLadang(){
+    public void setKartuLadang(int pemain, String lokasi, String nama, int umurBerat, List<String> itemAktif){
         // TODO: bikin fungsi set suatu kartu di ladang
+        Harvestable h = (Harvestable) Config.buildKartu(nama);
+        h.setValue(umurBerat);
+        h.setValueEfek(umurBerat);
+        for (String s : itemAktif) {
+            h.addItemAktif(s);
+        }
+        this.getListPemain().get(pemain).getLadang().getLadang().put(lokasi, h);
     }
 
     public void loadSaveFile(String filepath, String extension) {

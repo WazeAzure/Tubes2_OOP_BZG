@@ -79,26 +79,24 @@ public class FileHandling {
 
             // TODO: RESET GAME STATE - PLAYER 1 - PLAYER 2
 
-            /* get Game State info */
-            int currentTurn = fl.getCurrentTurn();
-            int nTokoItem = fl.getNTokoItem();
-            List<InfoItemShop> li = fl.getItemAndQty();
+            /* set Game State info */
+            gameEngine.resetGame();
+            gameEngine.setTurn(fl.getCurrentTurn());
+            for (InfoItemShop i : fl.getItemAndQty()) {
+                gameEngine.setItemInToko(i.nama, i.qty);
+            }
 
-            /* get Player 1 info */
-            int player = fl.getCurrentPlayer();
-            int gulden = fl.getGulden(0);
-            int jumlahDeck = fl.getJumlahDeck(0);
-            List<InfoKartuAktif> p = fl.getKartuDeckAktif(0);
-            List<InfoKartuLadang> q = fl.getListKartuLadang(0);
-
-            /* get Player 2 info */
-            fl.getCurrentPlayer();
-            fl.getGulden(1);
-            fl.getJumlahDeck(1);
-            fl.getKartuDeckAktif(1);
-            fl.getListKartuLadang(1);
-
-
+            /* set Pemain info */
+            for (int i = 0; i < 2; i++) {
+                gameEngine.setPemainGulden(i, fl.getGulden(i));
+                gameEngine.setPemainJumlahDeck(i, fl.getJumlahDeck(i));
+                for (InfoKartuAktif ka : fl.getKartuDeckAktif(i)) {
+                    gameEngine.setKartuDeckAktif(i, ka.lokasi, ka.nama);
+                }
+                for (InfoKartuLadang ka : fl.getListKartuLadang(i)) {
+                    gameEngine.setKartuLadang(i, ka.lokasi, ka.nama, ka.umurBerat, ka.itemAktif);
+                }
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -186,4 +186,23 @@ public class Config {
         Config conf = new Config();
         conf.loadConfig();
     }
+
+    public static Kartu buildKartu(String name) {
+        String kategori = listKategori.get(name);
+        if (kategori.equals("Produk")) {
+            return buildProduct(name);
+        } else if (kategori.equals("Herbivora")) {
+            return buildHerbivora(name);
+        } else if (kategori.equals("Omnivora")) {
+            return buildOmnivora(name);
+        } else if (kategori.equals("Karnivora")) {
+            return buildKarnivora(name);
+        } else if (kategori.equals("Tumbuhan")) {
+            return buildTumbuhan(name);
+        } else if (kategori.equals("Item")) {
+            return buildItem(name);
+        } else {
+            return null;
+        }
+    }
 }
