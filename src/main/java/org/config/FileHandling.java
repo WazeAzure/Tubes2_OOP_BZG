@@ -51,6 +51,8 @@ public class FileHandling {
             this.pluginMap.put("txt", c);
             Class d = Class.forName("org.plugins.LoaderXML");
             this.pluginMap.put("xml", d);
+            Class e = Class.forName("org.plugins.LoaderJSON");
+            this.pluginMap.put("json", e);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -85,18 +87,17 @@ public class FileHandling {
             List<InfoItemShop> li = fl.getItemAndQty();
 
             /* get Player 1 info */
-            int player = fl.getCurrentPlayer();
+            int turn = fl.getCurrentPlayer();
             int gulden = fl.getGulden(0);
             int jumlahDeck = fl.getJumlahDeck(0);
             List<InfoKartuAktif> p = fl.getKartuDeckAktif(0);
             List<InfoKartuLadang> q = fl.getListKartuLadang(0);
 
             /* get Player 2 info */
-            fl.getCurrentPlayer();
-            fl.getGulden(1);
-            fl.getJumlahDeck(1);
-            fl.getKartuDeckAktif(1);
-            fl.getListKartuLadang(1);
+            int gulden2 = fl.getGulden(1);
+            int jumlahDeck2 = fl.getJumlahDeck(1);
+            List<InfoKartuAktif> r = fl.getKartuDeckAktif(1);
+            List<InfoKartuLadang> s = fl.getListKartuLadang(1);
 
 
 
