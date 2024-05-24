@@ -214,12 +214,14 @@ public class GameEngine {
     public void setKartuLadang(int pemain, String lokasi, String nama, int umurBerat, List<String> itemAktif){
         // TODO: bikin fungsi set suatu kartu di ladang
         Harvestable h = (Harvestable) Config.buildKartu(nama);
-        h.setValue(umurBerat);
-        h.setValueEfek(umurBerat);
-        for (String s : itemAktif) {
-            h.addItemAktif(s);
+        if (h != null) {
+            h.setValue(umurBerat);
+            h.setValueEfek(umurBerat);
+            for (String s : itemAktif) {
+                h.applyEfek(s);
+            }
+            this.getListPemain().get(pemain).getLadang().getLadang().put(lokasi, h);
         }
-        this.getListPemain().get(pemain).getLadang().getLadang().put(lokasi, h);
     }
 
     public void loadSaveFile(String filepath, String extension) {

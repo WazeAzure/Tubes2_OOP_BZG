@@ -25,13 +25,13 @@ public class Tumbuhan extends Harvestable {
 
     public void applyEfek(String efek) {
         addItemAktif(efek);
-        if (efek.equals("Accelerate")) {
+        if (efek.equals("ACCELERATE")) {
             valueEfek += 2;
             if (valueEfek >= getValuePanen()) {
                  nama = product.getNama();
                  imageURL = product.getImageURL();
             }
-        } else if (efek.equals("Delay")) {
+        } else if (efek.equals("DELAY")) {
             valueEfek -= 2;
             if (valueEfek < 0) {
                 valueEfek = 0;

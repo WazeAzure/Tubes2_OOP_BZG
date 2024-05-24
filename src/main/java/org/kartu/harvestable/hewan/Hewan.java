@@ -12,9 +12,9 @@ abstract public class Hewan extends Harvestable {
 
     public void applyEfek(String efek) {
         addItemAktif(efek);
-        if (efek.equals("Accelerate")) {
+        if (efek.equals("ACCELERATE")) {
             valueEfek += 8;
-        } else if (efek.equals("Delay")) {
+        } else if (efek.equals("DELAY")) {
             valueEfek -= 5;
             if (valueEfek < 0) {
                 valueEfek = 0;
