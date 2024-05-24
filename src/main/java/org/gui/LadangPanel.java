@@ -40,7 +40,7 @@ public class LadangPanel extends JPanel {
         this.rootFrame = rootFrame;
         this.setLayout(null);
         this.setBounds(0,0,widthLadang,heightLadang);
-        this.setBackground(Color.decode("#C6A969"));
+        this.setBackground(Color.decode("#F1E4C3"));
         normalRender();
 //        expandedRender();
 //        shrinkedRender();
@@ -75,31 +75,11 @@ public class LadangPanel extends JPanel {
                 this.add(petakLadang);
                 new CardDropTargetListener(petakLadang,farm);
                 if (showLadang.getObject(Ladang.parseToKey(j, i)) != null) {
-                    System.out.println(showLadang.getObject(Ladang.parseToKey(j, i)));
-                    System.out.println(i);
-                    System.out.println(j);
                     CardPanel cardPanel = new CardPanel(0,0,petakLadang.getWidth(),petakLadang.getHeight(), showLadang.getObject(Ladang.parseToKey(j, i)));
                     petakLadang.setPanelCard(cardPanel);
                     var ds = new DragSource();
                     ds.createDefaultDragGestureRecognizer(cardPanel, DnDConstants.ACTION_MOVE, farm);
                 }
-//                if(i==0 && j==0){
-//                    CardPanel cardPanel = new CardPanel(0,0,petakLadang.getWidth(),petakLadang.getHeight());
-//                    petakLadang.setPanelCard(cardPanel);
-//                    var ds = new DragSource();
-//                    ds.createDefaultDragGestureRecognizer(cardPanel, DnDConstants.ACTION_MOVE, farm);
-//                }
-//                if(i==0 && j==1){
-//                    CardPanel cardPanel = new CardPanel(0,0,petakLadang.getWidth(),petakLadang.getHeight());
-//                    petakLadang.setPanelCard(cardPanel);
-//                    var ds = new DragSource();
-//                    ds.createDefaultDragGestureRecognizer(cardPanel, DnDConstants.ACTION_MOVE, farm);
-//                } if(i==0 && j==2){
-//                    CardPanel cardPanel = new CardPanel(0,0,petakLadang.getWidth(),petakLadang.getHeight());
-//                    petakLadang.setPanelCard(cardPanel);
-//                    var ds = new DragSource();
-//                    ds.createDefaultDragGestureRecognizer(cardPanel, DnDConstants.ACTION_MOVE, farm);
-//                }
             }
         }
         this.repaint();

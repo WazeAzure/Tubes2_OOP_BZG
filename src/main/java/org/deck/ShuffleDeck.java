@@ -87,6 +87,11 @@ public class ShuffleDeck{
         }
         return list;
     }
+
+    public int getRemainingCard(){
+        return listKartu.size();
+    }
+
     public void removeFromDeck(List<Kartu> lk){
         for(Kartu k : lk){
             listKartu.remove(k);

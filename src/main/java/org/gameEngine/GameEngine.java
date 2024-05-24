@@ -2,6 +2,7 @@ package org.gameEngine;
 
 import org.config.Config;
 import org.config.FileHandling;
+import org.grid.Grid;
 import org.kartu.Kartu;
 import org.ladang.Ladang;
 import org.pemain.Pemain;
@@ -83,29 +84,33 @@ public class GameEngine {
     }
 
     public void dndDeckDeck(int indexSource, int indexDest) throws Exception {
-        Kartu sourceCard = getCurrentPemain().getActiveDeck().getListKartu()[indexSource];
-        Kartu DestCard = getCurrentPemain().getActiveDeck().getListKartu()[indexDest];
+        Kartu sourceCard = getCurrentPemain().getActiveDeck().getListKartu().get(Grid.parseToKey(indexSource, 0));
+        Kartu DestCard = getCurrentPemain().getActiveDeck().getListKartu().get(Grid.parseToKey(indexSource, 0));
         if (sourceCard == null) {
             return;
         } else {
-            getCurrentPemain().getActiveDeck().getListKartu()[indexSource] = DestCard;
-            getCurrentPemain().getActiveDeck().getListKartu()[indexDest] = sourceCard;
+//            getCurrentPemain().getActiveDeck().getListKartu()[indexSource] = DestCard;
+//            getCurrentPemain().getActiveDeck().getListKartu()[indexDest] = sourceCard;
         }
 
     }
 
     public void dndDeckLadang(int indexSource, int rowDest, int colDest) throws Exception{
-        Kartu sourceCard = getCurrentPemain().getActiveDeck().getListKartu()[indexSource];
+        Kartu sourceCard = getCurrentPemain().getActiveDeck().getListKartu().get(Grid.parseToKey(indexSource, 0));
         if (sourceCard == null) {
             throw new Exception("Pemindahan Tidak valid!");
         } else {
-            getCurrentPemain().getLadang().placeCard(sourceCard, Ladang.parseToKey(colDest, rowDest));
-            getCurrentPemain().getActiveDeck().getListKartu()[indexSource] = null;
+            List<Kartu> temp = new ArrayList<>();
+            temp.add(getCurrentPemain().getLadang().placeCard(sourceCard, Ladang.parseToKey(colDest, rowDest)));
+            getCurrentPemain().getActiveDeck().removeCard(Grid.parseToKey(indexSource, 0));
+            if (temp != null) {
+                getCurrentPemain().getActiveDeck().addCard(temp);
+            }
         }
     }
 
     public void dndDeckLadangMusuh(int indexSource, int rowDest, int colDest) throws Exception {
-        Kartu sourceCard = getCurrentPemain().getActiveDeck().getListKartu()[indexSource];
+        Kartu sourceCard = getCurrentPemain().getActiveDeck().getListKartu().get(Grid.parseToKey(indexSource, 0));
         if (sourceCard == null || sourceCard.getNama().equals("Protect") || !sourceCard.getKategori().equals("Item")) {
             throw new Exception("Pemindahan Tidak valid!");
         } else {
@@ -113,8 +118,10 @@ public class GameEngine {
         }
     }
 
-    public void panen(String coor) throws Exception{
-        getCurrentPemain().getLadang().panen(coor);
+    public void panen(int row, int col) throws Exception{
+        List<Kartu> temp = new ArrayList<>();
+        temp.add(getCurrentPemain().getLadang().panen(Ladang.parseToKey(col, row)));
+        getCurrentPemain().getActiveDeck().addCard(temp);
     }
 
     public void nextTurn() {

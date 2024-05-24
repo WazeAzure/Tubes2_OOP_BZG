@@ -8,7 +8,7 @@ import java.awt.*;
 public class App extends Default {
     public JFrame frame = new JFrame();
     public JPanel main_panel = new JPanel();
-    public Farm farm;
+    public static Farm farm;
     public static GameEngine gameEngine = new GameEngine();
 
     private void initialize() {
@@ -31,8 +31,8 @@ public class App extends Default {
         main_panel.setLayout(null);
         main_panel.setPreferredSize(new Dimension(1060, 700));
 
-        this.farm = new Farm(this);
-        main_panel.add(this.farm);
+        farm = new Farm(this);
+        main_panel.add(farm);
 
         JPanel empty1 = new JPanel();
         empty1.setPreferredSize(new Dimension(1100, 20));
@@ -54,7 +54,7 @@ public class App extends Default {
         frame.add(empty2, BorderLayout.EAST);
         frame.add(empty4, BorderLayout.WEST);
 
-        String sound_track = "src\\main\\java\\org\\gui\\assets\\bs1.wav";
+        String sound_track = "src/main/java/org/gui/assets/bs1.wav";
         Music se = new Music();
         se.setFile(sound_track);
         se.setVolume(0.85f);
@@ -64,7 +64,7 @@ public class App extends Default {
         frame.pack();
         frame.setVisible(true);
         ShuffleCardDialog shuffleCardDialog = new ShuffleCardDialog(this);
-        shuffleCardDialog.render(4);
+        shuffleCardDialog.render(this.gameEngine.getCurrentPemain().getActiveDeck().remainingSlot());
     }
 
     public static void main(String[] args) {

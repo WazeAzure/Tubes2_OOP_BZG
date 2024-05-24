@@ -131,7 +131,7 @@ public class ItemCard extends Default{
 
         if (choice == JOptionPane.YES_OPTION) {
             System.out.println("Sure button clicked");
-            String sound_track = "src\\main\\java\\org\\gui\\assets\\buy.wav";
+            String sound_track = "src/main/java/org/gui/assets/buy.wav";
             Music se = new Music();
             se.setFile(sound_track);
             se.play();

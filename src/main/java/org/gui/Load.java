@@ -124,7 +124,7 @@ public class Load extends Default{
     public void loadB(Component panel, String selectedFormat, String path) {
         JOptionPane.showMessageDialog(panel, "Load " + path + selectedFormat );
         // TODO: Add load logic
-        String sound_track = "src\\main\\java\\org\\gui\\assets\\save.wav";
+        String sound_track = "src/main/java/org/gui/assets/save.wav";
         Music se = new Music();
         se.setFile(sound_track);
         se.play();
@@ -138,7 +138,7 @@ public class Load extends Default{
         app.main_panel.add(farm);
         app.main_panel.revalidate();
         app.main_panel.repaint();
-        String sound_track = "src\\main\\java\\org\\gui\\assets\\horse.wav";
+        String sound_track = "src/main/java/org/gui/assets/horse.wav";
         Music se = new Music();
         se.setFile(sound_track);
         se.play();
@@ -169,7 +169,7 @@ public class Load extends Default{
         }
 
         panel.add(imagePan);
-        String sound_track = "src\\main\\java\\org\\gui\\assets\\save.wav";
+        String sound_track = "src/main/java/org/gui/assets/save.wav";
         Music se = new Music();
         se.setFile(sound_track);
         se.play();
