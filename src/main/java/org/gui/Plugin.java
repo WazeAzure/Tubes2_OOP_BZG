@@ -1,14 +1,14 @@
 package org.gui;
 
+import javax.imageio.ImageIO;
 import org.config.FileHandling;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import javax.imageio.ImageIO;
 
-public class Plugin {
+public class Plugin extends Default {
     private App app;
     private File selectedFile;
 
@@ -27,7 +27,7 @@ public class Plugin {
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             if (image != null) {
-                g.drawImage(image, 0, 0, 1060, 660, this);
+                g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
             }
         }
 
@@ -39,21 +39,37 @@ public class Plugin {
 
     private JPanel pluginComponent() {
         JPanel panel = new JPanel();
-        panel.setBackground(Color.decode(app.getColor3()));
+        panel.setOpaque(false);
         panel.setLayout(null);
         panel.setBounds(0, 0, 500, 250);
 
         JLabel title = new JLabel("Plugin");
         title.setHorizontalAlignment(SwingConstants.CENTER);
         title.setFont(new Font("Serif", Font.BOLD, 24));
-        title.setBounds(0, 20, 500, 50);
+        title.setBounds(0, 35, 500, 50);
+        panel.add(title);
 
         JTextField fileNameField = new JTextField("No file selected");
+        fileNameField.setFont(new Font("Arial", Font.BOLD, 14));
+        fileNameField.setBackground(Color.decode(getColor3()));
+        fileNameField.setForeground(Color.BLACK);
         fileNameField.setEditable(false);
-        fileNameField.setBounds(50, 100, 280, 30);
+        fileNameField.setBounds(50, 100, 280, 40);
+        panel.add(fileNameField);
 
-        JButton chooseFileButton = new JButton("Choose File");
-        chooseFileButton.setBounds(350, 100, 100, 30);
+        JButton chooseFileButton = new JButton();
+        chooseFileButton.setBackground(Color.decode(app.getColor1()));
+        try {
+            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/choose.png"));
+            Image resizedImage = img.getScaledInstance(120, 40, Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon(resizedImage);
+
+            chooseFileButton.setIcon(icon);
+            chooseFileButton.setPreferredSize(new Dimension(120, 40));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        chooseFileButton.setBounds(350, 100, 120, 40);
         chooseFileButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
@@ -63,14 +79,38 @@ public class Plugin {
                 fileNameField.setText(selectedFile.getName());
             }
         });
+        panel.add(chooseFileButton);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
-        buttonPanel.setBounds(20, 165, 460, 35);
-        buttonPanel.setBackground(Color.decode(app.getColor3()));
+        buttonPanel.setOpaque(false);
+        buttonPanel.setBounds(20, 150, 460, 50);
 
-        JButton backButton = new JButton("Back");
-        JButton uploadButton = new JButton("Load");
+        JButton backButton = new JButton();
+        backButton.setBackground(Color.decode(app.getColor1()));
+        try {
+            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/back.png"));
+            Image resizedImage = img.getScaledInstance(120, 40, Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon(resizedImage);
+
+            backButton.setIcon(icon);
+            backButton.setPreferredSize(new Dimension(120, 40));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         buttonPanel.add(backButton);
+
+        JButton uploadButton = new JButton();
+        uploadButton.setBackground(Color.decode(app.getColor1()));
+        try {
+            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/upload.png"));
+            Image resizedImage = img.getScaledInstance(120, 40, Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon(resizedImage);
+
+            uploadButton.setIcon(icon);
+            uploadButton.setPreferredSize(new Dimension(120, 40));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         buttonPanel.add(uploadButton);
 
         backButton.addActionListener(e -> backB());
@@ -82,9 +122,6 @@ public class Plugin {
             }
         });
 
-        panel.add(title);
-        panel.add(fileNameField);
-        panel.add(chooseFileButton);
         panel.add(buttonPanel);
 
         return panel;
@@ -93,25 +130,41 @@ public class Plugin {
     public void uploadB(Component panel, File file) {
         if (file != null && file.exists()) {
             JOptionPane.showMessageDialog(panel, "Open file: " + file.getName());
+            // TODO: Add plugin logic
+
+            String sound_track = "src\\main\\java\\org\\gui\\assets\\save.wav";
+            Music se = new Music();
+            se.setFile(sound_track);
+            se.play();
+            
             // TODO: Add algoritma plugin
             // TODO: HAPUS BAGIAN INI karena bad testing method.
             //  Call dari gameEngine. Lalu passing file.getAbsolutePathFile()
             //
-            FileHandling fh = new FileHandling();
+            App.gameEngine.addPlugin(String.valueOf(file.getAbsoluteFile()));
+//            FileHandling fh = new FileHandling();
 //            fh.loadPlugin(String.valueOf(file.getAbsoluteFile()));
-            fh.load("C:\\Users\\Asus Tuf Gaming\\IdeaProjects\\Tubes2_OOP_BZG\\testfile\\xml", "xml");
+//            fh.load("C:\\Users\\Asus Tuf Gaming\\IdeaProjects\\Tubes2_OOP_BZG\\testfile\\xml", "xml");
         } else {
             JOptionPane.showMessageDialog(panel, "File does not exist.");
         }
     }
 
     public void backB() {
-        app.page = 1;
-        app.updateMainPanel();
+        Farm farm = new Farm(app);
+        app.main_panel.removeAll();
+        app.main_panel.add(farm);
+        app.main_panel.revalidate();
+        app.main_panel.repaint();
+        String sound_track = "src\\main\\java\\org\\gui\\assets\\horse.wav";
+        Music se = new Music();
+        se.setFile(sound_track);
+        se.play();
     }
 
     private JPanel plugin() {
         JPanel panel = new JPanel();
+        panel.setOpaque(false);
         panel.setLayout(null);
         panel.setBounds(280, 205, 500, 250);
         panel.add(pluginComponent());
@@ -120,7 +173,7 @@ public class Plugin {
 
     public JPanel page_plugin() {
         JPanel panel = new JPanel();
-        panel.setBackground(Color.decode(app.getColor1()));
+        panel.setBackground(new Color(0, 0, 0, 0));
         panel.setLayout(null);
         panel.setBounds(0, 0, 1060, 660);
 
@@ -128,13 +181,17 @@ public class Plugin {
         imagePan.setBounds(0, 0, 1060, 660);
 
         try {
-            BufferedImage myImage = ImageIO.read(new File("src\\main\\java\\org\\gui\\assets\\bg.png"));
+            BufferedImage myImage = ImageIO.read(new File("src\\main\\java\\org\\gui\\assets\\bgv3.png"));
             imagePan.setImage(myImage);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         panel.add(imagePan);
+        String sound_track = "src\\main\\java\\org\\gui\\assets\\save.wav";
+        Music se = new Music();
+        se.setFile(sound_track);
+        se.play();
 
         JPanel pluginPanel = plugin();
         panel.add(pluginPanel);

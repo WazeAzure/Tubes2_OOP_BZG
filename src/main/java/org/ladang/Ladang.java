@@ -14,6 +14,8 @@ public class Ladang {
     private int curWidth;
     private int curHeight;
     private Map<String, Harvestable> kumpulanPetak = new HashMap<>();
+    private int layoutTurn; // -1 berati lagi default
+    private int layoutChange; // -1 lagi mengecil +1 lagi membesar
 
     public Ladang(int Width, int Height){
         curWidth = 1;
@@ -26,6 +28,8 @@ public class Ladang {
         for(int j = 0; j < Height-1; j++){
             addRow();
         }
+        layoutTurn = -1;
+        layoutChange = 0;
     }
     public Map<String, Harvestable> getLadang(){
         return kumpulanPetak;
@@ -162,7 +166,23 @@ public class Ladang {
             throw new Exception("Ga bisa kocak");
         }
     }
-
+    public List<Harvestable> placeCard(Kartu card, Boolean self) throws Exception{
+        List<Harvestable> l = new ArrayList<>();
+        if(card.getKategori().equals("Item")){
+            if(card.getNama().equals("Layout") && self){
+                makeBigger();
+                layoutChange = 1;
+                layoutTurn = 6;
+            } else if (card.getNama().equals("Layout") && !self){} {
+                l = makeSmaller();
+                layoutChange = -1;
+                layoutTurn = 6;
+            }
+            return l;
+        }else{
+            throw new Exception("Salah method");
+        }
+    }
 
     // panen digunakan untuk memanggil method panen pada Harvestable
     public Product panen(String coor) throws Exception{
@@ -304,144 +324,5 @@ public class Ladang {
 
         }
         return listDestroy;
-//        int possibility = random.nextInt(4);
-//        switch (possibility) {
-//            case 0: // 1 x 1
-//                removeObject(start);
-//                break;
-//            case 1: // 1 x 2
-//                if (row == curHeight) {
-//                    row -= 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                } else if (col == curWidth) {
-//                    col -= 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                } else if (row == 1) {
-//                    row += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                } else if (col == 1) {
-//                    col += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                } else {
-//                    col += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                }
-//                break;
-//            case 2: // 2x2
-//                if (col == curWidth && row == curHeight) {
-//                    row -= 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    col -= 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    row += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                }else if (row == curHeight) {
-//                    row -= 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    col += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    row += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                } else if (col == curWidth) {
-//                    row += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    col -= 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    row -= 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                } else if (row == 1 && col == 1) {
-//                    row += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    col += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    row -= 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                } else if (row == 1) {
-//                    row += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    col -= 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    row -= 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                } else if (col == 1){
-//                    row += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    col += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    row -= 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                }else{
-//                    row += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    col += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    row -= 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                }
-//                break;
-//            case 3: // 2 x 3
-//                if (col == curWidth && row == curHeight) {
-//                    row -= 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    col -= 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    col -= 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    row += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    row += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//
-//                }else if (row == curHeight) {
-//                    row -= 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    col += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    row += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                } else if (col == curWidth) {
-//                    row += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    col -= 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    row -= 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                } else if (row == 1 && col == 1) {
-//                    row += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    col += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    row -= 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                } else if (row == 1) {
-//                    row += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    col -= 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    row -= 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                } else if (col == 1){
-//                    row += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    col += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    row -= 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                }else{
-//                    row += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    col += 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                    row -= 1;
-//                    listDestroy.add(Integer.toString(col) + row);
-//                }
-//                break;
-//        }
-
-
-
-
-
-
     }
 }

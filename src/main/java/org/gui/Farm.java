@@ -2,89 +2,205 @@ package org.gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.dnd.*;
 
-public class Farm {
+public class Farm extends JPanel implements DragGestureListener {
+    private CardPlaceholder sourceDragPanel;
     private App app;
+    public static Integer currentLadang;
 
     public Farm(App app) {
+        currentLadang = 0;
         this.app = app;
+        this.setLayout(null);
+        this.setBounds(0, 0, 1060, 700);
+        this.setBackground(Color.GREEN);
+        this.render();
+    }
+    public void render() {
+        this.removeAll();
+        // KOLOM KIRI
+        LadangPanel ladangPanel = new LadangPanel(this, app.frame);
+        this.add(ladangPanel);
+
+        DeckAktif deckAktif = new DeckAktif(this);
+        this.add(deckAktif);
+
+        // KOLOM TENGAH
+        // (optional) gambar character (520+45,0,150,355)
+
+        // label nama dari currentplayer
+        JLabel namaCurrPlayer = new JLabel("Player 1");
+        namaCurrPlayer.setFont(new Font("Serif", Font.BOLD, 20));
+        JPanel namaCurrPlayerPanel = new JPanel();
+        namaCurrPlayerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        namaCurrPlayerPanel.add(namaCurrPlayer);
+        namaCurrPlayerPanel.setBounds(562, 355, 150, 30);
+        this.add(namaCurrPlayerPanel);
+
+        // Button next
+        JButton nextButton = new JButton("Next");
+        nextButton.setFocusable(false);
+        nextButton.setPreferredSize(new Dimension(130, 40));
+        nextButton.addActionListener(e -> {
+            // logic ganti player terus render player selanjutnya
+        });
+        JPanel nextButtonPanel = new JPanel();
+        nextButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        nextButtonPanel.add(nextButton);
+        nextButtonPanel.setBounds(565, 405, 150, 50);
+        this.add(nextButtonPanel);
+
+        // info deck
+        JLabel deck = new JLabel("xx/40");
+        deck.setFont(new Font("Serif", Font.BOLD, 30));
+        JPanel flowPanel = new JPanel();
+        flowPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        flowPanel.setBounds(0, 70, 150, 40);
+        flowPanel.add(deck);
+        JPanel deckPanel = new JPanel();
+        deckPanel.setLayout(null);
+        deckPanel.add(flowPanel);
+        deckPanel.setBounds(565, 495, 150, 200);
+        this.add(deckPanel);
+
+        // KOLOM KANAN
+        // label jumlah turn
+        JLabel turnLabel = new JLabel("Turn : XX");
+        JPanel turnLabelPanel = new JPanel();
+        turnLabelPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        turnLabelPanel.add(turnLabel);
+        turnLabelPanel.setBounds(760, 0, 300, 40);
+        this.add(turnLabelPanel);
+
+        // label gulden Player 1
+        JLabel infoPlayer1 = new JLabel("Player 1 : xx Gulden");
+        JPanel infoPlayer1Panel = new JPanel();
+        infoPlayer1Panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        infoPlayer1Panel.add(infoPlayer1);
+        infoPlayer1Panel.setBounds(760, 60, 300, 40);
+        this.add(infoPlayer1Panel);
+
+        // label gulden Player 2
+        JLabel infoPlayer2 = new JLabel("Player 2 : xx Gulden");
+        JPanel infoPlayer2Panel = new JPanel();
+        infoPlayer2Panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        infoPlayer2Panel.add(infoPlayer2);
+        infoPlayer2Panel.setBounds(760, 110, 300, 40);
+        this.add(infoPlayer2Panel);
+
+        // Button ladang lawan
+        JButton buttonLadangLawan = new JButton("Ladang Lawan");
+        buttonLadangLawan.setFocusable(false);
+        buttonLadangLawan.setPreferredSize(new Dimension(280, 30));
+        buttonLadangLawan.addActionListener(e -> {
+            // logic ngerender ladang lawan
+            currentLadang = 1;
+            this.render();
+        });
+        JPanel buttonLadangLawanPanel = new JPanel();
+        buttonLadangLawanPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        buttonLadangLawanPanel.setBounds(760, 170, 300, 40);
+        buttonLadangLawanPanel.add(buttonLadangLawan);
+        this.add(buttonLadangLawanPanel);
+
+        // Button save state
+        JButton saveState = new JButton("Save State");
+        saveState.setFocusable(false);
+        saveState.setPreferredSize(new Dimension(280, 30));
+        saveState.addActionListener(e -> {
+            // logic ngesave state, render page save
+            Save save = new Save(app);
+            app.main_panel.removeAll();
+            app.main_panel.add(save.page_save());
+            app.main_panel.revalidate();
+            app.main_panel.repaint();
+        });
+        JPanel saveStatePanel = new JPanel();
+        saveStatePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        saveStatePanel.setBounds(760, 230, 300, 40);
+        saveStatePanel.add(saveState);
+        this.add(saveStatePanel);
+
+        // Button load state
+        JButton loadState = new JButton("Load State");
+        loadState.setFocusable(false);
+        loadState.setPreferredSize(new Dimension(280, 30));
+        loadState.addActionListener(e -> {
+            // logic ngerender load state
+            Load load = new Load(app);
+            app.main_panel.removeAll();
+            app.main_panel.add(load.page_load());
+            app.main_panel.revalidate();
+            app.main_panel.repaint();
+        });
+        JPanel loadStatePanel = new JPanel();
+        loadStatePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        loadStatePanel.setBounds(760, 290, 300, 40);
+        loadStatePanel.add(loadState);
+        this.add(loadStatePanel);
+
+        // Button load plugin
+        JButton loadPlugin = new JButton("Load Plugin");
+        loadPlugin.setFocusable(false);
+        loadPlugin.setPreferredSize(new Dimension(280, 30));
+        loadPlugin.addActionListener(e -> {
+            // logic ngerender load plugin
+            Plugin plugin = new Plugin(app);
+            app.main_panel.removeAll();
+            app.main_panel.add(plugin.page_plugin());
+            app.main_panel.revalidate();
+            app.main_panel.repaint();
+        });
+        JPanel loadPluginPanel = new JPanel();
+        loadPluginPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        loadPluginPanel.setBounds(760, 350, 300, 40);
+        loadPluginPanel.add(loadPlugin);
+        this.add(loadPluginPanel);
+
+        // toko
+        JButton buttonToko = new JButton("Toko");
+        buttonToko.setFocusable(false);
+        buttonToko.setPreferredSize(new Dimension(290, 295));
+        buttonToko.addActionListener(e -> {
+            // logic ngerender toko
+            Shop shop = new Shop(app);
+            app.main_panel.removeAll();
+            app.main_panel.add(shop.page_shop());
+            app.main_panel.revalidate();
+            app.main_panel.repaint();
+        });
+        JPanel buttonTokoPanel = new JPanel();
+        buttonTokoPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        buttonTokoPanel.setBounds(760, 410, 300, 305);
+        buttonTokoPanel.add(buttonToko);
+        this.add(buttonTokoPanel);
+
+        this.revalidate();
+        this.repaint();
     }
 
-    private JPanel player1() {
-        JPanel panel = new JPanel();
-        panel.setBounds(0, 20, 100, 80);
-        panel.setBackground(Color.GREEN);
-        return panel;
+    public void dragGestureRecognized(DragGestureEvent event) {
+        this.sourceDragPanel = null;
+        var cursor = Cursor.getDefaultCursor();
+        var panel = (CardPanel) event.getComponent();
+
+        if (event.getDragAction() == DnDConstants.ACTION_MOVE) {
+            cursor = DragSource.DefaultMoveDrop;
+        }
+        this.sourceDragPanel = (CardPlaceholder) panel.getParent();
+        try {
+            event.startDrag(cursor, panel);
+        } catch (Exception e) {
+            // Do nothing
+        }
     }
 
-    private JPanel player2() {
-        JPanel panel = new JPanel();
-        panel.setBounds(530, 70, 150, 200);
-        panel.setBackground(Color.GREEN);
-        return panel;
+    public CardPlaceholder getSourceDragPanel() {
+        return this.sourceDragPanel;
     }
 
-    private JPanel title() {
-        JPanel panel = new JPanel();
-        JLabel label = new JLabel();
-        label.setText("LADANGKU");
-        panel.setBounds(150, 0, 690, 105);
-        panel.setBackground(Color.BLUE);
-        panel.add(label);  
-        return panel;
-    }
-
-    private JPanel headerPanel() {
-        JPanel panel = new JPanel();
-        panel.setBounds(180, 0, 620, 100);
-        panel.setBackground(Color.WHITE);
-        panel.setLayout(null); 
-        panel.add(player1());
-        panel.add(title());
-        panel.add(player2());
-        return panel;
-    }
-
-    private JPanel field() {
-        JPanel panel = new JPanel();
-        panel.setBounds(180, 100, 620, 560);
-        panel.setBackground(Color.BLACK);
-        return panel;
-    }
-
-    private JPanel menu() {
-        JPanel panel = new JPanel();
-        panel.setBounds(0, 100, 180, 560);
-        panel.setBackground(Color.YELLOW);
-        return panel;
-    }
-
-    private JPanel deck() {
-        JPanel panel = new JPanel();
-        panel.setBounds(800, 100, 260, 560);
-        panel.setBackground(Color.GRAY);
-        return panel;
-    }
-
-    private JPanel nextTurn() {
-        JPanel panel = new JPanel();
-        panel.setBounds(920, 20, 120, 60);
-        panel.setBackground(Color.PINK);
-        return panel;
-    }
-
-    public JPanel page_farm() {
-        JPanel panel = new JPanel();
-        panel.setLayout(null);
-        panel.setBounds(0, 0, 1060, 660);
-        panel.setBackground(Color.ORANGE);
-
-        panel.add(headerPanel());
-        panel.add(menu());
-        panel.add(field());
-        panel.add(deck());
-        panel.add(nextTurn());
-
-        return panel;
+    public void setNullSourceDragPanel() {
+        this.sourceDragPanel = null;
     }
 }

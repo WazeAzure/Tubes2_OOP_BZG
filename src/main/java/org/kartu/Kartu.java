@@ -1,6 +1,8 @@
 package org.kartu;
 
-public class Kartu {
+import java.io.Serializable;
+
+public class Kartu implements Serializable {
     protected String nama;
     protected String kategori;
     protected String imageURL;

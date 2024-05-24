@@ -49,6 +49,8 @@ public class FileHandling {
         try {
             Class c = Class.forName("org.plugins.LoaderTXT");
             this.pluginMap.put("txt", c);
+            Class d = Class.forName("org.plugins.LoaderXML");
+            this.pluginMap.put("xml", d);
         } catch (Exception e){
             e.printStackTrace();
         }
