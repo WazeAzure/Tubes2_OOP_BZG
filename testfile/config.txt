@@ -1,24 +1,24 @@
-Produk Tanaman 10 500 Labu
-Produk Tanaman 3 150 Jagung
-Produk Tanaman 5 350 Stroberi
-Produk Hewan 4 100 Susu
-Produk Hewan 2 50 Telur
-Produk Hewan 12 500 Sirip Hiu
-Produk Hewan 8 150 Daging Kuda
-Produk Hewan 6 120 Daging Domba
-Produk Hewan 12 500 Daging Beruang
-Hewan Karnivora 20 Hiu Darat
-Hewan Herbivora 10 Sapi
-Hewan Herbivora 12 Domba
-Hewan Herbivora 14 Kuda
-Hewan Omnivora 5 Ayam
-Hewan Omnivora 25 Beruang
-Tanaman 5 Biji Labu
-Tanaman 3 Biji Jagung
-Tanaman 4 Biji Stroberi
-Item Accelerate
-Item Delay
-Item Instant Harvest
-Item Destroy
-Item Protect
-Item Trap
+Produk Tanaman 10 500 LABU
+Produk Tanaman 3 150 JAGUNG
+Produk Tanaman 5 350 STROBERI
+Produk Hewan 4 100 SUSU
+Produk Hewan 2 50 TELUR
+Produk Hewan 12 500 SIRIP_HIU
+Produk Hewan 8 150 DAGING_KUDA
+Produk Hewan 6 120 DAGING_DOMBA
+Produk Hewan 12 500 DAGING_BERUANG
+Hewan Karnivora 20 HIU_DARAT
+Hewan Herbivora 10 SAPI
+Hewan Herbivora 12 DOMBA
+Hewan Herbivora 14 KUDA
+Hewan Omnivora 5 AYAM
+Hewan Omnivora 25 BERUANG
+Tanaman 5 BIJI_LABU
+Tanaman 3 BIJI_JAGUNG
+Tanaman 4 BIJI_STROBERI
+Item ACCELERATE
+Item DELAY
+Item INSTANT_HARVEST
+Item DESTROY
+Item PROTECT
+Item TRAP

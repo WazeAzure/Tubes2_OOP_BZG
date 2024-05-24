@@ -130,6 +130,7 @@ public class Load extends Default{
         se.play();
 
         App.gameEngine.loadSaveFile("testfile" + File.separator + path, selectedFormat);
+
     }
 
     public void backB() {

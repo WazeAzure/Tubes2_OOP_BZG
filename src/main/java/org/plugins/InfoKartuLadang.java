@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InfoKartuLadang {
-    String lokasi;
-    String nama;
-    int umurBerat;
-    int jumlahItemAktif;
-    List<String> itemAktif;
+    public String lokasi;
+    public String nama;
+    public int umurBerat;
+    public int jumlahItemAktif;
+    public List<String> itemAktif;
 
     public InfoKartuLadang(String lokasi, String nama, int umurBerat, int jumlahItemAktif, String[] itemAktif){
         this.lokasi = lokasi;

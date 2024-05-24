@@ -15,7 +15,7 @@ public class Pemain {
         ladang = new Ladang(5, 4);
         uang = 0;
         this.playerNumber = playerNumber;
-        this.deck = new ShuffleDeck();
+        this.deck = new ShuffleDeck(40);
         this.activeDeck = new ActiveDeck();
     }
 
@@ -49,5 +49,9 @@ public class Pemain {
 
     public void setUang(Integer uang) {
         this.uang = uang;
+    }
+
+    public void setShuffleDeck(ShuffleDeck shuffleDeck) {
+        this.deck = shuffleDeck;
     }
 }
