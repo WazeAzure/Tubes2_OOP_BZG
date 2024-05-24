@@ -7,8 +7,10 @@ import java.awt.dnd.*;
 public class Farm extends JPanel implements DragGestureListener {
     private CardPlaceholder sourceDragPanel;
     private App app;
+    public static Integer currentLadang;
 
     public Farm(App app) {
+        currentLadang = 0;
         this.app = app;
         this.setLayout(null);
         this.setBounds(0, 0, 1060, 700);
@@ -93,6 +95,8 @@ public class Farm extends JPanel implements DragGestureListener {
         buttonLadangLawan.setPreferredSize(new Dimension(280, 30));
         buttonLadangLawan.addActionListener(e -> {
             // logic ngerender ladang lawan
+            currentLadang = 1;
+            this.render();
         });
         JPanel buttonLadangLawanPanel = new JPanel();
         buttonLadangLawanPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -171,6 +175,9 @@ public class Farm extends JPanel implements DragGestureListener {
         buttonTokoPanel.setBounds(760, 410, 300, 305);
         buttonTokoPanel.add(buttonToko);
         this.add(buttonTokoPanel);
+
+        this.revalidate();
+        this.repaint();
     }
 
     public void dragGestureRecognized(DragGestureEvent event) {

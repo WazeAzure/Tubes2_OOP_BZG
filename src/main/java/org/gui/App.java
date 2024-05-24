@@ -8,7 +8,8 @@ import java.awt.*;
 public class App extends Default {
     public JFrame frame = new JFrame();
     public JPanel main_panel = new JPanel();
-    public GameEngine gameEngine = new GameEngine();
+    public Farm farm;
+    public static GameEngine gameEngine = new GameEngine();
 
     private void initialize() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -30,8 +31,8 @@ public class App extends Default {
         main_panel.setLayout(null);
         main_panel.setPreferredSize(new Dimension(1060, 700));
 
-        Farm farm_player1 = new Farm(this);
-        main_panel.add(farm_player1);
+        this.farm = new Farm(this);
+        main_panel.add(this.farm);
 
         JPanel empty1 = new JPanel();
         empty1.setPreferredSize(new Dimension(1100, 20));

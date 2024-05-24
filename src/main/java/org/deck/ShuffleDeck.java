@@ -32,7 +32,7 @@ public class ShuffleDeck{
                     max = map.size();
                     index = random.nextInt(max);
                     String carnivore = list.get(index);
-                    listKartu.add(Config.buildHerbivora(carnivore));
+                    listKartu.add(Config.buildKarnivora(carnivore));
                     break;
                 case 2:
                     map = Config.getOmnivora();
@@ -40,7 +40,7 @@ public class ShuffleDeck{
                     max = map.size();
                     index = random.nextInt(max);
                     String omnivore = list.get(index);
-                    listKartu.add(Config.buildHerbivora(omnivore));
+                    listKartu.add(Config.buildOmnivora(omnivore));
                     break;
                 case 3:
                     map = Config.getListTumbuhan();
@@ -48,7 +48,7 @@ public class ShuffleDeck{
                     max = map.size();
                     index = random.nextInt(max);
                     String plant = list.get(index);
-                    listKartu.add(Config.buildHerbivora(plant));
+                    listKartu.add(Config.buildTumbuhan(plant));
                     break;
                 case 4:
                     map = Config.getListItem();
@@ -56,7 +56,7 @@ public class ShuffleDeck{
                     max = map.size();
                     index = random.nextInt(max);
                     String item = list.get(index);
-                    listKartu.add(Config.buildHerbivora(item));
+                    listKartu.add(Config.buildItem(item));
                     break;
                 case 5:
                     map = Config.getListProductAnimal();
@@ -64,7 +64,7 @@ public class ShuffleDeck{
                     max = map.size();
                     index = random.nextInt(max);
                     String productAnimal = list.get(index);
-                    listKartu.add(Config.buildHerbivora(productAnimal));
+                    listKartu.add(Config.buildProduct(productAnimal));
                     break;
                 case 6:
                     map = Config.getListProductPlant();
@@ -72,7 +72,7 @@ public class ShuffleDeck{
                     max = map.size();
                     index = random.nextInt(max);
                     String productPlant = list.get(index);
-                    listKartu.add(Config.buildHerbivora(productPlant));
+                    listKartu.add(Config.buildProduct(productPlant));
                     break;
             }
         }

@@ -1,9 +1,14 @@
 package org.gui;
 
+import org.kartu.harvestable.Harvestable;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -19,6 +24,14 @@ public class PetakLadangPlaceholder extends CardPlaceholder {
         this.rootFrame = rootFrame;
     }
 
+    public int getRow() {
+        return idx_i;
+    }
+
+    public int getCol() {
+        return idx_j;
+    }
+
     public void displayIJ(){
         System.out.println(idx_i);
         System.out.println(idx_j);
@@ -30,6 +43,7 @@ public class PetakLadangPlaceholder extends CardPlaceholder {
         this.panelCard.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                Harvestable card = (Harvestable) panelCard.kartu;
                 // This block will execute ONLY when the panel itself is clicked
                 System.out.println("JPanel was clicked!");
                 JDialog infoDialog = new JDialog(rootFrame, "Information Details", true);
@@ -44,17 +58,25 @@ public class PetakLadangPlaceholder extends CardPlaceholder {
                 // Component gambar
                 // Nanti ganti image
                 int imageHeight = 130;
-                JLabel image = new JLabel("Image");
+                ImageIcon icon;
+                try {
+                    BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/Hewan/" + card.getNama()+ ".png"));
+                    Image resizedImage = img.getScaledInstance(imageHeight, imageHeight, Image.SCALE_SMOOTH);
+                    icon = new ImageIcon(resizedImage);
+                } catch (Exception b) {
+                    b.printStackTrace();
+                    icon = new ImageIcon();
+                }
+                JLabel image = new JLabel(icon);
                 JPanel imagePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
                 imagePanel.add(image);
                 imagePanel.setPreferredSize(new Dimension(400,30));
-                imagePanel.setBackground(Color.CYAN);
                 imagePanel.setBounds(0,10,400,imageHeight);
                 contentPanel.add(imagePanel);
 
                 // Component nama kartu
                 int namaY = 15 + imageHeight;
-                JLabel nama = new JLabel("Nama");
+                JLabel nama = new JLabel(card.getNama());
                 Font namaFont = new Font("Arial", Font.PLAIN, 20);
                 nama.setFont(namaFont);
                 JPanel namaPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -66,13 +88,13 @@ public class PetakLadangPlaceholder extends CardPlaceholder {
                 // Nanti tergantung kartu hewan/tumbuhan
                 int beratUmurY = 30 + namaY;
                 // Berat (hewan)
-                JLabel berat = new JLabel("Berat : xx (zz)");
+                JLabel berat = new JLabel(((card.getKategori().equals("Tumbuhan")) ? "Umur" : "Berat") + " : " + card.getValue() + " (" + card.getValueEfek()+ ")");
                 berat.setBounds(20,beratUmurY,500,30);
                 contentPanel.add(berat);
                 // Umur (tumbuhan)
-                JLabel umur = new JLabel("Umur : xx (zz)");
-                umur.setBounds(20,beratUmurY,500,30);
-                contentPanel.add(umur);
+//                JLabel umur = new JLabel("Umur : xx (zz)");
+//                umur.setBounds(20,beratUmurY,500,30);
+//                contentPanel.add(umur);
 
                 // Component item aktif (jml)
                 int itemAktifY = 30 + beratUmurY;
@@ -88,12 +110,10 @@ public class PetakLadangPlaceholder extends CardPlaceholder {
                 // <nama_item> (jml_item_tsb)
                 // jadi tiap total item harus ditotalin dulu
                 List<String> contohList = new ArrayList<>();
-                contohList.add("Accelerate (x)");
-                contohList.add("Delay (x)");
-                contohList.add("Instant Harvest (x)");
-                contohList.add("Destroy (x)");
-                contohList.add("Protect (x)");
-                contohList.add("Trap (x)");
+
+                card.getItemAktif().forEach(
+                        (key, value)
+                                -> contohList.add(key + " (" + value +" + )"));
 
                 // Loop tiap jenis item yang ada di list
                 // Jadi kl pke map buat ngemap nama_item : jml_item
@@ -108,6 +128,7 @@ public class PetakLadangPlaceholder extends CardPlaceholder {
                 // Component button Panen
                 int buttonY = 20 + 6*30 + itemAktifY;
                 JButton panenButton = new JButton("Panen");
+                panenButton.setEnabled(card.isSiapPanen());
                 panenButton.setFocusable(false);
                 JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
                 buttonPanel.add(panenButton);
