@@ -69,8 +69,6 @@ public class ShuffleCardDialog {
             App.gameEngine.getCurrentPemain().getActiveDeck().addCard(currentListKartu);
             App.gameEngine.getCurrentPemain().getShuffleDeck().removeFromDeck(currentListKartu);
             shuffleDialog.dispose();
-            BearAttack.isBearAtack=true;
-            app.farm.render();
             new BearAttack(app);
 //            JPanel transparentPanel = new JPanel();
 //            transparentPanel.setOpaque(false);
