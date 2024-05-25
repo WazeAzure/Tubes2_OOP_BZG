@@ -101,6 +101,8 @@ public class GameEngine {
         Kartu sourceCard = getCurrentPemain().getActiveDeck().getListKartu().get(Grid.parseToKey(indexSource, 0));
         if (sourceCard == null) {
             throw new Exception("Pemindahan Tidak valid!");
+        } else if (sourceCard.getNama().equals("DESTROY") || sourceCard.getNama().equals("DELAY")) {
+            throw new Exception("Item/Kartu Tidak valid!");
         } else {
             List<Kartu> temp = new ArrayList<>();
             temp.add(getCurrentPemain().getLadang().placeCard(sourceCard, Ladang.parseToKey(colDest, rowDest)));
@@ -115,7 +117,7 @@ public class GameEngine {
         Kartu sourceCard = getCurrentPemain().getActiveDeck().getListKartu().get(Grid.parseToKey(indexSource, 0));
         if (sourceCard == null) {
             throw new Exception("Pemindahan Tidak valid!");
-        } else if (!sourceCard.getNama().equals("DESTROY") || !sourceCard.getNama().equals("DELAY")) {
+        } else if (!(sourceCard.getNama().equals("DESTROY") || sourceCard.getNama().equals("DELAY"))) {
             throw new Exception("Item/Kartu Tidak valid!");
         } else {
             getCurrentLawan().getLadang().placeCard(sourceCard, Ladang.parseToKey(colDest, rowDest));

@@ -128,7 +128,7 @@ public class PetakLadangPlaceholder extends CardPlaceholder {
                 // Component button Panen
                 int buttonY = 20 + 6*30 + itemAktifY;
                 JButton panenButton = new JButton("Panen");
-                panenButton.setEnabled(card.isSiapPanen() && App.gameEngine.getCurrentPemain().getActiveDeck().remainingSlot() != 0);
+                panenButton.setEnabled(card.isSiapPanen() && App.gameEngine.getCurrentPemain().getActiveDeck().remainingSlot() != 0 && App.gameEngine.getGameState() != 3);
                     panenButton.addActionListener(a -> {
                         try {
                             App.gameEngine.panen(idx_i, idx_j);
