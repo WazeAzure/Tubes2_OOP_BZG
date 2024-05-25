@@ -179,8 +179,8 @@ public class Shop extends Default {
         button.setForeground(Color.decode(app.getColor1()));
         button.addActionListener(e -> {
             app.main_panel.removeAll();
-            Farm farm = new Farm(app);
-            app.main_panel.add(farm);
+            app.main_panel.add(App.farm);
+            App.farm.render();
             app.main_panel.revalidate();
             app.main_panel.repaint();
         });
