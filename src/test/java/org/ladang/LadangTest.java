@@ -53,23 +53,45 @@ class LadangTest {
 
     @Test
     void removeRow() {
+        Config c = new Config();
+        c.loadConfig();
         Ladang l = new Ladang(4, 5);
+        try{
+            l.placeCard(Config.buildTumbuhan("BIJI_JAGUNG"),"A05");
+            l.placeCard(Config.buildTumbuhan("BIJI_JAGUNG"),"B05");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         List<Harvestable> l2 = l.removeRow();
         List<String> list = new ArrayList<String>(l.getLadang().keySet());
         Collections.sort(list);
         System.out.println(list);
-        System.out.println(l2);
+        System.out.println(l2.get(0).getNama());
+        System.out.println(l2.get(1).getNama());
+        assert l2.get(0).getNama().equals("BIJI_JAGUNG");
+        assert l2.get(1).getNama().equals("BIJI_JAGUNG");
+
     }
 
     @Test
     void removeCol() {
+        Config c = new Config();
+        c.loadConfig();
         Ladang l = new Ladang(4, 5);
+        try{
+            l.placeCard(Config.buildTumbuhan("BIJI_JAGUNG"),"D05");
+            l.placeCard(Config.buildTumbuhan("BIJI_JAGUNG"),"D04");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         List<Harvestable> l2 = l.removeCol();
-        System.out.println(l.getLadang().entrySet());
         List<String> list = new ArrayList<String>(l.getLadang().keySet());
         Collections.sort(list);
         System.out.println(list);
-        System.out.println(l2);
+        System.out.println(l2.get(0).getNama());
+        System.out.println(l2.get(1).getNama());
+        assert l2.get(0).getNama().equals("BIJI_JAGUNG");
+        assert l2.get(1).getNama().equals("BIJI_JAGUNG");
     }
 
     @Test
@@ -106,14 +128,18 @@ class LadangTest {
     @Test
     void placeCard() throws Exception {
         Ladang l = new Ladang(4, 5);
-        l.placeCard(new Kartu("BIJI_JAGUNG", "Tanaman", null), "A01");
+        Config c = new Config();
+        c.loadConfig();
+        l.placeCard(new Tumbuhan("BIJI_JAGUNG", "Tumbuhan", null, 4), "A01");
         assert l.getObject("A01").getNama().equals("BIJI_JAGUNG");
     }
 
     @Test
     void removeObject() throws Exception {
         Ladang l = new Ladang(4, 5);
-        l.placeCard(new Tumbuhan("BIJI_JAGUNG", "Tanaman", null, 4),"A01");
+        Config c = new Config();
+        c.loadConfig();
+        l.placeCard(new Tumbuhan("BIJI_JAGUNG", "Tumbuhan", null, 4),"A01");
         assert l.getObject("A01").getNama().equals("BIJI_JAGUNG");
         l.removeObject("A01");
         assert l.getObject("A01") == null;
@@ -122,13 +148,27 @@ class LadangTest {
     @Test
     void growAllPlant() throws Exception {
         Ladang l = new Ladang(4, 5);
-        l.placeCard(new Tumbuhan("BIJI_JAGUNG", "Tanaman", null, 4),"A01");
+        Config c = new Config();
+        c.loadConfig();
+        l.placeCard(new Tumbuhan("BIJI_JAGUNG", "Tumbuhan", null, 4),"A01");
         assert l.getObject("A01").getNama().equals("BIJI_JAGUNG");
-        l.
+        l.placeCard(new Tumbuhan("BIJI_JAGUNG", "Tumbuhan", null, 4),"A02");
+        assert l.getObject("A02").getNama().equals("BIJI_JAGUNG");
+        l.growAllPlant();
+        assert l.getObject("A01").getValue() == 1;
+        assert l.getObject("A02").getValue() == 1;
+
     }
 
     @Test
-    void getInfo() {
+    void getInfo() throws Exception {
+        Ladang l = new Ladang(5, 4);
+        Config c = new Config();
+        c.loadConfig();
+        l.placeCard(new Tumbuhan("BIJI_JAGUNG", "Tumbuhan", null, 4),"A01");
+        assert l.getInfo("A01").get(0).equals("BIJI_JAGUNG");
+        assert l.getInfo("A01").get(1).equals("0");
+        assert l.getInfo("A01").get(2).equals("0");
 
     }
 

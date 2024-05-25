@@ -45,7 +45,7 @@ public class Ladang {
             if(kumpulanPetak.getObj(s) != null){
                 l.add(kumpulanPetak.getObj(s));
             }
-            kumpulanPetak.remove(s);
+            kumpulanPetak.getGrid().remove(s);
         }
         return l;
     }
@@ -57,7 +57,7 @@ public class Ladang {
             if(kumpulanPetak.getObj(s) != null){
                 l.add(kumpulanPetak.getObj(s));
             }
-            kumpulanPetak.remove(s);
+            kumpulanPetak.getGrid().remove(s);
         }
         return l;
 
@@ -77,8 +77,10 @@ public class Ladang {
     }
     public List<Harvestable> makeSmaller(){
         List<Harvestable> l = new ArrayList<>();
-        l.addAll(removeRow());
-        l.addAll(removeCol());
+        List<Harvestable> lrow = removeRow();
+        List<Harvestable> lcol = removeCol();
+        l.addAll(lrow);
+        l.addAll(lcol);
         return l;
     }
 //    public Boolean isCoordinateValid(String coor){
