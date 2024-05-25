@@ -76,7 +76,7 @@ public class Load extends Default{
         entry.setOpaque(false);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        buttonPanel.setBounds(80, 160, 340, 50);
+        buttonPanel.setBounds(80, 150, 340, 50);
         buttonPanel.setOpaque(false); 
 
         JButton backButton = new JButton();

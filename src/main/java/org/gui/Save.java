@@ -73,10 +73,10 @@ public class Save extends Default{
         entry.add(folder);
         entry.add(Box.createHorizontalStrut(10));
         entry.add(dropdown);
-        panel.setOpaque(false);
+        entry.setBackground(Color.decode(getColor1()));
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        buttonPanel.setBounds(80, 165, 340, 50);
+        buttonPanel.setBounds(80, 150, 340, 50);
         buttonPanel.setBackground(Color.decode(getColor1()));
         
         JButton backButton = new JButton();
