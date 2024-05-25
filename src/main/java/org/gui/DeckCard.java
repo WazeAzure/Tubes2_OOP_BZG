@@ -13,15 +13,13 @@ public class DeckCard extends Default{
     private String name;
     private String img;
     private int price;
-    private int stock;
     private int width;
     private int height;
     
-    public DeckCard(String name, String img, int price, int stock, int width, int height){
+    public DeckCard(String name, String img, int price, int width, int height){
         this.name = name;
         this.img = img;
         this.price = price;
-        this.stock = stock;
         this.width = width;
         this.height = height;
     }
@@ -86,12 +84,6 @@ public class DeckCard extends Default{
         priceLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         priceLabel.setBorder(new EmptyBorder(0, 0, 0, 0));
 
-        JLabel stockLabel = new JLabel("Stock: " + this.stock);
-        stockLabel.setForeground(Color.BLACK);
-        stockLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        stockLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-        stockLabel.setBorder(new EmptyBorder(0, 0, 0, 0));
-
         JButton buyButton = new JButton();
         try {
             BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/money.png"));
@@ -115,7 +107,6 @@ public class DeckCard extends Default{
         panel.add(nameLabel);
         panel.add(imagePan);
         panel.add(priceLabel);
-        panel.add(stockLabel);
         panel.add(Box.createVerticalStrut(10));
         panel.add(buyButton);
 

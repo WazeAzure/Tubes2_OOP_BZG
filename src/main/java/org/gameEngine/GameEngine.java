@@ -156,6 +156,7 @@ public class GameEngine {
             if (entry != null) {
                 if (entry.getValue().getNama().equals(produk)) {
                     getCurrentPemain().getActiveDeck().removeCard(entry.getKey());
+                    break;
                 }
             }
         }

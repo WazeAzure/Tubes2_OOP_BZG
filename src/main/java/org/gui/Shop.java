@@ -94,7 +94,7 @@ public class Shop extends Default {
             if (k != null) {
                 if (k.getKategori().equals("Produk Tanaman") || k.getKategori().equals("Produk Hewan") ){
                     // for (int i = 0; i < 6; i++) {
-                    DeckCard card = new DeckCard(k.getNama(), k.getImageURL(), toko.totalHarga(k.getNama(), 1), toko.getStok(k.getNama()), 160, 225);
+                    DeckCard card = new DeckCard(k.getNama(), k.getImageURL(), toko.totalHarga(k.getNama(), 1), 160, 225);
                     JPanel cardpanel = card.createCard();
                     panel.add(cardpanel);
                     // }  

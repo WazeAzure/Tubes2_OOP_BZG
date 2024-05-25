@@ -183,7 +183,7 @@ public class Farm extends JPanel implements DragGestureListener {
         Image scaledImage2 = originalIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH); 
         ImageIcon resizedIcon2 = new ImageIcon(scaledImage);
 
-        JLabel infoPlayer2 = new JLabel("Player 2 : " + app.gameEngine.getListPemain().get(0).getUang() + " ");
+        JLabel infoPlayer2 = new JLabel("Player 2 : " + app.gameEngine.getListPemain().get(1).getUang() + " ");
         infoPlayer2.setFont(new Font("Arial", Font.BOLD, 16));
         infoPlayer2.setIcon(resizedIcon);
         infoPlayer2.setHorizontalTextPosition(JLabel.LEFT); 
@@ -383,8 +383,7 @@ public class Farm extends JPanel implements DragGestureListener {
         buttonToko.setOpaque(false);
         buttonToko.addActionListener(e -> {
             // logic ngerender toko
-            Toko toko = new Toko();
-            Shop shop = new Shop(app, toko);
+            Shop shop = new Shop(app, App.gameEngine.getToko());
             app.main_panel.removeAll();
             app.main_panel.add(shop.page_shop());
             app.main_panel.revalidate();
