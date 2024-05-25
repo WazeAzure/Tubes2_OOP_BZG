@@ -214,9 +214,9 @@ public class Ladang {
         colrow = parseFromKey(start);
         int col = colrow.get(0);
         int row = colrow.get(1);
-        if(size == 5){
-            System.out.println("Ukuran 5");
-        }
+//        if(size == 6){
+//            System.out.println("Ukuran 6");
+//        }
         if(size == 1){
             listDestroy.add(parseToKey(col-1,row-1));
         }else if(size == 2){
