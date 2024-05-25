@@ -56,4 +56,8 @@ public class Toko {
     public void setItemStock(String produk, int jumlah){
         stok.put(produk, jumlah);
     }
+
+    public Map<String, Integer> getMapStok(){
+        return this.stok;
+    }
 }

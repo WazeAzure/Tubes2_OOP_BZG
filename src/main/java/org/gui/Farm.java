@@ -86,7 +86,18 @@ public class Farm extends JPanel implements DragGestureListener {
         this.add(namaCurrPlayerPanel);
 
         // Button next
-        JButton nextButton = new JButton("Next");
+        JButton nextButton = new JButton();
+        nextButton.setBackground(Color.decode(app.getColor1()));
+        try {
+            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/next.png"));
+            Image resizedImage = img.getScaledInstance(120, 40, Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon(resizedImage);
+
+            nextButton.setIcon(icon);
+            nextButton.setPreferredSize(new Dimension(120, 40)); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         nextButton.setFocusable(false);
         nextButton.setEnabled(!(App.gameEngine.getGameState() == 1));
         nextButton.setPreferredSize(new Dimension(130, 40));
@@ -100,32 +111,29 @@ public class Farm extends JPanel implements DragGestureListener {
         JPanel nextButtonPanel = new JPanel();
         nextButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         nextButtonPanel.add(nextButton);
+        nextButtonPanel.setBackground((Color.decode("#F1E4C3")));
         nextButtonPanel.setBounds(565, 405, 150, 50);
         this.add(nextButtonPanel);
 
+        
         // info deck
 
-        BufferedImage imgb = null;
-        try {
-            imgb = ImageIO.read(new File("src/main/java/org/gui/assets/totalcard.png"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        JLabel deck = new ImageLabel(App.gameEngine.getCurrentPemain().getShuffleDeck().getRemainingCard() + "/40", imgb);
-        deck.setPreferredSize(new Dimension(150, 150)); 
+        JLabel deck = new JLabel(App.gameEngine.getCurrentPemain().getShuffleDeck().getRemainingCard() + "/40");
+        deck.setBounds(0,0,40, 20);
+        // deck.setPreferredSize(new Dimension(150, 150)); 
+        deck.setBackground(Color.decode("#614124"));
 
         deck.setFont(new Font("Serif", Font.BOLD, 30));
         JPanel flowPanel = new JPanel();
         flowPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         flowPanel.setBounds(0, 30, 150, 150);
         flowPanel.add(deck);
-        flowPanel.setBackground(Color.decode("#F1E4C3"));
+        flowPanel.setBackground(Color.decode("#C6A969"));
         JPanel deckPanel = new JPanel();
         deckPanel.setLayout(null);
         deckPanel.add(flowPanel);
-        deckPanel.setBounds(565, 495, 150, 200);
-        deckPanel.setBackground(Color.decode("#F1E4C3"));
+        deckPanel.setBounds(565, 495+80, 150, 100);
+        deckPanel.setBackground(Color.decode("#C6A969"));
         this.add(deckPanel);
 
         // KOLOM KANAN
@@ -134,7 +142,8 @@ public class Farm extends JPanel implements DragGestureListener {
         JPanel turnLabelPanel = new JPanel();
         turnLabelPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         turnLabelPanel.add(turnLabel);
-        turnLabelPanel.setBounds(760, 0, 300, 40);
+        turnLabelPanel.setBounds(790, 20, 240, 40);
+        turnLabelPanel.setBackground(Color.decode("#C6A969"));
         this.add(turnLabelPanel);
 
         // label gulden Player 1
@@ -142,7 +151,8 @@ public class Farm extends JPanel implements DragGestureListener {
         JPanel infoPlayer1Panel = new JPanel();
         infoPlayer1Panel.setLayout(new FlowLayout(FlowLayout.CENTER));
         infoPlayer1Panel.add(infoPlayer1);
-        infoPlayer1Panel.setBounds(760, 60, 300, 40);
+        infoPlayer1Panel.setBounds(790, 60+20, 240, 40);
+        infoPlayer1Panel.setBackground(Color.decode("#C6A969"));
         this.add(infoPlayer1Panel);
 
         // label gulden Player 2
@@ -150,7 +160,8 @@ public class Farm extends JPanel implements DragGestureListener {
         JPanel infoPlayer2Panel = new JPanel();
         infoPlayer2Panel.setLayout(new FlowLayout(FlowLayout.CENTER));
         infoPlayer2Panel.add(infoPlayer2);
-        infoPlayer2Panel.setBounds(760, 110, 300, 40);
+        infoPlayer2Panel.setBounds(790, 110+20, 240, 40);
+        infoPlayer2Panel.setBackground(Color.decode("#C6A969"));
         this.add(infoPlayer2Panel);
 
         // Button ladang lawan
@@ -178,7 +189,7 @@ public class Farm extends JPanel implements DragGestureListener {
 
             JPanel buttonLadangLawanPanel = new JPanel();
             buttonLadangLawanPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-            buttonLadangLawanPanel.setBounds(760, 170, 300, 50);
+            buttonLadangLawanPanel.setBounds(760, 170+20, 300, 50);
             buttonLadangLawanPanel.setBackground(Color.decode("#F1E4C3"));
             buttonLadangLawanPanel.add(buttonLadangLawan);
 
@@ -207,7 +218,7 @@ public class Farm extends JPanel implements DragGestureListener {
 
             JPanel buttonLadangLawanPanel = new JPanel();
             buttonLadangLawanPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-            buttonLadangLawanPanel.setBounds(760, 170, 300, 50);
+            buttonLadangLawanPanel.setBounds(760, 170+20, 300, 50);
             buttonLadangLawanPanel.setBackground(Color.decode("#F1E4C3"));
             buttonLadangLawanPanel.add(buttonLadangLawan);
 
@@ -241,7 +252,7 @@ public class Farm extends JPanel implements DragGestureListener {
         });
         JPanel saveStatePanel = new JPanel();
         saveStatePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        saveStatePanel.setBounds(760, 230, 300, 50);
+        saveStatePanel.setBounds(760, 230+20, 300, 50);
         saveStatePanel.add(saveState);
         saveStatePanel.setBackground(Color.decode("#F1E4C3"));
         this.add(saveStatePanel);
@@ -272,7 +283,7 @@ public class Farm extends JPanel implements DragGestureListener {
         });
         JPanel loadStatePanel = new JPanel();
         loadStatePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        loadStatePanel.setBounds(760, 290, 300, 50);
+        loadStatePanel.setBounds(760, 290+20, 300, 50);
         loadStatePanel.setBackground(Color.decode("#F1E4C3"));
 
         loadStatePanel.add(loadState);
@@ -304,7 +315,7 @@ public class Farm extends JPanel implements DragGestureListener {
         });
         JPanel loadPluginPanel = new JPanel();
         loadPluginPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        loadPluginPanel.setBounds(760, 350, 300, 50);
+        loadPluginPanel.setBounds(760, 350+20, 300, 50);
         loadPluginPanel.add(loadPlugin);
         loadPluginPanel.setBackground(Color.decode("#F1E4C3"));
         this.add(loadPluginPanel);
@@ -337,7 +348,7 @@ public class Farm extends JPanel implements DragGestureListener {
         });
         JPanel buttonTokoPanel = new JPanel();
         buttonTokoPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        buttonTokoPanel.setBounds(760, 410, 300, 305);
+        buttonTokoPanel.setBounds(760, 450, 300, 305);
         buttonTokoPanel.setOpaque(false);
         buttonTokoPanel.add(buttonToko);
 

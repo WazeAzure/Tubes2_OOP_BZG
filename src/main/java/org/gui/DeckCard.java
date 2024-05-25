@@ -70,7 +70,7 @@ public class DeckCard extends Default{
         imagePan.setAlignmentX(Component.CENTER_ALIGNMENT);
         imagePan.setBorder(new EmptyBorder(0, 0, 10, 0));
         try {
-            myImage = ImageIO.read(new File(img));
+            myImage = ImageIO.read(new File("src/main/java/org/gui/assets/" + img + ".png"));
             imagePan.setImage(myImage);
         } catch (Exception e) {
             e.printStackTrace();

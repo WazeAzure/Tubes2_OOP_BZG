@@ -231,4 +231,8 @@ public class GameEngine {
     public void loadSaveFile(String filepath, String extension) {
         fileHandling.load(filepath, extension);
     }
+
+    public void saveFile(String filePath, String extention){
+        fileHandling.save(filePath, extention);
+    }
 }

@@ -57,7 +57,7 @@ public class Load extends Default{
         folder.setBackground(Color.decode(getColor3()));
         folder.setForeground(Color.BLACK);
 
-        String[] format = {"txt", "yaml", "png"};
+        String[] format = {"txt", "xml", "json"};
                 JComboBox<String> dropdown = new JComboBox<>(format);
 
         dropdown.setPreferredSize(new Dimension(150, 30));
@@ -76,7 +76,7 @@ public class Load extends Default{
         entry.setOpaque(false);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        buttonPanel.setBounds(80, 160, 340, 50);
+        buttonPanel.setBounds(80, 150, 340, 50);
         buttonPanel.setOpaque(false); 
 
         JButton backButton = new JButton();
