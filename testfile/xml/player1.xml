@@ -3,14 +3,14 @@
     <JUMLAH_DECK>39</JUMLAH_DECK>
     <JUMLAH_DECK_AKTIF>1</JUMLAH_DECK_AKTIF>
     <DECK>
-        <KARTU_DECK>
+        <KARTU>
             <LOKASI>A01</LOKASI>
             <NAMA>BERUANG</NAMA>
-        </KARTU_DECK>
+        </KARTU>
     </DECK>
     <JUMLAH_KARTU_LADANG>1</JUMLAH_KARTU_LADANG>
     <LADANG>
-        <KARTU_LADANG>
+        <KARTU>
             <LOKASI>A01</LOKASI>
             <NAMA>DOMBA</NAMA>
             <UMUR_BERAT>5</UMUR_BERAT>
@@ -20,6 +20,6 @@
                 <ITEM>DELAY</ITEM>
                 <ITEM>PROTECT</ITEM>
             </ITEM_AKTIF>
-        </KARTU_LADANG>
+        </KARTU>
     </LADANG>
 </PLAYER>

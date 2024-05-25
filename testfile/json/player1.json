@@ -1,0 +1,31 @@
+{
+    "JUMLAH_GULDEN": 500,
+    "JUMLAH_DECK": 39,
+    "JUMLAH_DECK_AKTIF": 1,
+    "DECK": {
+      "KARTU": [
+        {
+          "LOKASI": "A01",
+          "NAMA": "BERUANG"
+        }
+      ]
+    },
+    "JUMLAH_KARTU_LADANG": 1,
+    "LADANG": {
+      "KARTU": [
+        {
+          "LOKASI": "A01",
+          "NAMA": "DOMBA",
+          "UMUR_BERAT": 5,
+          "JUMLAH_ITEM_AKTIF": 3,
+          "ITEM_AKTIF": {
+            "ITEM": [
+              "ACCELERATE",
+              "DELAY",
+              "PROTECT"
+            ]
+          }
+        }
+      ]
+    }
+}

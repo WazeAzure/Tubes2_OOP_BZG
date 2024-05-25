@@ -15,6 +15,9 @@ import java.util.jar.JarFile;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
+import org.kartu.Kartu;
+import org.kartu.harvestable.Harvestable;
+import org.ladang.Ladang;
 import org.pemain.Pemain;
 import org.plugins.FileLoader;
 import org.plugins.InfoItemShop;
@@ -36,6 +39,8 @@ public class FileHandling {
             Class d = Class.forName("org.plugins.LoaderXML");
             this.pluginMap.put("xml", d);
 
+            Class e = Class.forName("org.plugins.LoaderJSON");
+            this.pluginMap.put("json", e);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -51,19 +56,90 @@ public class FileHandling {
             this.pluginMap.put("txt", c);
             Class d = Class.forName("org.plugins.LoaderXML");
             this.pluginMap.put("xml", d);
+            Class e = Class.forName("org.plugins.LoaderJSON");
+            this.pluginMap.put("json", e);
         } catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    public void save() {
+    public void save(String folderPath, String extention) {
+        try {
+            if (!this.pluginMap.containsKey(extention)) {
+                System.out.println(this.pluginMap);
+                System.out.println("Plugin Not Exist!");
+                return;
+            }
 
+            FileLoader fl = (FileLoader) this.pluginMap.get(extention).getConstructor().newInstance();
+
+            // setup file to save
+
+            /* Handle Game State */
+            fl.setCurrentTurn(gameEngine.getTurn());
+            Map<String, Integer> shopItemStock = gameEngine.getToko().getMapStok();
+
+
+            List<InfoItemShop> listShopItemStock = new ArrayList<>();
+            for (String key : shopItemStock.keySet()) {
+                if(shopItemStock.get(key) != 0){
+                    InfoItemShop p = new InfoItemShop(key, shopItemStock.get(key));
+                    listShopItemStock.add(p);
+                }
+            }
+            fl.setNTokoItem(listShopItemStock.size());
+            fl.setItemAndQty(listShopItemStock);
+
+            /* Handle Player */
+            List<Pemain> listPemain = gameEngine.getListPemain();
+            for(int i=0; i<2; i++){
+                fl.setGulden(i, listPemain.get(i).getUang());
+                fl.setJumlahDeck(i, listPemain.get(i).getShuffleDeck().getRemainingCard());
+
+                Map<String, Kartu> deckAktif = listPemain.get(i).getActiveDeck().getListKartu();
+                List<InfoKartuAktif> listKartuAktif = new ArrayList<>();
+                for(String key: deckAktif.keySet()){
+                    if(deckAktif.get(key) != null){
+                        Kartu tempKartu = deckAktif.get(key);
+                        InfoKartuAktif k = new InfoKartuAktif(key, tempKartu.getNama());
+                    }
+                }
+                fl.setKartuDeckAktif(i,listKartuAktif);
+
+                Map<String, Harvestable> p = listPemain.get(i).getLadang().getLadang();
+                List<InfoKartuLadang> listKartuLadang = new ArrayList<>();
+
+                for(String key: p.keySet()){
+                    if(p.get(key) != null){
+                        Harvestable temp = p.get(key);
+                        Map<String, Integer> mapItemAktif = temp.getItemAktif();
+                        int jumlahItemInteraktif = 0;
+                        List<String> listItemInteraktif = new ArrayList<>();
+                        for(String key2: mapItemAktif.keySet()){
+                            jumlahItemInteraktif += mapItemAktif.get(key2);
+                            for(int j=0; j<mapItemAktif.get(key2); j++){
+                                listItemInteraktif.add(key2);
+                            }
+                        }
+                        InfoKartuLadang kartuLadang = new InfoKartuLadang(key, temp.getNama(), temp.getValue(), jumlahItemInteraktif, listItemInteraktif);
+                        listKartuLadang.add(kartuLadang);
+                    }
+                }
+
+                fl.setListKartuLadang(i, listKartuLadang);
+            }
+
+
+            // load file
+            fl.saveFile(folderPath);
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void load(String folderPath, String extention){
         // ASUMSIKAN folderPath ABSOLUTE PATH
-
-        // TODO: BERSIHKAN SELURUH STATE - LADANG - DEK AKTIF
 
         try {
             if(!this.pluginMap.containsKey(extention)){
@@ -76,8 +152,6 @@ public class FileHandling {
 
             // load file
             fl.loadFile(folderPath);
-
-            // TODO: RESET GAME STATE - PLAYER 1 - PLAYER 2
 
             /* set Game State info */
             gameEngine.resetGame();
@@ -106,7 +180,7 @@ public class FileHandling {
 
     public void loadPlugin(String filePath) {
         // TODO: Hapus hard code filePath
-        filePath = "C:\\Users\\Asus Tuf Gaming\\IdeaProjects\\Tubes2_OOP_BZG\\testfile\\LoaderXML.jar";
+//        filePath = "C:\\Users\\Asus Tuf Gaming\\IdeaProjects\\Tubes2_OOP_BZG\\testfile\\LoaderXML.jar";
 
         try {
             URL jarUrl= new File(filePath).toURI().toURL();

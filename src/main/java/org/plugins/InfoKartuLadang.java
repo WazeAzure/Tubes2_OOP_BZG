@@ -10,7 +10,7 @@ public class InfoKartuLadang {
     public int jumlahItemAktif;
     public List<String> itemAktif;
 
-    public InfoKartuLadang(String lokasi, String nama, int umurBerat, int jumlahItemAktif, String[] itemAktif){
+    public InfoKartuLadang(String lokasi, String nama, int umurBerat, int jumlahItemAktif, List<String> itemAktif){
         this.lokasi = lokasi;
         this.nama = nama;
         this.umurBerat = umurBerat;
@@ -18,7 +18,7 @@ public class InfoKartuLadang {
         this.itemAktif = new ArrayList<>();
 
         for(int i=0; i<jumlahItemAktif; i++){
-            this.itemAktif.add(itemAktif[i]);
+            this.itemAktif.add(itemAktif.get(i));
         }
     }
 }
