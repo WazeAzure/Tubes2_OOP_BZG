@@ -60,8 +60,7 @@ public class App extends Default {
         Music se = new Music();
         se.setFile(sound_track);
         se.setVolume(0.85f);
-//        se.loop();
-
+        se.loop();
 
         frame.pack();
         frame.setVisible(true);

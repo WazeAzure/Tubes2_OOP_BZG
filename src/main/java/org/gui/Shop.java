@@ -93,11 +93,11 @@ public class Shop extends Default {
         for (Kartu k: App.gameEngine.getCurrentPemain().getActiveDeck().getListKartu().values()) {
             if (k != null) {
                 if (k.getKategori().equals("Produk Tanaman") || k.getKategori().equals("Produk Hewan") ){
-                    for (int i = 0; i < 6; i++) {
-                        DeckCard card = new DeckCard(k.getNama(), k.getImageURL(), toko.totalHarga(k.getNama(), 1), toko.getStok(k.getNama()), 160, 225);
-                        JPanel cardpanel = card.createCard();
-                            panel.add(cardpanel);
-                    }  
+                    // for (int i = 0; i < 6; i++) {
+                    DeckCard card = new DeckCard(k.getNama(), k.getImageURL(), toko.totalHarga(k.getNama(), 1), toko.getStok(k.getNama()), 160, 225);
+                    JPanel cardpanel = card.createCard();
+                    panel.add(cardpanel);
+                    // }  
                 }
             }
         }
@@ -178,6 +178,12 @@ public class Shop extends Default {
         button.setBackground(Color.decode(app.getColor1()));
         button.setForeground(Color.decode(app.getColor1()));
         button.addActionListener(e -> {
+
+            String sound_track = "src/main/java/org/gui/assets/horse.wav";
+            Music se = new Music();
+            se.setFile(sound_track);
+            se.play();
+
             app.main_panel.removeAll();
             app.main_panel.add(App.farm);
             App.farm.render();

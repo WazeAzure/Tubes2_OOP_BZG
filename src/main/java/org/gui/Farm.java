@@ -103,10 +103,16 @@ public class Farm extends JPanel implements DragGestureListener {
         nextButton.setPreferredSize(new Dimension(130, 40));
         nextButton.addActionListener(e -> {
             // logic ganti player terus render player selanjutnya
-            App.gameEngine.nextTurn();
-            this.render();
-            ShuffleCardDialog shuffleCardDialog = new ShuffleCardDialog(app);
-            shuffleCardDialog.render(app.gameEngine.getCurrentPemain().getActiveDeck().remainingSlot());
+            if(app.gameEngine.getTurn() == 20){
+                DialogMenang dialogMenang = new DialogMenang(app);
+                dialogMenang.render();
+            }
+            else{
+                App.gameEngine.nextTurn();
+                this.render();
+                ShuffleCardDialog shuffleCardDialog = new ShuffleCardDialog(app);
+                shuffleCardDialog.render(app.gameEngine.getCurrentPemain().getActiveDeck().remainingSlot());
+            }
         });
         JPanel nextButtonPanel = new JPanel();
         nextButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -149,7 +155,7 @@ public class Farm extends JPanel implements DragGestureListener {
 
         // Info player 1 + gulden 
 
-        ImageIcon originalIcon = new ImageIcon("src\\main\\java\\org\\gui\\assets\\gulden.png"); 
+        ImageIcon originalIcon = new ImageIcon("src/main/java/org/gui/assets/gulden.png");
 
         Image scaledImage = originalIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH); 
         ImageIcon resizedIcon = new ImageIcon(scaledImage);
@@ -172,12 +178,12 @@ public class Farm extends JPanel implements DragGestureListener {
 
         // label gulden Player 2
 
-        ImageIcon originalIcon2 = new ImageIcon("src\\main\\java\\org\\gui\\assets\\gulden.png"); 
+        ImageIcon originalIcon2 = new ImageIcon("src/main/java/org/gui/assets/gulden.png");
 
         Image scaledImage2 = originalIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH); 
         ImageIcon resizedIcon2 = new ImageIcon(scaledImage);
 
-        JLabel infoPlayer2 = new JLabel("Player 1 : " + app.gameEngine.getListPemain().get(0).getUang() + " ");
+        JLabel infoPlayer2 = new JLabel("Player 2 : " + app.gameEngine.getListPemain().get(0).getUang() + " ");
         infoPlayer2.setFont(new Font("Arial", Font.BOLD, 16));
         infoPlayer2.setIcon(resizedIcon);
         infoPlayer2.setHorizontalTextPosition(JLabel.LEFT); 
@@ -195,6 +201,7 @@ public class Farm extends JPanel implements DragGestureListener {
             buttonLadangLawan.setEnabled(!(App.gameEngine.getGameState() == 1));
             try {
                 BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/ladanglawan.png"));
+                // Kalo balik: src/main/java/org/gui/assets/back_f.png
                 Image resizedImage = img.getScaledInstance(240, 40, Image.SCALE_SMOOTH);
                 ImageIcon icon = new ImageIcon(resizedImage);
 
@@ -210,6 +217,12 @@ public class Farm extends JPanel implements DragGestureListener {
                 // logic to render ladang lawan
                 App.gameEngine.setGameState(3);
                 this.render();
+
+                // add music
+                String sound_track = "src/main/java/org/gui/assets/horse.wav";
+                Music se = new Music();
+                se.setFile(sound_track);
+                se.play();
             });
 
             JPanel buttonLadangLawanPanel = new JPanel();
@@ -239,6 +252,12 @@ public class Farm extends JPanel implements DragGestureListener {
                 // logic to render ladang lawan
                 App.gameEngine.setGameState(2);
                 this.render();
+
+                // add music
+                String sound_track = "src/main/java/org/gui/assets/horse.wav";
+                Music se = new Music();
+                se.setFile(sound_track);
+                se.play();
             });
 
             JPanel buttonLadangLawanPanel = new JPanel();
@@ -370,6 +389,12 @@ public class Farm extends JPanel implements DragGestureListener {
             app.main_panel.add(shop.page_shop());
             app.main_panel.revalidate();
             app.main_panel.repaint();
+
+            // add music
+            String sound_track = "src/main/java/org/gui/assets/pshop.wav";
+            Music se = new Music();
+            se.setFile(sound_track);
+            se.play();
         });
         JPanel buttonTokoPanel = new JPanel();
         buttonTokoPanel.setLayout(new FlowLayout(FlowLayout.CENTER));

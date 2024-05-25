@@ -20,7 +20,7 @@ public class BearAttack {
         new Thread(() -> {
             app.gameEngine.setGameState(1);
             App.farm.render();
-            this.timeLeft = 5;
+            this.timeLeft = 0;
             JPanel transparentPanel = new JPanel();
             transparentPanel.setOpaque(false);
             TitledBorder border = new TitledBorder(BorderFactory.createLineBorder(Color.RED, 7),String.format("%.1f", timeLeft));

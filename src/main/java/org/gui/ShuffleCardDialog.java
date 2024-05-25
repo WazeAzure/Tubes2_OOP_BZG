@@ -9,10 +9,10 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ShuffleCardDialog {
-    private int choosedCard;
     private App app;
     
 
@@ -69,6 +69,13 @@ public class ShuffleCardDialog {
         JPanel buttonShufflePanel = new JPanel();
         buttonShuffle.setFocusable(false);
         buttonShuffle.addActionListener(e -> {
+
+            // Add lagu
+            String sound_track = "src/main/java/org/gui/assets/shuffle.wav";
+            Music se = new Music();
+            se.setFile(sound_track);
+            se.play();
+
             shuffleDialog.setVisible(false);
             this.render(numCardShuffle);
             shuffleDialog.dispose();
@@ -89,6 +96,12 @@ public class ShuffleCardDialog {
 
         okButton.setFocusable(false);
         okButton.addActionListener(e -> {
+
+            String sound_track = "src/main/java/org/gui/assets/collect.wav";
+            Music se = new Music();
+            se.setFile(sound_track);
+            se.play();
+
             App.gameEngine.getCurrentPemain().getActiveDeck().addCard(currentListKartu);
             App.gameEngine.getCurrentPemain().getShuffleDeck().removeFromDeck(currentListKartu);
             shuffleDialog.dispose();
