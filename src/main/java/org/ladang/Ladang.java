@@ -24,7 +24,12 @@ public class Ladang {
     public Map<String, Harvestable> getLadang(){
         return kumpulanPetak.getGrid();
     }
-
+    public int getLayoutChange(){
+        return layoutChange;
+    }
+    public int getLayoutTurn(){
+        return layoutTurn;
+    }
     // ke samping ABC ke bawah 1,2,3
     public void addRow(){
         kumpulanPetak.addRow();
@@ -40,7 +45,7 @@ public class Ladang {
             if(kumpulanPetak.getObj(s) != null){
                 l.add(kumpulanPetak.getObj(s));
             }
-            kumpulanPetak.remove(s);
+            kumpulanPetak.getGrid().remove(s);
         }
         return l;
     }
@@ -52,7 +57,7 @@ public class Ladang {
             if(kumpulanPetak.getObj(s) != null){
                 l.add(kumpulanPetak.getObj(s));
             }
-            kumpulanPetak.remove(s);
+            kumpulanPetak.getGrid().remove(s);
         }
         return l;
 
@@ -72,8 +77,10 @@ public class Ladang {
     }
     public List<Harvestable> makeSmaller(){
         List<Harvestable> l = new ArrayList<>();
-        l.addAll(removeRow());
-        l.addAll(removeCol());
+        List<Harvestable> lrow = removeRow();
+        List<Harvestable> lcol = removeCol();
+        l.addAll(lrow);
+        l.addAll(lcol);
         return l;
     }
 //    public Boolean isCoordinateValid(String coor){
