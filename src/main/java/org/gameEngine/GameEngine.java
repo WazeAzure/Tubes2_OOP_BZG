@@ -88,12 +88,12 @@ public class GameEngine {
 
     public void dndDeckDeck(int indexSource, int indexDest) throws Exception {
         Kartu sourceCard = getCurrentPemain().getActiveDeck().getListKartu().get(Grid.parseToKey(indexSource, 0));
-        Kartu DestCard = getCurrentPemain().getActiveDeck().getListKartu().get(Grid.parseToKey(indexSource, 0));
+        Kartu DestCard = getCurrentPemain().getActiveDeck().getListKartu().get(Grid.parseToKey(indexDest, 0));
         if (sourceCard == null) {
             return;
         } else {
-//            getCurrentPemain().getActiveDeck().getListKartu().put(Grid.parseToKey(indexSource, 0), DestCard);
-//            getCurrentPemain().getActiveDeck().getListKartu().put(Grid.parseToKey(indexDest, 0), sourceCard);
+            getCurrentPemain().getActiveDeck().getListKartu().put(Grid.parseToKey(indexSource, 0), DestCard);
+            getCurrentPemain().getActiveDeck().getListKartu().put(Grid.parseToKey(indexDest, 0), sourceCard);
         }
     }
 
