@@ -112,7 +112,7 @@ public class ShuffleCardDialog {
             if(randomNum <= 30){
                 new BearAttack(app);
             }else{
-                app.farm.render();
+                App.farm.render();
                 app.main_panel.revalidate();
                 app.main_panel.repaint();
             }
