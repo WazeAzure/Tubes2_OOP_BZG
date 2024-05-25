@@ -169,9 +169,11 @@ public class GameEngine {
         getCurrentPemain().setUang(getCurrentPemain().getUang() + toko.sell(produk));
         for (var entry : getCurrentPemain().getActiveDeck().getListKartu().entrySet()) {
             if (entry != null) {
-                if (entry.getValue().getNama().equals(produk)) {
-                    getCurrentPemain().getActiveDeck().removeCard(entry.getKey());
-                    break;
+                if (entry.getValue() != null) {
+                    if (entry.getValue().getNama().equals(produk)) {
+                        getCurrentPemain().getActiveDeck().removeCard(entry.getKey());
+                        break;
+                    }
                 }
             }
         }
