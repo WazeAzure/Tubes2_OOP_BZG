@@ -102,6 +102,7 @@ public class FileHandling {
                     if(deckAktif.get(key) != null){
                         Kartu tempKartu = deckAktif.get(key);
                         InfoKartuAktif k = new InfoKartuAktif(key, tempKartu.getNama());
+                        listKartuAktif.add(k);
                     }
                 }
                 fl.setKartuDeckAktif(i,listKartuAktif);
