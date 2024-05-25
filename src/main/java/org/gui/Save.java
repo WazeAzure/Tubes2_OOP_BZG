@@ -56,7 +56,7 @@ public class Save extends Default{
         folder.setBackground(Color.decode(getColor3()));
         folder.setForeground(Color.BLACK);
 
-        String[] format = {"txt", "yaml", "png"};
+        String[] format = {"txt", "xml", "json"};
         JComboBox<String> dropdown = new JComboBox<>(format);
         dropdown.setPreferredSize(new Dimension(150, 30));
 

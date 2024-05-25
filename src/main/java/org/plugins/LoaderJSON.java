@@ -4,7 +4,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.nio.file.Files;
@@ -37,6 +40,160 @@ public class LoaderJSON implements FileLoader {
         this.listKartuLadang = (List<InfoKartuLadang>[]) new List[this.playerCount];
         for(int i=0; i<this.playerCount; i++){
             this.listKartuLadang[i] = new ArrayList<>();
+        }
+    }
+
+    @Override
+    public void saveFile(String folderPath) throws Exception {
+        // folder checking
+        Path path = Paths.get(folderPath);
+        if(Files.notExists(path)){
+            // create folder
+            try {
+                Files.createDirectories(path);
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        // handle and check each file
+        File gamestate = new File(folderPath, "gamestate." + extention);
+        File player1 = new File(folderPath, "player1." + extention);
+        File player2 = new File(folderPath, "player2." + extention);
+
+//        if(gamestate.exists() || player1.exists() || player2.exists()){
+//            throw new IOException("File exist!");
+//        }
+
+        // start handling each file
+
+        /* Handle Game State */
+        try {
+            JSONObject mainPage = new JSONObject();
+            mainPage.put("CURRENT_TURN", this.turn);
+            mainPage.put("JUMLAH_ITEM_DI_SHOP", this.nShopItem);
+
+            JSONArray listItemJSON = new JSONArray();
+            for(int i=0; i<this.listItemShop.size(); i++){
+                JSONObject itemJSON = new JSONObject();
+                InfoItemShop p = this.listItemShop.get(i);
+                itemJSON.put(p.nama, p.qty);
+                listItemJSON.add(itemJSON);
+            }
+
+            JSONObject item = new JSONObject();
+            item.put("ITEM", listItemJSON);
+            mainPage.put("SHOPS", item);
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter(gamestate));
+            writer.write(mainPage.toJSONString());
+            writer.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        /* Handle Player 1 */
+        try {
+            JSONObject mainPage = new JSONObject();
+            mainPage.put("JUMLAH_GULDEN", this.gulden[0]);
+            mainPage.put("JUMLAH_DECK", this.jumlahDeck[0]);
+
+            JSONArray listDeckAktif = new JSONArray();
+            List<InfoKartuAktif> listA = this.listKartuDeck[0];
+            mainPage.put("JUMLAH_DECK_AKTIF", listA.size());
+            for(int i=0; i<listA.size(); i++){
+                JSONObject itemJSON = new JSONObject();
+                itemJSON.put("LOKASI", listA.get(i).lokasi);
+                itemJSON.put("NAMA", listA.get(i).nama);
+
+                listDeckAktif.add(itemJSON);
+            }
+            JSONObject deck = new JSONObject();
+            deck.put("KARTU", listDeckAktif);
+            mainPage.put("DECK", deck);
+
+            JSONArray listLadangAktif = new JSONArray();
+            List<InfoKartuLadang> listB = this.listKartuLadang[0];
+            mainPage.put("JUMLAH_KARTU_LADANG", listB.size());
+            for(int i=0; i<listB.size(); i++){
+                JSONObject itemJSON = new JSONObject();
+                itemJSON.put("LOKASI", listB.get(i).lokasi);
+                itemJSON.put("NAMA", listB.get(i).nama);
+                itemJSON.put("UMUR_BERAT", listB.get(i).umurBerat);
+                itemJSON.put("JUMLAH_ITEM_AKTIF", listB.get(i).jumlahItemAktif);
+
+                JSONArray jsonItemAktif = new JSONArray();
+                for(int j=0; j<listB.get(i).jumlahItemAktif; j++){
+                    jsonItemAktif.add(listB.get(i).itemAktif.get(j));
+                }
+                JSONObject itemAKtif = new JSONObject();
+                itemAKtif.put("ITEM", jsonItemAktif);
+                itemJSON.put("ITEM_AKTIF", itemAKtif);
+
+                listLadangAktif.add(itemJSON);
+            }
+            JSONObject kartuLadang = new JSONObject();
+            kartuLadang.put("KARTU", listLadangAktif);
+            mainPage.put("LADANG", kartuLadang);
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter(player1));
+            writer.write(mainPage.toJSONString());
+            writer.close();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        /* Handle Player 2 */
+        try {
+            JSONObject mainPage = new JSONObject();
+            mainPage.put("JUMLAH_GULDEN", this.gulden[1]);
+            mainPage.put("JUMLAH_DECK", this.jumlahDeck[1]);
+
+            JSONArray listDeckAktif = new JSONArray();
+            List<InfoKartuAktif> listA = this.listKartuDeck[1];
+            mainPage.put("JUMLAH_DECK_AKTIF", listA.size());
+            for(int i=0; i<listA.size(); i++){
+                JSONObject itemJSON = new JSONObject();
+                itemJSON.put("LOKASI", listA.get(i).lokasi);
+                itemJSON.put("NAMA", listA.get(i).nama);
+
+                listDeckAktif.add(itemJSON);
+            }
+            JSONObject deck = new JSONObject();
+            deck.put("KARTU", listDeckAktif);
+            mainPage.put("DECK", deck);
+
+            JSONArray listLadangAktif = new JSONArray();
+            List<InfoKartuLadang> listB = this.listKartuLadang[1];
+            mainPage.put("JUMLAH_KARTU_LADANG", listB.size());
+            for(int i=0; i<listB.size(); i++){
+                JSONObject itemJSON = new JSONObject();
+                itemJSON.put("LOKASI", listB.get(i).lokasi);
+                itemJSON.put("NAMA", listB.get(i).nama);
+                itemJSON.put("UMUR_BERAT", listB.get(i).umurBerat);
+                itemJSON.put("JUMLAH_ITEM_AKTIF", listB.get(i).jumlahItemAktif);
+
+                JSONArray jsonItemAktif = new JSONArray();
+                for(int j=0; j<listB.get(i).jumlahItemAktif; j++){
+                    jsonItemAktif.add(listB.get(i).itemAktif.get(j));
+                }
+                JSONObject itemAKtif = new JSONObject();
+                itemAKtif.put("ITEM", jsonItemAktif);
+                itemJSON.put("ITEM_AKTIF", itemAKtif);
+
+                listLadangAktif.add(itemJSON);
+            }
+            JSONObject kartuLadang = new JSONObject();
+            kartuLadang.put("KARTU", listLadangAktif);
+            mainPage.put("LADANG", kartuLadang);
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter(player2));
+            writer.write(mainPage.toJSONString());
+            writer.close();
+
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -164,11 +321,6 @@ public class LoaderJSON implements FileLoader {
     }
 
     @Override
-    public void saveFile(String folderPath) throws Exception {
-
-    }
-
-    @Override
     public String getSupportedExtension() {
         return this.extention;
     }
@@ -223,36 +375,36 @@ public class LoaderJSON implements FileLoader {
 
     @Override
     public void setCurrentTurn(int turn) {
-
+        this.turn = turn;
     }
 
     @Override
     public void setNTokoItem(int n) {
-
+        this.nShopItem = n;
     }
 
     @Override
     public void setItemAndQty(List<InfoItemShop> shop) {
-
+        this.listItemShop = shop;
     }
 
     @Override
     public void setGulden(int pemain, int gulden) {
-
+        this.gulden[pemain] = gulden;
     }
 
     @Override
     public void setJumlahDeck(int pemain, int jumlahDeck) {
-
+        this.jumlahDeck[pemain] = jumlahDeck;
     }
 
     @Override
     public void setKartuDeckAktif(int pemain, List<InfoKartuAktif> kartuDeckAktif) {
-
+        this.listKartuDeck[pemain] = kartuDeckAktif;
     }
 
     @Override
     public void setListKartuLadang(int pemain, List<InfoKartuLadang> kartuLadang) {
-
+        this.listKartuLadang[pemain] = kartuLadang;
     }
 }
