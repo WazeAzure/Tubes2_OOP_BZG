@@ -9,17 +9,19 @@ import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class ItemCard extends Default{
+public class ItemCard{
     private String name;
     private String img;
     private int price;
     private int stock;
+    private App app;
 
-    public ItemCard(String name, String img, int price, int stock){
+    public ItemCard(String name, String img, int price, int stock, App app){
         this.name = name;
         this.img = img;
         this.price = price;
         this.stock = stock;
+        this.app = app;
     }
 
     public JPanel createCard() {
@@ -97,15 +99,15 @@ public class ItemCard extends Default{
             e.printStackTrace();
         }
         buyButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        buyButton.setBackground(Color.decode(getColor1()));
-        buyButton.setForeground(Color.decode(getColor1()));
+        buyButton.setBackground(Color.decode("#F1E4C3"));
+        buyButton.setForeground(Color.decode("#F1E4C3"));
         buyButton.setFont(new Font("Arial", Font.BOLD, 14));
         buyButton.setBorder(new EmptyBorder(10, 20, 10, 20));
         buyButton.setEnabled(this.stock > 0 && App.gameEngine.getCurrentPemain().getActiveDeck().remainingSlot() > 0 && App.gameEngine.getCurrentPemain().getUang() >= this.price);
         
         buyButton.addActionListener(e -> buy(panel));
         
-        panel.setBackground(Color.decode(getColor1()));
+        panel.setBackground(Color.decode("#F1E4C3"));
         
         panel.add(nameLabel);
         panel.add(imagePan);
@@ -135,9 +137,17 @@ public class ItemCard extends Default{
                 App.gameEngine.beli(this.name, 1);
                 System.out.println("Sure button clicked");
                 String sound_track = "src/main/java/org/gui/assets/buy.wav";
+                System.out.println("wejrb");
                 Music se = new Music();
                 se.setFile(sound_track);
                 se.play();
+                app.main_panel.removeAll();
+                app.main_panel.revalidate();
+                app.main_panel.repaint();
+                Shop shop = new Shop (app, App.gameEngine.getToko());
+                app.main_panel.add(shop.page_shop());
+                app.main_panel.revalidate();
+                app.main_panel.repaint();
             } catch (Exception e){
                 System.out.println("buy fail");
             }

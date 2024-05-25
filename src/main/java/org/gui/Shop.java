@@ -61,7 +61,7 @@ public class Shop extends Default {
         java.util.List<Kartu> list = toko.getListCard();
 
         for (Kartu kartu : list) {
-            ItemCard card = new ItemCard(kartu.getNama(), kartu.getImageURL(), toko.totalHarga(kartu.getNama(), 1), toko.getStok(kartu.getNama()));
+            ItemCard card = new ItemCard(kartu.getNama(), kartu.getImageURL(), toko.totalHarga(kartu.getNama(), 1), toko.getStok(kartu.getNama()), app);
             JPanel cardpanel = card.createCard();
             panel.add(cardpanel);
         }
@@ -94,7 +94,7 @@ public class Shop extends Default {
             if (k != null) {
                 if (k.getKategori().equals("Produk Tanaman") || k.getKategori().equals("Produk Hewan") ){
                     // for (int i = 0; i < 6; i++) {
-                    DeckCard card = new DeckCard(k.getNama(), k.getImageURL(), toko.totalHarga(k.getNama(), 1), 160, 225);
+                    DeckCard card = new DeckCard(k.getNama(), k.getImageURL(), toko.totalHarga(k.getNama(), 1), 160, 225, app);
                     JPanel cardpanel = card.createCard();
                     panel.add(cardpanel);
                     // }  
@@ -221,7 +221,6 @@ public class Shop extends Default {
         panel.add(sellP);
         panel.add(backP);
 
-        // Set the Z-order to ensure the background is at the back
         panel.setComponentZOrder(imagePan, panel.getComponentCount() - 1);
         panel.setComponentZOrder(titleP, 0);
         panel.setComponentZOrder(buyP, 0);
