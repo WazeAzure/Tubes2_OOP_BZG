@@ -158,7 +158,7 @@ public class Ladang {
                 makeBigger();
                 layoutChange = 1;
                 layoutTurn = 6;
-            } else if (card.getNama().equals("LAYOUT") && !self){} {
+            } else if (card.getNama().equals("LAYOUT") && !self) {
                 l = makeSmaller();
                 layoutChange = -1;
                 layoutTurn = 6;

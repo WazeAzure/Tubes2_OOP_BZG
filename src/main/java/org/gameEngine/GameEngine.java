@@ -103,7 +103,9 @@ public class GameEngine {
             throw new Exception("Pemindahan Tidak valid!");
         } else if (sourceCard.getNama().equals("DESTROY") || sourceCard.getNama().equals("DELAY")) {
             throw new Exception("Item/Kartu Tidak valid!");
-        } else {
+        } else if (sourceCard.getNama().equals("LAYOUT")) {
+            getCurrentPemain().getLadang().placeCard(sourceCard, true);
+        }{
             List<Kartu> temp = new ArrayList<>();
             temp.add(getCurrentPemain().getLadang().placeCard(sourceCard, Ladang.parseToKey(colDest, rowDest)));
             getCurrentPemain().getActiveDeck().removeCard(Grid.parseToKey(indexSource, 0));
@@ -119,7 +121,12 @@ public class GameEngine {
             throw new Exception("Pemindahan Tidak valid!");
         } else if (!(sourceCard.getNama().equals("DESTROY") || sourceCard.getNama().equals("DELAY"))) {
             throw new Exception("Item/Kartu Tidak valid!");
-        } else {
+        } else if (sourceCard.getNama().equals("LAYOUT")) {
+            int size = getCurrentLawan().getLadang().placeCard(sourceCard, false).size();
+            if (size != 0) {
+                getCurrentPemain().setShuffleDeck(new ShuffleDeck(getCurrentPemain().getShuffleDeck().getRemainingCard() + size));
+            }
+        }else {
             getCurrentLawan().getLadang().placeCard(sourceCard, Ladang.parseToKey(colDest, rowDest));
             getCurrentPemain().getActiveDeck().removeCard(Grid.parseToKey(indexSource, 0));
         }
@@ -136,6 +143,12 @@ public class GameEngine {
             turn += 1;
             for (Pemain p : pemain) {
                 p.getLadang().growAllPlant();
+                if (p.getLadang().getLayoutChange() != 0) {
+                    p.getLadang().decLayoutTurn();
+                    if (p.getLadang().getLayoutTurn() == 0) {
+                        p.getLadang().makeNormal();
+                    }
+                }
             }
             setGameState(0);
         }
