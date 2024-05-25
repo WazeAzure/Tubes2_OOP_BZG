@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ShuffleCardDialog {
@@ -105,7 +106,16 @@ public class ShuffleCardDialog {
             App.gameEngine.getCurrentPemain().getActiveDeck().addCard(currentListKartu);
             App.gameEngine.getCurrentPemain().getShuffleDeck().removeFromDeck(currentListKartu);
             shuffleDialog.dispose();
-            new BearAttack(app);
+
+            Random rand = new Random();
+            int randomNum = rand.nextInt(100);
+            if(randomNum <= 30){
+                new BearAttack(app);
+            }else{
+                app.farm.render();
+                app.main_panel.revalidate();
+                app.main_panel.repaint();
+            }
         });
         okButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         okButtonPanel.add(okButton);
