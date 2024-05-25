@@ -195,9 +195,10 @@ public class Ladang {
     }
     public int regionSize(){
         Random random =  new Random();
-        int rand = random.nextInt(6);
-        while(rand == 0){
-            rand = random.nextInt(6);
+        int rand;
+        rand = random.nextInt(7);
+        while(rand == 0 || (rand == 5 && layoutChange == -1)){
+            rand = random.nextInt(7);
         }
         return rand;
     }
@@ -213,6 +214,9 @@ public class Ladang {
         colrow = parseFromKey(start);
         int col = colrow.get(0);
         int row = colrow.get(1);
+        if(size == 5){
+            System.out.println("Ukuran 5");
+        }
         if(size == 1){
             listDestroy.add(parseToKey(col-1,row-1));
         }else if(size == 2){
@@ -255,7 +259,7 @@ public class Ladang {
             col--;
             listDestroy.add(parseToKey(col-1,row-1));
         }else if (size == 5){
-            while(col + 4 > kumpulanPetak.getHeight()){
+            while(col + 4 > kumpulanPetak.getWidth()){
                 randomInt = random.nextInt(list.size());
                 start = list.get(randomInt);
                 colrow = parseFromKey(start);
@@ -263,13 +267,13 @@ public class Ladang {
                 row = colrow.get(1);
             }
             listDestroy.add(parseToKey(col-1,row-1));
-            row++;
+            col++;
             listDestroy.add(parseToKey(col-1,row-1));
-            row++;
+            col++;
             listDestroy.add(parseToKey(col-1,row-1));
-            row++;
+            col++;
             listDestroy.add(parseToKey(col-1,row-1));
-            row++;
+            col++;
             listDestroy.add(parseToKey(col-1,row-1));
         }else if(size == 6){
             while(col + 2 > kumpulanPetak.getWidth() || row + 1 > kumpulanPetak.getHeight()) {

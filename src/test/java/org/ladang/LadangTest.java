@@ -119,11 +119,16 @@ class LadangTest {
     }
 
     @Test
-    void destroyRegion(){
+    void destroyRegion() throws InterruptedException {
         System.out.println("Destroy");
-        Ladang l = new Ladang(4, 5);
-        for(String s: l.destroyRegion()){
-            System.out.println(s);
+        Ladang l = new Ladang(5, 4);
+        while (true) {
+            System.out.println("Test");
+            for(String s: l.destroyRegion()){
+                System.out.println(s);
+            }
+            Thread.sleep(1000);
+
         }
     }
 }
