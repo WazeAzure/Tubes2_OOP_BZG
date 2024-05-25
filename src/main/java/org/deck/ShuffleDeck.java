@@ -40,6 +40,10 @@ public class ShuffleDeck{
                     max = map.size();
                     index = random.nextInt(max);
                     String omnivore = list.get(index);
+                    while(omnivore.equals("BERUANG")){
+                        index = random.nextInt(max);
+                        omnivore = list.get(index);
+                    }
                     listKartu.add(Config.buildOmnivora(omnivore));
                     break;
                 case 3:

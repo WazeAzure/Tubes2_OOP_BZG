@@ -89,12 +89,13 @@ class LadangTest {
         c.loadConfig();
         Ladang l = new Ladang(4, 5);
         try{
-            l.placeCard(Config.buildTumbuhan("Biji Jagung"),"A1");
+            l.placeCard(Config.buildTumbuhan("BIJI_JAGUNG"),"A1");
         }catch(Exception e){
 
         }
         System.out.println("masuk");
         System.out.println(l.getObject("A1").getNama());
+        assert l.getObject("A1").getNama().equals("BIJI_JAGUNG");
     }
 
     @Test
