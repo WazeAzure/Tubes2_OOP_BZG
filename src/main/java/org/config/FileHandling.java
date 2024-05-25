@@ -36,11 +36,11 @@ public class FileHandling {
             Class c = Class.forName("org.plugins.LoaderTXT");
             this.pluginMap.put("txt", c);
 
-            Class d = Class.forName("org.plugins.LoaderXML");
-            this.pluginMap.put("xml", d);
-
-            Class e = Class.forName("org.plugins.LoaderJSON");
-            this.pluginMap.put("json", e);
+//            Class d = Class.forName("org.plugins.LoaderXML");
+//            this.pluginMap.put("xml", d);
+//
+//            Class e = Class.forName("org.plugins.LoaderJSON");
+//            this.pluginMap.put("json", e);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -54,10 +54,10 @@ public class FileHandling {
         try {
             Class c = Class.forName("org.plugins.LoaderTXT");
             this.pluginMap.put("txt", c);
-            Class d = Class.forName("org.plugins.LoaderXML");
-            this.pluginMap.put("xml", d);
-            Class e = Class.forName("org.plugins.LoaderJSON");
-            this.pluginMap.put("json", e);
+//            Class d = Class.forName("org.plugins.LoaderXML");
+//            this.pluginMap.put("xml", d);
+//            Class e = Class.forName("org.plugins.LoaderJSON");
+//            this.pluginMap.put("json", e);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -196,9 +196,9 @@ public class FileHandling {
                     String className = entry.getName().replace('/', '.').replaceAll(".class$", "");
                     System.out.println(className);
 
-                    Class<?> c = urlClassLoader.loadClass(className);
+                    Class c = urlClassLoader.loadClass("org.plugins." + className);
 
-                    final List<Class<?>> interfaces = Arrays.asList(c.getInterfaces());
+                    final List<Class> interfaces = Arrays.asList(c.getInterfaces());
                     interfaces.forEach(itf -> {
                         System.out.println(itf.getName());
                         if (itf.getName().endsWith(".FileLoader")) {

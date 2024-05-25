@@ -1,5 +1,3 @@
-package org.plugins;
-
 import org.plugins.FileLoader;
 import org.plugins.InfoItemShop;
 import org.plugins.InfoKartuAktif;
