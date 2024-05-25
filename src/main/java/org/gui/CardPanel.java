@@ -67,7 +67,7 @@ public class CardPanel extends JPanel implements Transferable, Serializable {
         this.add(panelGambar);
 
         JLabel labelNama = new JLabel(this.nama);
-        labelNama.setFont(new Font("Arial", Font.PLAIN, 9));
+        labelNama.setFont(new Font("Arial", Font.PLAIN, 7));
         JPanel panelNama = new JPanel();
         panelNama.setLayout(new FlowLayout(FlowLayout.CENTER));
         panelNama.setBackground(Color.decode("#C6A969"));
