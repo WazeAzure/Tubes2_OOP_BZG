@@ -11,6 +11,7 @@ import org.pemain.Pemain;
 import org.toko.Toko;
 
 import java.io.File;
+import java.nio.channels.Pipe;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -71,7 +72,6 @@ public class GameEngine {
 
     public void setGameState(Integer gameState) {
         this.gameState = gameState;
-        System.out.println(gameState);
     }
 
     public Toko getToko() {
@@ -92,10 +92,9 @@ public class GameEngine {
         if (sourceCard == null) {
             return;
         } else {
-//            getCurrentPemain().getActiveDeck().getListKartu()[indexSource] = DestCard;
-//            getCurrentPemain().getActiveDeck().getListKartu()[indexDest] = sourceCard;
+//            getCurrentPemain().getActiveDeck().getListKartu().put(Grid.parseToKey(indexSource, 0), DestCard);
+//            getCurrentPemain().getActiveDeck().getListKartu().put(Grid.parseToKey(indexDest, 0), sourceCard);
         }
-
     }
 
     public void dndDeckLadang(int indexSource, int rowDest, int colDest) throws Exception{
@@ -137,8 +136,6 @@ public class GameEngine {
                 p.getLadang().growAllPlant();
             }
             setGameState(0);
-        } else {
-
         }
     }
 
@@ -174,7 +171,7 @@ public class GameEngine {
         fileHandling.loadPlugin(filePath);
     }
 
-    public void resetGame() {
+    public void resetGame(int gameState) {
         // Inisialisasi turn;
         turn = 1;
 
@@ -189,7 +186,7 @@ public class GameEngine {
 
         // Inisialisasi gameState
         // 0 = Shuffle Kartu, 1 = Serangan Beruang, 2 = Aksi Bebas
-        gameState = 0;
+        this.gameState = gameState;
 
         Object self;
         fileHandling = new FileHandling(this);
