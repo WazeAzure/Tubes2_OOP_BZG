@@ -62,7 +62,6 @@ public class App extends Default {
         se.setVolume(0.85f);
         se.loop();
 
-
         frame.pack();
         frame.setVisible(true);
         ShuffleCardDialog shuffleCardDialog = new ShuffleCardDialog(this);
