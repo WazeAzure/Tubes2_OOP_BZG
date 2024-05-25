@@ -19,24 +19,24 @@ public abstract class Harvestable extends Kartu {
         this.valuePanen = valuePanen;
         this.value = 0;
         this.valueEfek = 0;
-        if (nama.equals("Hiu Darat")) {
-            this.product = Config.buildProduct("Sirip Hiu");
-        } else if (nama.equals("Sapi")) {
-            this.product = Config.buildProduct("Susu");
-        } else if (nama.equals("Domba")) {
-            this.product = Config.buildProduct("Daging Domba");
-        } else if (nama.equals("Kuda")) {
-            this.product = Config.buildProduct("Daging Kuda");
-        } else if (nama.equals("Ayam")) {
-            this.product = Config.buildProduct("Telur");
-        } else if (nama.equals("Beruang")) {
-            this.product = Config.buildProduct("Daging Beruang");
-        } else if (nama.equals("Biji Jagung")) {
-            this.product = Config.buildProduct("Jagung");
-        } else if (nama.equals("Biji Labu")) {
-            this.product = Config.buildProduct("Labu");
-        } else if (nama.equals("Biji Stroberi")) {
-            this.product = Config.buildProduct("Stroberi");
+        if (nama.equals("HIU_DARAT")) {
+            this.product = Config.buildProduct("SIRIP_HIU");
+        } else if (nama.equals("SAPI")) {
+            this.product = Config.buildProduct("SUSU");
+        } else if (nama.equals("DOMBA")) {
+            this.product = Config.buildProduct("DAGING_DOMBA");
+        } else if (nama.equals("KUDA")) {
+            this.product = Config.buildProduct("DAGING_KUDA");
+        } else if (nama.equals("AYAM")) {
+            this.product = Config.buildProduct("TELUR");
+        } else if (nama.equals("BERUANG")) {
+            this.product = Config.buildProduct("DAGING_BERUANG");
+        } else if (nama.equals("BIJI_JAGUNG")) {
+            this.product = Config.buildProduct("JAGUNG");
+        } else if (nama.equals("BIJI_LABU")) {
+            this.product = Config.buildProduct("LABU");
+        } else if (nama.equals("BIJI_STROBERI")) {
+            this.product = Config.buildProduct("STROBERI");
         }
     }
 

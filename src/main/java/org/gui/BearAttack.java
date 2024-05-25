@@ -18,11 +18,11 @@ public class BearAttack {
     public static Boolean isBearAtack = false;
 
     public BearAttack(App app) {
-        isBearAtack = true;
         this.app = app;
-        App.farm.render();
-        this.timeLeft = 5;
         new Thread(() -> {
+            isBearAtack = true;
+            App.farm.render();
+            this.timeLeft = 5;
             JPanel transparentPanel = new JPanel();
             transparentPanel.setOpaque(false);
             TitledBorder border = new TitledBorder(BorderFactory.createLineBorder(Color.RED, 7),String.format("%.1f", timeLeft));
@@ -63,7 +63,6 @@ public class BearAttack {
             app.main_panel.add(transparentPanel);
             app.main_panel.setComponentZOrder(transparentPanel,0);
             try {
-                BearAttack.isBearAtack=true;
                 SwingUtilities.invokeLater(() -> {
                     border.setTitle("Bear Attack! Time Left: " + String.format("%.1f", timeLeft)); // Update the title once before the loop
                     transparentPanel.repaint();
@@ -107,15 +106,14 @@ public class BearAttack {
                         }
                     }
                 }
-                BearAttack.isBearAtack=false;
-                app.main_panel.remove(transparentPanel);
-                app.farm.render();
-                app.main_panel.revalidate();
-                app.main_panel.repaint();
             } catch (InterruptedException interrupt) {
                 interrupt.printStackTrace();
             }
+            BearAttack.isBearAtack=false;
+            app.main_panel.remove(transparentPanel);
+            app.farm.render();
+            app.main_panel.revalidate();
+            app.main_panel.repaint();
         }).start();
     }
-
 }
