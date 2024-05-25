@@ -201,6 +201,7 @@ public class Farm extends JPanel implements DragGestureListener {
             buttonLadangLawan.setEnabled(!(App.gameEngine.getGameState() == 1));
             try {
                 BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/ladanglawan.png"));
+                // Kalo balik: src/main/java/org/gui/assets/back_f.png
                 Image resizedImage = img.getScaledInstance(240, 40, Image.SCALE_SMOOTH);
                 ImageIcon icon = new ImageIcon(resizedImage);
 
