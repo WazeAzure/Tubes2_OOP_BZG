@@ -12,7 +12,6 @@ import java.io.File;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ShuffleCardDialog {
-    private int choosedCard;
     private App app;
     
 
