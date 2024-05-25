@@ -68,10 +68,10 @@ public class LadangPanel extends JPanel {
     private void normalRender(){
         this.removeAll();
         Ladang showLadang;
-        if (Farm.currentLadang == 0) {
-            showLadang = App.gameEngine.getCurrentPemain().getLadang();
-        } else {
+        if (App.gameEngine.getGameState() == 3) {
             showLadang = App.gameEngine.getCurrentLawan().getLadang();
+        } else {
+            showLadang = App.gameEngine.getCurrentPemain().getLadang();
         }
         for(int i=0; i<nRowNormal; i++){
             for(int j=0; j<nColNormal; j++){
@@ -95,16 +95,16 @@ public class LadangPanel extends JPanel {
     private void expandedRender(){
         this.removeAll();
         Ladang showLadang;
-        if (Farm.currentLadang == 0) {
-            showLadang = App.gameEngine.getCurrentPemain().getLadang();
-        } else {
+        if (App.gameEngine.getGameState() == 3) {
             showLadang = App.gameEngine.getCurrentLawan().getLadang();
+        } else {
+            showLadang = App.gameEngine.getCurrentPemain().getLadang();
         }
         for(int i=0; i<nRowExpanded; i++){
             for(int j=0; j<nColExpanded; j++){
                 int x = (j+1)*widthPaddingExpanded + (j*widthPetakExpanded);
                 int y = (i+1)*heightPaddingExpanded + (i*heightPetakExpanded);
-                PetakLadangPlaceholder petakLadang = new PetakLadangPlaceholder(x,y,widthPetakExpanded,heightPetakExpanded,i,j,this.rootFrame);
+                PetakLadangPlaceholder petakLadang = new PetakLadangPlaceholder(0,0,widthPetakExpanded,heightPetakExpanded,i,j,this.rootFrame);
                 this.add(petakLadang);
                 new CardDropTargetListener(petakLadang,farm);
                 if (showLadang.getObject(Ladang.parseToKey(i, j)) != null) {
@@ -122,16 +122,16 @@ public class LadangPanel extends JPanel {
     private void shrinkedRender(){
         this.removeAll();
         Ladang showLadang;
-        if (Farm.currentLadang == 0) {
-            showLadang = App.gameEngine.getCurrentPemain().getLadang();
-        } else {
+        if (App.gameEngine.getGameState() == 3) {
             showLadang = App.gameEngine.getCurrentLawan().getLadang();
+        } else {
+            showLadang = App.gameEngine.getCurrentPemain().getLadang();
         }
         for(int i=0; i<nRowShrinked; i++){
             for(int j=0; j<nColShrinked; j++){
                 int x = (j+1)*widthPaddingShrinked + (j*widthPetakShrinked);
                 int y = (i+1)*heightPaddingShrinked + (i*heightPetakShrinked);
-                PetakLadangPlaceholder petakLadang = new PetakLadangPlaceholder(x,y,widthPetakShrinked,heightPetakShrinked,i,j,this.rootFrame);
+                PetakLadangPlaceholder petakLadang = new PetakLadangPlaceholder(0,0,widthPetakShrinked,heightPetakShrinked,i,j,this.rootFrame);
                 this.add(petakLadang);
                 new CardDropTargetListener(petakLadang,farm);
                 if (showLadang.getObject(Ladang.parseToKey(i, j)) != null) {

@@ -15,18 +15,15 @@ import java.util.List;
 public class BearAttack {
     private double timeLeft;
     private App app;
-    public static Boolean isBearAtack = false;
-
     public BearAttack(App app) {
         this.app = app;
         new Thread(() -> {
-            isBearAtack = true;
+            app.gameEngine.setGameState(1);
             App.farm.render();
             this.timeLeft = 5;
             JPanel transparentPanel = new JPanel();
             transparentPanel.setOpaque(false);
             TitledBorder border = new TitledBorder(BorderFactory.createLineBorder(Color.RED, 7),String.format("%.1f", timeLeft));
-
             int jmin = 100;
             int imin = 100;
             int imax = -1;
@@ -47,7 +44,6 @@ public class BearAttack {
                     }
                 }
             }
-
             int ladang_i_top_left = jmin-1; // ini angka percobaan
             int ladang_j_top_left = imin-1; // ini angka percobaan
             int XbearRegion = ladang_j_top_left * (LadangPanel.widthPaddingNormal+LadangPanel.widthPetakNormal);
@@ -109,7 +105,7 @@ public class BearAttack {
             } catch (InterruptedException interrupt) {
                 interrupt.printStackTrace();
             }
-            BearAttack.isBearAtack=false;
+            App.gameEngine.setGameState(2);
             app.main_panel.remove(transparentPanel);
             app.farm.render();
             app.main_panel.revalidate();

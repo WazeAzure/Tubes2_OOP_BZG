@@ -13,7 +13,6 @@ import org.toko.*;
 public class Farm extends JPanel implements DragGestureListener {
     private CardPlaceholder sourceDragPanel;
     private App app;
-    public static Integer currentLadang;
 
     private class ImageLabel extends JLabel {
         private Image backgroundImage;
@@ -37,7 +36,6 @@ public class Farm extends JPanel implements DragGestureListener {
     }
 
     public Farm(App app) {
-        currentLadang = 0;
         this.app = app;
         this.setLayout(null);
         this.setBounds(0, 0, 1060, 700);
@@ -90,7 +88,7 @@ public class Farm extends JPanel implements DragGestureListener {
         // Button next
         JButton nextButton = new JButton("Next");
         nextButton.setFocusable(false);
-        nextButton.setEnabled(!BearAttack.isBearAtack);
+        nextButton.setEnabled(!(App.gameEngine.getGameState() == 1));
         nextButton.setPreferredSize(new Dimension(130, 40));
         nextButton.addActionListener(e -> {
             // logic ganti player terus render player selanjutnya
@@ -156,39 +154,70 @@ public class Farm extends JPanel implements DragGestureListener {
         this.add(infoPlayer2Panel);
 
         // Button ladang lawan
+        if (App.gameEngine.getGameState() != 3) {
+            JButton buttonLadangLawan = new JButton();
+            buttonLadangLawan.setEnabled(!(App.gameEngine.getGameState() == 1));
+            try {
+                BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/ladanglawan.png"));
+                Image resizedImage = img.getScaledInstance(240, 40, Image.SCALE_SMOOTH);
+                ImageIcon icon = new ImageIcon(resizedImage);
 
-        JButton buttonLadangLawan = new JButton();
-        buttonLadangLawan.setEnabled(!BearAttack.isBearAtack);
-        try {
-            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/ladanglawan.png"));
-            Image resizedImage = img.getScaledInstance(240, 40, Image.SCALE_SMOOTH);
-            ImageIcon icon = new ImageIcon(resizedImage);
+                buttonLadangLawan.setIcon(icon);
+                buttonLadangLawan.setPreferredSize(new Dimension(240, 40));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-            buttonLadangLawan.setIcon(icon);
-            buttonLadangLawan.setPreferredSize(new Dimension(240, 40)); 
-        } catch (Exception e) {
-            e.printStackTrace();
+            buttonLadangLawan.setFocusable(false);
+            buttonLadangLawan.setPreferredSize(new Dimension(240, 40));
+            buttonLadangLawan.addActionListener(e -> {
+                // logic to render ladang lawan
+                App.gameEngine.setGameState(3);
+                this.render();
+            });
+
+            JPanel buttonLadangLawanPanel = new JPanel();
+            buttonLadangLawanPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+            buttonLadangLawanPanel.setBounds(760, 170, 300, 50);
+            buttonLadangLawanPanel.setBackground(Color.decode("#F1E4C3"));
+            buttonLadangLawanPanel.add(buttonLadangLawan);
+
+            this.add(buttonLadangLawanPanel);
+        } else { // Button Kembali
+            JButton buttonLadangLawan = new JButton();
+            buttonLadangLawan.setEnabled(!(App.gameEngine.getGameState() == 1));
+            try {
+                BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/ladanglawan.png"));
+                Image resizedImage = img.getScaledInstance(240, 40, Image.SCALE_SMOOTH);
+                ImageIcon icon = new ImageIcon(resizedImage);
+
+                buttonLadangLawan.setIcon(icon);
+                buttonLadangLawan.setPreferredSize(new Dimension(240, 40));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            buttonLadangLawan.setFocusable(false);
+            buttonLadangLawan.setPreferredSize(new Dimension(240, 40));
+            buttonLadangLawan.addActionListener(e -> {
+                // logic to render ladang lawan
+                App.gameEngine.setGameState(2);
+                this.render();
+            });
+
+            JPanel buttonLadangLawanPanel = new JPanel();
+            buttonLadangLawanPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+            buttonLadangLawanPanel.setBounds(760, 170, 300, 50);
+            buttonLadangLawanPanel.setBackground(Color.decode("#F1E4C3"));
+            buttonLadangLawanPanel.add(buttonLadangLawan);
+
+            this.add(buttonLadangLawanPanel);
         }
 
-        buttonLadangLawan.setFocusable(false);
-        buttonLadangLawan.setPreferredSize(new Dimension(240, 40));
-        buttonLadangLawan.addActionListener(e -> {
-            // logic to render ladang lawan
-            currentLadang = 1;
-            this.render();
-        });
-
-        JPanel buttonLadangLawanPanel = new JPanel();
-        buttonLadangLawanPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        buttonLadangLawanPanel.setBounds(760, 170, 300, 50); 
-        buttonLadangLawanPanel.setBackground(Color.decode("#F1E4C3"));
-        buttonLadangLawanPanel.add(buttonLadangLawan);
-
-        this.add(buttonLadangLawanPanel);
         // Button save state
 
         JButton saveState = new JButton();
-        saveState.setEnabled(!BearAttack.isBearAtack);
+        saveState.setEnabled(!(App.gameEngine.getGameState() == 1));
         try {
             BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/savestate.png"));
             Image resizedImage = img.getScaledInstance(240, 40, Image.SCALE_SMOOTH);
@@ -219,7 +248,7 @@ public class Farm extends JPanel implements DragGestureListener {
 
         // Button load state
         JButton loadState = new JButton();
-        loadState.setEnabled(!BearAttack.isBearAtack);
+        loadState.setEnabled(!(App.gameEngine.getGameState() == 1));
         try {
             BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/loadstate.png"));
             Image resizedImage = img.getScaledInstance(240, 40, Image.SCALE_SMOOTH);
@@ -252,7 +281,7 @@ public class Farm extends JPanel implements DragGestureListener {
         // Button load plugin
 
         JButton loadPlugin = new JButton();
-        loadPlugin.setEnabled(!BearAttack.isBearAtack);
+        loadPlugin.setEnabled(!(App.gameEngine.getGameState() == 1));
         try {
             BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/loadplugin.png"));
             Image resizedImage = img.getScaledInstance(240, 40, Image.SCALE_SMOOTH);
@@ -282,7 +311,7 @@ public class Farm extends JPanel implements DragGestureListener {
 
         // toko
         JButton buttonToko = new JButton();
-        buttonToko.setEnabled(!BearAttack.isBearAtack);
+        buttonToko.setEnabled(!(App.gameEngine.getGameState() == 1));
         try {
             BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/shops.png"));
             Image resizedImage = img.getScaledInstance(220, 220, Image.SCALE_SMOOTH);

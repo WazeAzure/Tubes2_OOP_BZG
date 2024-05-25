@@ -30,15 +30,23 @@ public class CardDropTargetListener extends DropTargetAdapter {
                     if (sourceClass.equals("org.gui.DeckAktifPlaceHolder") && targetClass.equals("org.gui.DeckAktifPlaceHolder")) {
                         DeckAktifPlaceHolder source = (DeckAktifPlaceHolder) sourcePanel;
                         DeckAktifPlaceHolder dest = (DeckAktifPlaceHolder) this.panel;
-                        App.gameEngine.dndDeckDeck(source.getIdx(), dest.getIdx());
+                        if (App.gameEngine.getGameState() != 3) {
+                            App.gameEngine.dndDeckDeck(source.getIdx(), dest.getIdx());
+                        }
                     } else if (sourceClass.equals("org.gui.PetakLadangPlaceholder") && targetClass.equals("org.gui.PetakLadangPlaceholder")){
                         PetakLadangPlaceholder source = (PetakLadangPlaceholder) sourcePanel;
                         PetakLadangPlaceholder dest = (PetakLadangPlaceholder) this.panel;
-                        App.gameEngine.dndLadangLadang(source.getCol(), source.getRow(), dest.getCol(), dest.getRow());
+                        if (App.gameEngine.getGameState() != 3) {
+                            App.gameEngine.dndLadangLadang(source.getCol(), source.getRow(), dest.getCol(), dest.getRow());
+                        }
                     } else if (sourceClass.equals("org.gui.DeckAktifPlaceHolder") && targetClass.equals("org.gui.PetakLadangPlaceholder")) {
                         DeckAktifPlaceHolder source = (DeckAktifPlaceHolder) sourcePanel;
                         PetakLadangPlaceholder dest = (PetakLadangPlaceholder) this.panel;
-                        App.gameEngine.dndDeckLadang(source.getIdx(), dest.getRow(), dest.getCol());
+                        if (App.gameEngine.getGameState() != 3) {
+                            App.gameEngine.dndDeckLadang(source.getIdx(), dest.getRow(), dest.getCol());
+                        }else {
+                            App.gameEngine.dndDeckLadangMusuh(source.getIdx(), dest.getRow(), dest.getCol());
+                        }
                     } else {
                         event.rejectDrop();
                         return;

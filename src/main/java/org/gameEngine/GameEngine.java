@@ -69,8 +69,9 @@ public class GameEngine {
         return gameState;
     }
 
-    void setGameState(Integer gameState) {
+    public void setGameState(Integer gameState) {
         this.gameState = gameState;
+        System.out.println(gameState);
     }
 
     public Toko getToko() {
@@ -113,10 +114,13 @@ public class GameEngine {
 
     public void dndDeckLadangMusuh(int indexSource, int rowDest, int colDest) throws Exception {
         Kartu sourceCard = getCurrentPemain().getActiveDeck().getListKartu().get(Grid.parseToKey(indexSource, 0));
-        if (sourceCard == null || sourceCard.getNama().equals("Protect") || !sourceCard.getKategori().equals("Item")) {
+        if (sourceCard == null) {
             throw new Exception("Pemindahan Tidak valid!");
+        } else if (!sourceCard.getNama().equals("DESTROY") || !sourceCard.getNama().equals("DELAY")) {
+            throw new Exception("Item/Kartu Tidak valid!");
         } else {
-            getCurrentPemain().getLadang().placeCard(sourceCard, Ladang.parseToKey(colDest, rowDest));
+            getCurrentLawan().getLadang().placeCard(sourceCard, Ladang.parseToKey(colDest, rowDest));
+            getCurrentPemain().getActiveDeck().removeCard(Grid.parseToKey(indexSource, 0));
         }
     }
 
@@ -132,7 +136,7 @@ public class GameEngine {
             for (Pemain p : pemain) {
                 p.getLadang().growAllPlant();
             }
-            gameState = 0;
+            setGameState(0);
         } else {
 
         }
