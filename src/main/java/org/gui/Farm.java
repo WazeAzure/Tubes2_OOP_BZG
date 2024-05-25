@@ -216,6 +216,12 @@ public class Farm extends JPanel implements DragGestureListener {
                 // logic to render ladang lawan
                 App.gameEngine.setGameState(3);
                 this.render();
+
+                // add music
+                String sound_track = "src/main/java/org/gui/assets/horse.wav";
+                Music se = new Music();
+                se.setFile(sound_track);
+                se.play();
             });
 
             JPanel buttonLadangLawanPanel = new JPanel();
@@ -245,6 +251,12 @@ public class Farm extends JPanel implements DragGestureListener {
                 // logic to render ladang lawan
                 App.gameEngine.setGameState(2);
                 this.render();
+
+                // add music
+                String sound_track = "src/main/java/org/gui/assets/horse.wav";
+                Music se = new Music();
+                se.setFile(sound_track);
+                se.play();
             });
 
             JPanel buttonLadangLawanPanel = new JPanel();
@@ -376,6 +388,12 @@ public class Farm extends JPanel implements DragGestureListener {
             app.main_panel.add(shop.page_shop());
             app.main_panel.revalidate();
             app.main_panel.repaint();
+
+            // add music
+            String sound_track = "src/main/java/org/gui/assets/pshop.wav";
+            Music se = new Music();
+            se.setFile(sound_track);
+            se.play();
         });
         JPanel buttonTokoPanel = new JPanel();
         buttonTokoPanel.setLayout(new FlowLayout(FlowLayout.CENTER));

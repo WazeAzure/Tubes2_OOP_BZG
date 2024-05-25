@@ -41,6 +41,12 @@ public class DialogMenang {
             namaPemenang = "Permainan Seri";
         }
 
+        // Add lagu 
+        String sound_track = "src/main/java/org/gui/assets/win.wav";
+        Music se = new Music();
+        se.setFile(sound_track);
+        se.play();
+
         // Masukin component label deklarasi pemenang
         JLabel labelPemenang = new JLabel(namaPemenang);
         labelPemenang.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -62,7 +68,7 @@ public class DialogMenang {
         restartButton.setFocusable(false);
         restartButton.addActionListener(e -> {
             // Restart logic
-            App.gameEngine.resetGame();
+            App.gameEngine.resetGame(0);
             app.farm.render();
             app.main_panel.revalidate();
             app.main_panel.repaint();
