@@ -155,7 +155,7 @@ public class Farm extends JPanel implements DragGestureListener {
 
         // Info player 1 + gulden 
 
-        ImageIcon originalIcon = new ImageIcon("src\\main\\java\\org\\gui\\assets\\gulden.png"); 
+        ImageIcon originalIcon = new ImageIcon("src/main/java/org/gui/assets/gulden.png");
 
         Image scaledImage = originalIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH); 
         ImageIcon resizedIcon = new ImageIcon(scaledImage);
@@ -178,12 +178,12 @@ public class Farm extends JPanel implements DragGestureListener {
 
         // label gulden Player 2
 
-        ImageIcon originalIcon2 = new ImageIcon("src\\main\\java\\org\\gui\\assets\\gulden.png"); 
+        ImageIcon originalIcon2 = new ImageIcon("src/main/java/org/gui/assets/gulden.png");
 
         Image scaledImage2 = originalIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH); 
         ImageIcon resizedIcon2 = new ImageIcon(scaledImage);
 
-        JLabel infoPlayer2 = new JLabel("Player 1 : " + app.gameEngine.getListPemain().get(0).getUang() + " ");
+        JLabel infoPlayer2 = new JLabel("Player 2 : " + app.gameEngine.getListPemain().get(0).getUang() + " ");
         infoPlayer2.setFont(new Font("Arial", Font.BOLD, 16));
         infoPlayer2.setIcon(resizedIcon);
         infoPlayer2.setHorizontalTextPosition(JLabel.LEFT); 
