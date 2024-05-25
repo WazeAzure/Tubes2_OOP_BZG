@@ -365,9 +365,9 @@ public class LoaderXML implements FileLoader {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
 
-        File gamestate = new File(folderPath + "\\gamestate." + extention);
-        File player1 = new File(folderPath + "\\player1." + extention);
-        File player2 = new File(folderPath + "\\player2." + extention);
+        File gamestate = new File(folderPath + "/gamestate." + extention);
+        File player1 = new File(folderPath + "/player1." + extention);
+        File player2 = new File(folderPath + "/player2." + extention);
 
         /* Handle GameState */
         try {
