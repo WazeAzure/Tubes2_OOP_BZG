@@ -139,6 +139,7 @@ public class Farm extends JPanel implements DragGestureListener {
         // KOLOM KANAN
         // label jumlah turn
         JLabel turnLabel = new JLabel("Turn : " + App.gameEngine.getTurn());
+        turnLabel.setFont(new Font("Arial", Font.BOLD, 16));
         JPanel turnLabelPanel = new JPanel();
         turnLabelPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         turnLabelPanel.add(turnLabel);
@@ -146,22 +147,46 @@ public class Farm extends JPanel implements DragGestureListener {
         turnLabelPanel.setBackground(Color.decode("#C6A969"));
         this.add(turnLabelPanel);
 
-        // label gulden Player 1
-        JLabel infoPlayer1 = new JLabel("Player 1 : " + app.gameEngine.getListPemain().get(0).getUang() + " Gulden");
+        // Info player 1 + gulden 
+
+        ImageIcon originalIcon = new ImageIcon("src\\main\\java\\org\\gui\\assets\\gulden.png"); 
+
+        Image scaledImage = originalIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH); 
+        ImageIcon resizedIcon = new ImageIcon(scaledImage);
+
+        JLabel infoPlayer1 = new JLabel("Player 1 : " + app.gameEngine.getListPemain().get(0).getUang() + " ");
+        infoPlayer1.setFont(new Font("Arial", Font.BOLD, 16));
+        infoPlayer1.setIcon(resizedIcon);
+        infoPlayer1.setHorizontalTextPosition(JLabel.LEFT); 
+        infoPlayer1.setVerticalTextPosition(JLabel.CENTER);
+
         JPanel infoPlayer1Panel = new JPanel();
         infoPlayer1Panel.setLayout(new FlowLayout(FlowLayout.CENTER));
         infoPlayer1Panel.add(infoPlayer1);
-        infoPlayer1Panel.setBounds(790, 60+20, 240, 40);
-        infoPlayer1Panel.setBackground(Color.decode("#C6A969"));
+        infoPlayer1Panel.setBounds(790, 60 + 20, 240, 40);
+        infoPlayer1Panel.setBackground(Color.decode("#F1E4C3"));
+
         this.add(infoPlayer1Panel);
 
+
+
         // label gulden Player 2
-        JLabel infoPlayer2 = new JLabel("Player 2 : " + app.gameEngine.getListPemain().get(1).getUang() + " Gulden");
+
+        ImageIcon originalIcon2 = new ImageIcon("src\\main\\java\\org\\gui\\assets\\gulden.png"); 
+
+        Image scaledImage2 = originalIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH); 
+        ImageIcon resizedIcon2 = new ImageIcon(scaledImage);
+
+        JLabel infoPlayer2 = new JLabel("Player 1 : " + app.gameEngine.getListPemain().get(0).getUang() + " ");
+        infoPlayer2.setFont(new Font("Arial", Font.BOLD, 16));
+        infoPlayer2.setIcon(resizedIcon);
+        infoPlayer2.setHorizontalTextPosition(JLabel.LEFT); 
+        infoPlayer2.setVerticalTextPosition(JLabel.CENTER);
         JPanel infoPlayer2Panel = new JPanel();
         infoPlayer2Panel.setLayout(new FlowLayout(FlowLayout.CENTER));
         infoPlayer2Panel.add(infoPlayer2);
         infoPlayer2Panel.setBounds(790, 110+20, 240, 40);
-        infoPlayer2Panel.setBackground(Color.decode("#C6A969"));
+        infoPlayer2Panel.setBackground(Color.decode("#F1E4C3"));
         this.add(infoPlayer2Panel);
 
         // Button ladang lawan
