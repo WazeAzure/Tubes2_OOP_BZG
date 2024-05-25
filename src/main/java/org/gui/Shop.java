@@ -46,10 +46,17 @@ public class Shop extends Default {
         panel.setBounds(0, 0, 1060, 50);
         panel.setOpaque(false);
 
-        JLabel label = new JLabel("Welcome to Shop!");
-        label.setFont(new Font("Serif", Font.BOLD, 30));
-        label.setHorizontalAlignment(JLabel.CENTER);
-        panel.add(label);
+        int gulden = App.gameEngine.getCurrentPemain().getUang();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBounds(0, 0, 1060, 50);
+        panel.setOpaque(false);
+
+        JLabel labelgulden = new JLabel("Your gulden: " + gulden);
+        
+        labelgulden.setFont(new Font("Serif", Font.BOLD, 25));
+        labelgulden.setAlignmentX(Component.CENTER_ALIGNMENT);
+    
+        panel.add(labelgulden);
 
         return panel;
     }

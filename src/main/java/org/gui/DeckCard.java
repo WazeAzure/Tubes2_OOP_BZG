@@ -80,7 +80,7 @@ public class DeckCard extends Default{
             e.printStackTrace();
         }
 
-        JLabel priceLabel = new JLabel("Price: $" + this.price);
+        JLabel priceLabel = new JLabel("Price: " + this.price);
         priceLabel.setForeground(Color.BLACK);
         priceLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         priceLabel.setFont(new Font("Arial", Font.PLAIN, 14));

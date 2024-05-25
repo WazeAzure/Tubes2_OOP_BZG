@@ -77,7 +77,7 @@ public class ItemCard{
             e.printStackTrace();
         }
 
-        JLabel priceLabel = new JLabel("Price: $" + this.price);
+        JLabel priceLabel = new JLabel("Price: " + this.price);
         priceLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         priceLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         priceLabel.setBorder(new EmptyBorder(0, 0, 0, 0));
