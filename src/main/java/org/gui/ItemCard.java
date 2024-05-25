@@ -100,7 +100,8 @@ public class ItemCard extends Default{
         buyButton.setBackground(Color.decode(getColor1()));
         buyButton.setForeground(Color.decode(getColor1()));
         buyButton.setFont(new Font("Arial", Font.BOLD, 14));
-        buyButton.setBorder(new EmptyBorder(10, 20, 10, 20)); 
+        buyButton.setBorder(new EmptyBorder(10, 20, 10, 20));
+        buyButton.setEnabled(this.stock > 0 && App.gameEngine.getCurrentPemain().getActiveDeck().remainingSlot() > 0 && App.gameEngine.getCurrentPemain().getUang() >= this.price);
         
         buyButton.addActionListener(e -> buy(panel));
         
@@ -130,11 +131,16 @@ public class ItemCard extends Default{
         );
 
         if (choice == JOptionPane.YES_OPTION) {
-            System.out.println("Sure button clicked");
-            String sound_track = "src/main/java/org/gui/assets/buy.wav";
-            Music se = new Music();
-            se.setFile(sound_track);
-            se.play();
+            try {
+                App.gameEngine.beli(this.name, 1);
+                System.out.println("Sure button clicked");
+                String sound_track = "src/main/java/org/gui/assets/buy.wav";
+                Music se = new Music();
+                se.setFile(sound_track);
+                se.play();
+            } catch (Exception e){
+                System.out.println("buy fail");
+            }
         } else if (choice == JOptionPane.NO_OPTION) {
             System.out.println("Cancel button clicked");
         }

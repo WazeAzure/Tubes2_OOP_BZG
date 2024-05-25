@@ -139,9 +139,9 @@ public class GameEngine {
         }
     }
 
-    public void beli(String produk, int jumlah, int uang) throws Exception {
+    public void beli(String produk, int jumlah) throws Exception {
         if (getCurrentPemain().getActiveDeck().remainingSlot() >= jumlah) {
-            List<Kartu> listKartu = toko.buy(produk, jumlah, uang);
+            List<Kartu> listKartu = toko.buy(produk, jumlah, getCurrentPemain().getUang());
             Pemain currentPemain = getCurrentPemain();
             currentPemain.setUang(currentPemain.getUang() - toko.totalHarga(produk, jumlah));
             getCurrentPemain().getActiveDeck().addCard(listKartu);
@@ -150,8 +150,15 @@ public class GameEngine {
         }
     }
 
-    public void jual(String produk, int indexActiveDeck) throws Exception {
+    public void jual(String produk) throws Exception {
         getCurrentPemain().setUang(getCurrentPemain().getUang() + toko.sell(produk));
+        for (var entry : getCurrentPemain().getActiveDeck().getListKartu().entrySet()) {
+            if (entry != null) {
+                if (entry.getValue().getNama().equals(produk)) {
+                    getCurrentPemain().getActiveDeck().removeCard(entry.getKey());
+                }
+            }
+        }
     }
 
     public List<Kartu> shuffleDeck() {

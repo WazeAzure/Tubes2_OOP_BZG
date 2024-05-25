@@ -109,7 +109,7 @@ public class DeckCard extends Default{
         buyButton.setFont(new Font("Arial", Font.BOLD, 14));
         buyButton.setBorder(new EmptyBorder(10, 20, 10, 20)); 
         
-        buyButton.addActionListener(e -> buy(panel));
+        buyButton.addActionListener(e -> sell(panel));
         
         panel.setBackground(Color.decode(getColor1()));
         panel.add(nameLabel);
@@ -122,11 +122,11 @@ public class DeckCard extends Default{
         return panel;
     }
 
-    public void buy(Component parentComponent) {
+    public void sell(Component parentComponent) {
         Object[] options = {"Sure", "Cancel"};
         int choice = JOptionPane.showOptionDialog(
                 null, 
-                "Are you sure to buy?", 
+                "Are you sure to sell?",
                 this.name, 
                 JOptionPane.YES_NO_OPTION, 
                 JOptionPane.QUESTION_MESSAGE, 
@@ -136,6 +136,11 @@ public class DeckCard extends Default{
         );
 
         if (choice == JOptionPane.YES_OPTION) {
+            try {
+                App.gameEngine.jual(this.name);
+            } catch (Exception e) {
+                System.out.println("Gagal Jual");
+            }
             System.out.println("Sure button clicked");
             String sound_track = "src/main/java/org/gui/assets/buy.wav";
             Music se = new Music();
