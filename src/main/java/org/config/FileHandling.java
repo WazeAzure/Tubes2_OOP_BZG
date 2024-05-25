@@ -154,7 +154,7 @@ public class FileHandling {
             fl.loadFile(folderPath);
 
             /* set Game State info */
-            gameEngine.resetGame();
+            gameEngine.resetGame(2);
             gameEngine.setTurn(fl.getCurrentTurn());
             for (InfoItemShop i : fl.getItemAndQty()) {
                 gameEngine.setItemInToko(i.nama, i.qty);

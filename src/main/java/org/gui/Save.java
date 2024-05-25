@@ -137,9 +137,9 @@ public class Save extends Default{
     }
 
     public void backB() {
-        Farm farm = new Farm(app);
         app.main_panel.removeAll();
-        app.main_panel.add(farm);
+        app.main_panel.add(App.farm);
+        App.farm.render();
         app.main_panel.revalidate();
         app.main_panel.repaint();
         String sound_track = "src/main/java/org/gui/assets/horse.wav";
