@@ -61,7 +61,7 @@ public class Shop extends Default {
         java.util.List<Kartu> list = toko.getListCard();
 
         for (Kartu kartu : list) {
-                ItemCard card = new ItemCard(kartu.getNama(), kartu.getImageURL(), toko.totalHarga(kartu.getNama(), 1), toko.getStok(kartu.getNama()));
+            ItemCard card = new ItemCard(kartu.getNama(), kartu.getImageURL(), toko.totalHarga(kartu.getNama(), 1), toko.getStok(kartu.getNama()));
             JPanel cardpanel = card.createCard();
             panel.add(cardpanel);
         }
@@ -87,17 +87,17 @@ public class Shop extends Default {
     }
 
     private JScrollPane items_in_deck() {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         panel.setBackground(Color.decode(app.getColor2()));
         
         for (Kartu k: App.gameEngine.getCurrentPemain().getActiveDeck().getListKartu().values()) {
             if (k != null) {
                 if (k.getKategori().equals("Produk Tanaman") || k.getKategori().equals("Produk Hewan") ){
-                    System.out.println(k.getNama());
-                    System.out.println(toko.totalHarga(k.getNama(), 1));
-                    DeckCard card = new DeckCard(k.getNama(), k.getImageURL(), toko.totalHarga(k.getNama(), 1), toko.getStok(k.getNama()));
-                    JPanel cardpanel = card.createCard();
-                    panel.add(cardpanel);
+                    for (int i = 0; i < 6; i++) {
+                        DeckCard card = new DeckCard(k.getNama(), k.getImageURL(), toko.totalHarga(k.getNama(), 1), toko.getStok(k.getNama()), 160, 225);
+                        JPanel cardpanel = card.createCard();
+                            panel.add(cardpanel);
+                    }  
                 }
             }
         }

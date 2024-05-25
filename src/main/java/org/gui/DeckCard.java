@@ -14,12 +14,16 @@ public class DeckCard extends Default{
     private String img;
     private int price;
     private int stock;
-
-    public DeckCard(String name, String img, int price, int stock){
+    private int width;
+    private int height;
+    
+    public DeckCard(String name, String img, int price, int stock, int width, int height){
         this.name = name;
         this.img = img;
         this.price = price;
         this.stock = stock;
+        this.width = width;
+        this.height = height;
     }
 
     public JPanel createCard() {
@@ -27,7 +31,7 @@ public class DeckCard extends Default{
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBackground(Color.BLACK);
         panel.setBorder(new LineBorder(Color.BLACK, 1, true)); 
-        panel.setPreferredSize(new Dimension(150, 210));
+        panel.setPreferredSize(new Dimension(this.width, this.height));
 
         JLabel nameLabel = new JLabel(this.name);
         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
