@@ -59,7 +59,12 @@ public class Farm extends JPanel implements DragGestureListener {
         imgPanel.setLayout(null);
 
         try {
-            BufferedImage img = ImageIO.read(new File("src/main/java/org/gui/assets/p1.png"));
+            BufferedImage img;
+            if (App.gameEngine.getCurrentPemain().getPlayerNumber() == 1) {
+                img = ImageIO.read(new File("src/main/java/org/gui/assets/p1.png"));
+            } else {
+                img = ImageIO.read(new File("src/main/java/org/gui/assets/p2.png"));
+            }
             Image resizedImage = img.getScaledInstance(150, 355, Image.SCALE_SMOOTH);
             ImageIcon icon = new ImageIcon(resizedImage);
 
