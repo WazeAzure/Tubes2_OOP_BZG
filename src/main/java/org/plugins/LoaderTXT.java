@@ -1,10 +1,12 @@
 package org.plugins;
 
+import org.gameEngine.GameEngine;
 import org.gui.Load;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +39,92 @@ public class LoaderTXT implements FileLoader {
             this.listKartuLadang[i] = new ArrayList<>();
         }
 
+    }
+
+    @Override
+    public void saveFile(String folderPath) throws Exception {
+        // folder checking
+        Path path = Paths.get(folderPath);
+        if(Files.notExists(path)){
+            // create folder
+            try {
+                Files.createDirectories(path);
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        // handle and check each file
+        File gamestate = new File(folderPath, "gamestate." + extention);
+        File player1 = new File(folderPath, "player1." + extention);
+        File player2 = new File(folderPath, "player2." + extention);
+
+//        if(gamestate.exists() || player1.exists() || player2.exists()){
+//            throw new IOException("File exist!");
+//        }
+
+        // start handling each file
+
+        /* Handle Game State */
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(gamestate));
+            writer.write(this.turn + "\n");
+            writer.write(this.nShopItem + "\n");
+            for(int i=0; i<this.listItemShop.size(); i++){
+                writer.write(this.listItemShop.get(i).nama + " " + this.listItemShop.get(i).qty + "\n");
+            }
+            writer.close();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+
+        /* Handle Player 1 */
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(player1));
+            writer.write(this.gulden[0] + "\n");
+            writer.write(this.jumlahDeck[0] + "\n");
+            writer.write(this.listKartuDeck[0].size() + "\n");
+            for(int i=0; i<this.listKartuDeck[0].size(); i++){
+                writer.write(this.listKartuDeck[0].get(i).lokasi + " " + this.listKartuDeck[0].get(i).nama + "\n");
+            }
+
+            writer.write(this.listKartuLadang[0].size() + "\n");
+            for(int i=0; i<this.listKartuLadang[0].size(); i++){
+                InfoKartuLadang t = this.listKartuLadang[0].get(i);
+                writer.write(t.lokasi + " " + t.nama + " " + t.umurBerat + " " + t.jumlahItemAktif);
+                for(int j=0; j < t.jumlahItemAktif; j++){
+                    writer.write(" " + t.itemAktif.get(j));
+                }
+                writer.write("\n");
+            }
+            writer.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        /* Handle Player 2 */
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(player2));
+            writer.write(this.gulden[1] + "\n");
+            writer.write(this.jumlahDeck[1] + "\n");
+            writer.write(this.listKartuDeck[1].size() + "\n");
+            for(int i=0; i<this.listKartuDeck[1].size(); i++){
+                writer.write(this.listKartuDeck[1].get(i).lokasi + " " + this.listKartuDeck[1].get(i).nama + "\n");
+            }
+
+            writer.write(this.listKartuLadang[1].size() + "\n");
+            for(int i=0; i<this.listKartuLadang[1].size(); i++){
+                InfoKartuLadang t = this.listKartuLadang[1].get(i);
+                writer.write(t.lokasi + " " + t.nama + " " + t.umurBerat + " " + t.jumlahItemAktif);
+                for(int j=0; j < t.jumlahItemAktif; j++){
+                    writer.write(" " + t.itemAktif.get(j));
+                }
+                writer.write("\n");
+            }
+            writer.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -93,14 +181,13 @@ public class LoaderTXT implements FileLoader {
 
                 int activeCard = Integer.parseInt(pair[3]);
 
-                String[] activeItemCard = new String[activeCard];
+                List<String> activeItemCard = new ArrayList<>();
                 for(int j=0; j<activeCard; j++){
-                    activeItemCard[j] = pair[4+j];
+                    activeItemCard.add(pair[4+j]);
                 }
 
                 InfoKartuLadang p = new InfoKartuLadang(coor, name, weightOrAge, activeCard, activeItemCard);
                 this.listKartuLadang[0].add(p);
-                // TODO: fungsi untuk update kondisi ladang (diskusi besok)
             }
         } catch (Exception e){
             e.printStackTrace();
@@ -137,9 +224,9 @@ public class LoaderTXT implements FileLoader {
 
                 int activeCard = Integer.parseInt(pair[3]);
 
-                String[] activeItemCard = new String[activeCard];
+                List<String> activeItemCard = new ArrayList<>();
                 for(int j=0; j<activeCard; j++){
-                    activeItemCard[j] = pair[4+j];
+                    activeItemCard.add(pair[4+j]);
                 }
 
                 InfoKartuLadang p = new InfoKartuLadang(coor, name, weightOrAge, activeCard, activeItemCard);
@@ -202,5 +289,40 @@ public class LoaderTXT implements FileLoader {
     @Override
     public List<InfoKartuLadang> getListKartuLadang(int pemain) {
         return this.listKartuLadang[pemain];
+    }
+
+    @Override
+    public void setCurrentTurn(int turn) {
+        this.turn = turn;
+    }
+
+    @Override
+    public void setNTokoItem(int n) {
+        this.nShopItem = n;
+    }
+
+    @Override
+    public void setItemAndQty(List<InfoItemShop> shop) {
+        this.listItemShop = shop;
+    }
+
+    @Override
+    public void setGulden(int pemain, int gulden) {
+        this.gulden[pemain] = gulden;
+    }
+
+    @Override
+    public void setJumlahDeck(int pemain, int jumlahDeck) {
+        this.jumlahDeck[pemain] = jumlahDeck;
+    }
+
+    @Override
+    public void setKartuDeckAktif(int pemain, List<InfoKartuAktif> kartuDeckAktif) {
+        this.listKartuDeck[pemain] = kartuDeckAktif;
+    }
+
+    @Override
+    public void setListKartuLadang(int pemain, List<InfoKartuLadang> kartuLadang) {
+        this.listKartuLadang[pemain] = kartuLadang;
     }
 }
