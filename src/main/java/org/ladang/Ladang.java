@@ -158,7 +158,7 @@ public class Ladang {
     }
 
     // panen digunakan untuk memanggil method panen pada Harvestable
-    public Product panen(String coor) throws Exception{
+    public Kartu panen(String coor) throws Exception{
         Product product = getObject(coor).panen();
         kumpulanPetak.put2(coor, null);
         return product;
