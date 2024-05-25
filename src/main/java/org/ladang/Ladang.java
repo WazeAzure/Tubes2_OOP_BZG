@@ -30,6 +30,18 @@ public class Ladang {
     public int getLayoutTurn(){
         return layoutTurn;
     }
+    public void makeNormal(){
+       if(layoutChange == -1){
+           layoutChange = 0;
+           makeBigger();
+       }else if(layoutChange == 1){
+           makeSmaller();
+           layoutChange = 0;
+       }
+    }
+    public void decLayoutTurn(){
+        layoutTurn--;
+    }
     // ke samping ABC ke bawah 1,2,3
     public void addRow(){
         kumpulanPetak.addRow();
