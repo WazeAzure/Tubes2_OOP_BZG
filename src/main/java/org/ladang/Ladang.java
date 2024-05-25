@@ -24,7 +24,12 @@ public class Ladang {
     public Map<String, Harvestable> getLadang(){
         return kumpulanPetak.getGrid();
     }
-
+    public int getLayoutChange(){
+        return layoutChange;
+    }
+    public int getLayoutTurn(){
+        return layoutTurn;
+    }
     // ke samping ABC ke bawah 1,2,3
     public void addRow(){
         kumpulanPetak.addRow();

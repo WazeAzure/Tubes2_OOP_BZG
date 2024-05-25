@@ -2,7 +2,10 @@ package org.ladang;
 
 import org.config.Config;
 import org.junit.jupiter.api.Test;
+import org.kartu.Kartu;
 import org.kartu.harvestable.Harvestable;
+import org.kartu.harvestable.tumbuhan.Tumbuhan;
+import org.kartu.product.Product;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -74,6 +77,7 @@ class LadangTest {
         Ladang l = new Ladang(4, 5);
         l.makeBigger();
         System.out.println(l.getLadang().keySet());
+        assert  l.getLadang().keySet().size() == 30;
     }
 
     @Test
@@ -81,6 +85,7 @@ class LadangTest {
         Ladang l = new Ladang(4, 5);
         l.makeSmaller();
         System.out.println(l.getLadang().keySet());
+        assert l.getLadang().keySet().size() == 12;
     }
 
     @Test
@@ -99,23 +104,32 @@ class LadangTest {
     }
 
     @Test
-    void validateCardPlacement() {
+    void placeCard() throws Exception {
+        Ladang l = new Ladang(4, 5);
+        l.placeCard(new Kartu("BIJI_JAGUNG", "Tanaman", null), "A01");
+        assert l.getObject("A01").getNama().equals("BIJI_JAGUNG");
     }
 
     @Test
-    void placeCard() {
+    void removeObject() throws Exception {
+        Ladang l = new Ladang(4, 5);
+        l.placeCard(new Tumbuhan("BIJI_JAGUNG", "Tanaman", null, 4),"A01");
+        assert l.getObject("A01").getNama().equals("BIJI_JAGUNG");
+        l.removeObject("A01");
+        assert l.getObject("A01") == null;
     }
 
     @Test
-    void panen() {
-    }
-
-    @Test
-    void growAllPlant() {
+    void growAllPlant() throws Exception {
+        Ladang l = new Ladang(4, 5);
+        l.placeCard(new Tumbuhan("BIJI_JAGUNG", "Tanaman", null, 4),"A01");
+        assert l.getObject("A01").getNama().equals("BIJI_JAGUNG");
+        l.
     }
 
     @Test
     void getInfo() {
+
     }
 
     @Test
