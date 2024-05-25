@@ -103,10 +103,16 @@ public class Farm extends JPanel implements DragGestureListener {
         nextButton.setPreferredSize(new Dimension(130, 40));
         nextButton.addActionListener(e -> {
             // logic ganti player terus render player selanjutnya
-            App.gameEngine.nextTurn();
-            this.render();
-            ShuffleCardDialog shuffleCardDialog = new ShuffleCardDialog(app);
-            shuffleCardDialog.render(app.gameEngine.getCurrentPemain().getActiveDeck().remainingSlot());
+            if(app.gameEngine.getTurn() == 20){
+                DialogMenang dialogMenang = new DialogMenang(app);
+                dialogMenang.render();
+            }
+            else{
+                App.gameEngine.nextTurn();
+                this.render();
+                ShuffleCardDialog shuffleCardDialog = new ShuffleCardDialog(app);
+                shuffleCardDialog.render(app.gameEngine.getCurrentPemain().getActiveDeck().remainingSlot());
+            }
         });
         JPanel nextButtonPanel = new JPanel();
         nextButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
