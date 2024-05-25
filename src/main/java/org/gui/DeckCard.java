@@ -15,13 +15,15 @@ public class DeckCard extends Default{
     private int price;
     private int width;
     private int height;
+    private App app;
     
-    public DeckCard(String name, String img, int price, int width, int height){
+    public DeckCard(String name, String img, int price, int width, int height, App app){
         this.name = name;
         this.img = img;
         this.price = price;
         this.width = width;
         this.height = height;
+        this.app = app;
     }
 
     public JPanel createCard() {
@@ -137,6 +139,14 @@ public class DeckCard extends Default{
             Music se = new Music();
             se.setFile(sound_track);
             se.play();
+            app.main_panel.removeAll();
+            app.main_panel.revalidate();
+            app.main_panel.repaint();
+            Shop shop = new Shop (app, App.gameEngine.getToko());
+            app.main_panel.add(shop.page_shop());
+            app.main_panel.revalidate();
+            app.main_panel.repaint();
+            System.out.println("mau");
         } else if (choice == JOptionPane.NO_OPTION) {
             System.out.println("Cancel button clicked");
         }
