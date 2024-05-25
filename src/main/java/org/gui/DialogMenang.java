@@ -62,7 +62,7 @@ public class DialogMenang {
         restartButton.setFocusable(false);
         restartButton.addActionListener(e -> {
             // Restart logic
-            App.gameEngine.resetGame();
+            App.gameEngine.resetGame(0);
             app.farm.render();
             app.main_panel.revalidate();
             app.main_panel.repaint();
