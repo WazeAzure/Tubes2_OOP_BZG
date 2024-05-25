@@ -10,7 +10,9 @@ import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class BearAttack {
     private double timeLeft;
@@ -20,7 +22,11 @@ public class BearAttack {
         new Thread(() -> {
             app.gameEngine.setGameState(1);
             App.farm.render();
-            this.timeLeft = 0;
+            Random random = new Random();
+            double min = 30.0;
+            double max = 60.0;
+            double randomNumber = min + (max - min) * random.nextDouble();
+            this.timeLeft = randomNumber;
             JPanel transparentPanel = new JPanel();
             transparentPanel.setOpaque(false);
             TitledBorder border = new TitledBorder(BorderFactory.createLineBorder(Color.RED, 7),String.format("%.1f", timeLeft));
